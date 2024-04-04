@@ -78,8 +78,7 @@ function renderMap(topoData, renderData){
       .attr('fill', 'lightblue')
       .classed('geopath', true)
       .on('mouseenter', onMouseHover)
-      .on('mouseleave', onMouseLeave)
-      .on('cliked', alert(111));
+      .on('mouseleave', onMouseLeave);
   const tUpdate = null;
   const tExit = null;
   stage
