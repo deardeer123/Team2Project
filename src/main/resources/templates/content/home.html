@@ -6,15 +6,55 @@
 <th:block layout:fragment="content_css">
     <!-- html 파일이 열릴때 같이 실행되는 css -->
     <!-- <link rel="stylesheet" href="/"> -->
+    
 </th:block>
 
 <th:block layout:fragment="contentFragment">
+    <script type="module" src="/js/content/home.js"></script>
+
+    <style>
+        .col-6, .col-3, .col{
+            border: 1px solid black;
+        }
+    </style>
+    
     <!-- html 코드 작성 -->
-    테스트
+    <div class="row">
+        <div class="col-6" id="map">
+
+        </div>
+        <div class="col-6">
+            <div class="row" style="height: 299px;">
+                <div class="col">
+                    
+                </div>
+                <div class="col">
+                    
+                </div>
+            </div>
+            <div class="row" style="height: 299px;">
+                <div class="col">
+                    
+                </div>
+                <div class="col">
+                    
+                </div>
+            </div>
+            <div class="row" style="height: 299px;">
+                <div class="col">
+                    
+                </div>
+                <div class="col">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
 </th:block>
 
 <th:block layout:fragment="content_js">
     <!-- html 파일이 열릴때 같이 실행되는 js -->
-    <!-- <script src="/"></script> -->
+    <!-- <script src="/js/content/home.js"></script> -->
 </th:block>
 </html>
