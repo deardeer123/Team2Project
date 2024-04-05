@@ -58,8 +58,9 @@ function renderMap(topoData, renderData){
     stage
       .selectAll('.geopath')
       .filter(td => td.properties.name === d.properties.name)
-      .attr('fill', '#ece7d5;'); // 04.05 색 바꾸기
-    infoText.text(d.properties.name);
+      .attr('fill', '#eee8ce')
+    infoText.text(d.properties.name)
+    
     console.log(d);
     console.log(td);
   };
@@ -69,7 +70,6 @@ function renderMap(topoData, renderData){
       .selectAll('.geopath')
       .filter(td => td.properties.name === d.properties.name)
       .attr('fill', '#eceae4');
-    infoText.text('선택 안함');
   };
 
   const tEnter = enter =>
