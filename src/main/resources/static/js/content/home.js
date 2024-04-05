@@ -58,15 +58,17 @@ function renderMap(topoData, renderData){
     stage
       .selectAll('.geopath')
       .filter(td => td.properties.name === d.properties.name)
-      .attr('fill', 'lightpink');
+      .attr('fill', '#ece7d5;'); // 04.05 색 바꾸기
     infoText.text(d.properties.name);
+    console.log(d);
+    console.log(td);
   };
 
   const onMouseLeave = d => {
     stage
       .selectAll('.geopath')
       .filter(td => td.properties.name === d.properties.name)
-      .attr('fill', 'lightblue');
+      .attr('fill', '#eceae4');
     infoText.text('선택 안함');
   };
 
@@ -74,11 +76,12 @@ function renderMap(topoData, renderData){
     enter
       .append('path')
       .attr('d', pathGen)
-      .attr('stroke', 'black')
-      .attr('fill', 'lightblue')
+      .attr('stroke', 'gray')
+      .attr('fill', '#eceae4')
       .classed('geopath', true)
       .on('mouseenter', onMouseHover)
-      .on('mouseleave', onMouseLeave);
+      .on('mouseleave', onMouseLeave)
+      .on('click', );
   const tUpdate = null;
   const tExit = null;
   stage

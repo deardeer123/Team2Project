@@ -20,8 +20,25 @@
     
     <!-- html 코드 작성 -->
     <div class="row">
-        <div class="col-6" id="map">
+        <div class="col-6" id="map" style="position: relative;">
 
+            <div style="display: inline-block; position: absolute; top: 370px; left: 485px;">경상북도</div>
+            <div style="display: inline-block; position: absolute; top: 452px; left: 460px;">대구광역시</div>
+            <div style="display: inline-block; position: absolute; top: 544px; left: 521px;">부산광역시</div>
+            <div style="display: inline-block; position: absolute; top: 495px; left: 542px;">울산광역시</div>
+            <div style="display: inline-block; position: absolute; top: 519px; left: 443px;">경상남도</div>
+            <div style="display: inline-block; position: absolute; top: 809px; left: 235px;">제주도</div>
+            <div style="display: inline-block; position: absolute; top: 550px; left: 252px;">광주광역시</div>
+            <div style="display: inline-block; position: absolute; top: 592px; left: 273px;">전라남도</div>
+            <div style="display: inline-block; position: absolute; top: 466px; left: 296px;">전라북도</div>
+            <div style="display: inline-block; position: absolute; top: 373px; left: 321px;">대전광역시</div>
+            <div style="display: inline-block; position: absolute; top: 330px; left: 304px;">세종특별시</div>
+            <div style="display: inline-block; position: absolute; top: 348px; left: 264px;">충청남도</div>
+            <div style="display: inline-block; position: absolute; top: 298px; left: 366px;">충청북도</div>
+            <div style="display: inline-block; position: absolute; top: 229px; left: 326px;">경기도</div>
+            <div style="display: inline-block; position: absolute; top: 166px; left: 457px;">강원도</div>
+            <div style="display: inline-block; position: absolute; top: 191px; left: 270px;">서울특별시</div>
+            <div style="display: inline-block; position: absolute; top: 175px; left: 191px;">인천광역시</div>
         </div>
         <div class="col-6">
             <div class="row" style="height: 299px;">
@@ -45,7 +62,27 @@
                     
                 </div>
                 <div class="col">
-                    
+                    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner" style="height: 200px; width: 400px;">
+                            <div class="carousel-item active" data-bs-interval="100">
+                                <img src="/slide_test/브이햄쥐.jpg" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item" data-bs-interval="2000">
+                                <img src="/slide_test/따봉햄쥐.jpg" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/slide_test/놀란햄쥐.jpg" class="d-block w-100" alt="...">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>                                   
+                    </div>
                 </div>
             </div>
         </div>
