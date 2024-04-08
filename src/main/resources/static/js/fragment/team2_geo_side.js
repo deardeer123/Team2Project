@@ -63,12 +63,9 @@ function getRenderData(){
   };
 }
 
-// 지도 렌더링 및 추가 할 세부 기능들
-
-function renderMap(topoData, renderData){
-
+function renderTooltip(){
   // 툴팁 렌더링
-  const tooltip = document.querySelector('#toolTip')
+  const tooltip = d3.select('#tooltip')
   tooltip
     .style("opacity", 0)
     .style("position", "absolute")
@@ -77,6 +74,11 @@ function renderMap(topoData, renderData){
     .style("padding", "5px")
     .style("border-radius", "5px")
     .style("pointer-events", "none");
+}
+
+// 지도 렌더링 및 추가 할 세부 기능들
+
+function renderMap(topoData, renderData){
 
   const geoJson = getGeoJson(topoData);
 
@@ -109,7 +111,7 @@ function renderMap(topoData, renderData){
 
   };
   
-  const onMouseHover = (d, pathGen, renderData) => {
+  const onMouseHover = (d, pathGen, renderData, tooltip) => {
     
     stage
       .selectAll('.geopath')
