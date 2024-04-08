@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="rangeMapper">
+    <resultMap id="range" type="com.green.Team2Project.range.vo.RangeVO">
+        <id column="OCCURRED_YEAR" property="occurredYear"/>
+        <result column="BURNRANGE0_5" property="burnrange0_5"/>
+        <result column="BURNRANGE6_10" property="burnrange6_10"/>
+        <result column="BURNRANGE11_21" property="burnrange11_21"/>
+        <result column="BURNRANGE21_30" property="burnrange21_30"/>
+        <result column="BURNRANGE31_40" property="burnrange31_40"/>
+        <result column="BURNRANGE41_50" property="burnrange41_50"/>
+        <result column="BURNRANGE51_60" property="burnrange51_60"/>
+        <result column="BURNRANGE60_OVER" property="burnrange60_over"/>
+    </resultMap>
+
+    <!--  전체 셀렉  -->
+    <select id="selectAllRange" resultMap="range">
+        SELECT
+            OCCURRED_YEAR
+            ,BURNRANGE0_5
+            ,BURNRANGE6_10
+            ,BURNRANGE11_21
+            ,BURNRANGE21_30
+            ,BURNRANGE31_40
+            ,BURNRANGE41_50
+            ,BURNRANGE51_60
+            ,BURNRANGE60_OVER
+        FROM ELECTRIC_ACCIDENTS_BURN_RANGE
+    </select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
