@@ -20,6 +20,6 @@ public class RangeController {
     @ResponseBody
     public void selectAllRange(){
         rangeService.selectAllRange();
-
+        
     }
 }
