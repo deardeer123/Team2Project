@@ -1,28 +1,28 @@
 // 페이지 로드 시 데이터 전부 가져오기(지도 렌더링 시 성능이 향상 된다고 함)
 
-fetch('/', { //요청경로
-  method: 'POST',
-  cache: 'no-cache',
-  headers: {
-      'Content-Type': 'application/json; charset=UTF-8'
-  },
-  //컨트롤러로 전달할 데이터
-  body: JSON.stringify({
-     // 데이터명 : 데이터값
-  })
-})
-.then((response) => {
-  return response.json(); //나머지 경우에 사용
-})
-//fetch 통신 후 실행 영역
-.then((data) => {//data -> controller에서 리턴되는 데이터!
+// fetch('/', { //요청경로
+//   method: 'POST',
+//   cache: 'no-cache',
+//   headers: {
+//       'Content-Type': 'application/json; charset=UTF-8'
+//   },
+//   //컨트롤러로 전달할 데이터
+//   body: JSON.stringify({
+//      // 데이터명 : 데이터값
+//   })
+// })
+// .then((response) => {
+//   return response.json(); //나머지 경우에 사용
+// })
+// //fetch 통신 후 실행 영역
+// .then((data) => {//data -> controller에서 리턴되는 데이터!
   
-})
-//fetch 통신 실패 시 실행 영역
-.catch(err=>{
-  alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
-  console.log(err);
-});
+// })
+// //fetch 통신 실패 시 실행 영역
+// .catch(err=>{
+//   alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
+//   console.log(err);
+// });
 
 ////////////////////////////////// 지도그리기 ////////////////////////////////////
 
@@ -67,7 +67,16 @@ function getRenderData(){
 
 function renderMap(topoData, renderData){
 
-  
+  // 툴팁 렌더링
+  const tooltip = d3.select("#tooltip")
+    .style("opacity", 0)
+    .style("position", "absolute")
+    .style("background-color", "rgba(0,0,0,0.7)")
+    .style("color", "white")
+    .style("padding", "5px")
+    .style("border-radius", "5px")
+    .style("pointer-events", "none");
+
   const geoJson = getGeoJson(topoData);
 
   const svg = d3
@@ -96,31 +105,38 @@ function renderMap(topoData, renderData){
   const infoText = stage
     .append('g')
     .attr('transform', `translate(${textX},${textY})`);
+};
   
   const onMouseHover = d => {
+    
+
     stage
       .selectAll('.geopath')
       .filter(td => td.properties.name === d.properties.name)
       .attr('fill', '#eee8ce');
     console.log(d.properties.name)
-      .on("mouseover", function() { tooltip.style("display", null); })
-      .on("mousemove", function(d) {
-        tooltip.style("left", (d3.event.pageX + 10) + "px");
-        tooltip.style("top", (d3.event.pageY - 10) + "px");
-        tooltip.text(d.y); 
+    tooltip
+      .style("opacity", 1)
+      .html(`<strong>${d.properties.name}</strong><br/>2016 :`);
 
-    })
-  };
+    // 툴팁 위치 조정
+    const [x, y] = pathGen.centroid(d);
+    const screenCoords = geoMercator([x, y]);
+    tooltip
+      .style("left", `${screenCoords[0] + renderData.margin}px`)
+      .style("top", `${screenCoords[1] + renderData.margin}px`);
+
+    }
 
   const onMouseLeave = d => {
     stage
       .selectAll('.geopath')
       .filter(td => td.properties.name === d.properties.name)
       .attr('fill', '#eceae4')
-      .on("mouseout",  function() { tooltip.style("display", "none"); });
+    tooltip.style("opacity", 0);
   };
 
-  const tEnter = enter =>
+  const tEnter = enter => {
     enter
       .append('path')
       .attr('d', pathGen)
