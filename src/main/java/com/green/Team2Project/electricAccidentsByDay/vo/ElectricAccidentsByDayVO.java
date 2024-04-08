@@ -1,4 +1,4 @@
-package com.green.Team2Project.electricAccidentsByDay;
+package com.green.Team2Project.electricAccidentsByDay.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
