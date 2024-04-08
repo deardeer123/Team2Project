@@ -68,7 +68,8 @@ function getRenderData(){
 function renderMap(topoData, renderData){
 
   // 툴팁 렌더링
-  const tooltip = d3.select("#tooltip")
+  const tooltip = document.querySelector('#toolTip')
+  tooltip
     .style("opacity", 0)
     .style("position", "absolute")
     .style("background-color", "rgba(0,0,0,0.7)")
@@ -105,11 +106,11 @@ function renderMap(topoData, renderData){
   const infoText = stage
     .append('g')
     .attr('transform', `translate(${textX},${textY})`);
-};
-  
-  const onMouseHover = d => {
-    
 
+  };
+  
+  const onMouseHover = (d, pathGen, renderData) => {
+    
     stage
       .selectAll('.geopath')
       .filter(td => td.properties.name === d.properties.name)
