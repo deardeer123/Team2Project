@@ -103,14 +103,21 @@ function renderMap(topoData, renderData){
       .filter(td => td.properties.name === d.properties.name)
       .attr('fill', '#eee8ce');
     console.log(d.properties.name)
+      .on("mouseover", function() { tooltip.style("display", null); })
+      .on("mousemove", function(d) {
+        tooltip.style("left", (d3.event.pageX + 10) + "px");
+        tooltip.style("top", (d3.event.pageY - 10) + "px");
+        tooltip.text(d.y); 
 
+    })
   };
 
   const onMouseLeave = d => {
     stage
       .selectAll('.geopath')
       .filter(td => td.properties.name === d.properties.name)
-      .attr('fill', '#eceae4');
+      .attr('fill', '#eceae4')
+      .on("mouseout",  function() { tooltip.style("display", "none"); });
   };
 
   const tEnter = enter =>
