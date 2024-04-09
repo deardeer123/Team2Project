@@ -22,7 +22,7 @@ function getGeoJson(topoData) {
 // 렌더링 할 지도가 치지할 크키
 function getRenderData() {
   return {
-    width: 900,
+    width: 700,
     height: 900,
     margin: 10
   };
@@ -51,26 +51,34 @@ function renderMap(topoData, renderData) {
     .append('g')
     .attr('transform', `translate(${renderData.margin},${renderData.margin})`);
 
-  const textX = 10;
-  const textY = 10;
-  const infoText = stage
-    .append('g')
-    .attr('transform', `translate(${textX},${textY})`);
+    const tooltip = d3.select(".infoTable")
+    .append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 1);
 
-  const onMouseHover = (d, pathGen) => {
+  const onMouseHover = (d) => {
     stage
       .selectAll('.geopath')
       .filter(td => td.properties.name === d.properties.name)
-      .attr('fill', '#eee8ce');
+      .attr('fill', '#eee8ce')
+      .on('mouseover', function () {tooltip.style("display", "block")});
+
+    tooltip
+      .style("opacity", 1)
+      .html(d.properties.name)
+      .style("left", (pageX + 10) + "px")
+      .style("top", (pageY - 10) + "px");
   
   }
-
 
   const onMouseLeave = d => {
     stage
       .selectAll('.geopath')
       .filter(td => td.properties.name === d.properties.name)
-      .attr('fill', '#eceae4');
+      .attr('fill', '#eceae4')
+      .on('mouseout', function () {tooltip.style("display", "none")});
+
+    tooltip.style("opacity", 0);
   };
 
   const tEnter = enter => {

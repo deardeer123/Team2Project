@@ -9,9 +9,23 @@
 <body>
 <th:block th:fragment="sideFragment0">
 
+<style>
+#infoTable{
+   display: none;
+   width: 500px;
+   height: 500px;
+   background-color: black;
+   position: absolute;
+   transform: translateX(3);
+}
+
+.sido:hover + #infoTable{
+   display: block;
+}
+</style>
+
    <div class="row">
-      <h1 style="display: inline-block; position: absolute; top: 18px; left: 750px;" class="banselect">전기 화재</h1>
-      <div id="infoTable">dfsf</div>
+      <h1 style="display: inline-block; position: absolute; top: 18px; left: 450px; font-family: LeferiPoint-BlackA;" class="banselect">전기 화재</h1>
       <div class="col banselect" style="font-family: LeferiBaseType-RegularA;">
          <div class="sido" style="display: inline-block; position: absolute; top: 370px; left: 485px;">경상북도</div>
          <div class="sido" style="display: inline-block; position: absolute; top: 448px; left: 468px; font-size: 14px;">대구광역시</div>
@@ -30,6 +44,7 @@
          <div class="sido" style="display: inline-block; position: absolute; top: 166px; left: 457px;">강원도</div>
          <div class="sido" style="display: inline-block; position: absolute; top: 201px; left: 273px; font-size: 14px;">서울특별시</div>
          <div class="sido" style="display: inline-block; position: absolute; top: 175px; left: 191px; font-size: 14px;">인천광역시</div>
+         <div class="infoTable"></div>
       </div>
    </div>
    
