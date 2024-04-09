@@ -9,12 +9,26 @@
 <body>
 <th:block th:fragment="sideFragment0">
 
+<style>
+#infoTable{
+   display: none;
+   width: 500px;
+   height: 500px;
+   background-color: black;
+   position: absolute;
+   transform: translateX(3);
+}
+
+.sido:hover + #infoTable{
+   display: block;
+}
+</style>
+
    <div class="row">
-      <h1 style="display: inline-block; position: absolute; top: 18px; left: 750px;" class="banselect">전기 화재</h1>
+      <h1 style="display: inline-block; position: absolute; top: 18px; left: 450px; font-family: LeferiPoint-BlackA;" class="banselect">전기 화재</h1>
       <div class="col banselect" style="font-family: LeferiBaseType-RegularA;">
-         <div id="toolTip"></div>
-         <div style="display: inline-block; position: absolute; top: 370px; left: 485px;">경상북도</div>
-         <div style="display: inline-block; position: absolute; top: 448px; left: 468px; font-size: 14px;">대구광역시</div>
+         <div class="sido" style="display: inline-block; position: absolute; top: 370px; left: 485px;">경상북도</div>
+         <div class="sido" style="display: inline-block; position: absolute; top: 448px; left: 468px; font-size: 14px;">대구광역시</div>
          <div class="sido" style="display: inline-block; position: absolute; top: 542px; left: 521px; font-size: 14px;">부산광역시</div>
          <div class="sido" style="display: inline-block; position: absolute; top: 490px; left: 542px; font-size: 14px;">울산광역시</div>
          <div class="sido" style="display: inline-block; position: absolute; top: 519px; left: 443px;">경상남도</div>
@@ -26,10 +40,11 @@
          <div class="sido" style="display: inline-block; position: absolute; top: 330px; left: 304px; font-size: 14px;">세종특별시</div>
          <div class="sido" style="display: inline-block; position: absolute; top: 348px; left: 264px;">충청남도</div>
          <div class="sido" style="display: inline-block; position: absolute; top: 298px; left: 366px;">충청북도</div>
-         <div class="sido2" style="display: inline-block; position: absolute; top: 229px; left: 326px;">경기도</div>
-         <div class="sido1" style="display: inline-block; position: absolute; top: 166px; left: 457px;">강원도</div>
+         <div class="sido" style="display: inline-block; position: absolute; top: 229px; left: 326px;">경기도</div>
+         <div class="sido" style="display: inline-block; position: absolute; top: 166px; left: 457px;">강원도</div>
          <div class="sido" style="display: inline-block; position: absolute; top: 201px; left: 273px; font-size: 14px;">서울특별시</div>
          <div class="sido" style="display: inline-block; position: absolute; top: 175px; left: 191px; font-size: 14px;">인천광역시</div>
+         <div class="infoTable"></div>
       </div>
    </div>
    
