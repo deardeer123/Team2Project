@@ -43,30 +43,27 @@ function getDayData() {
 new Chart(document.querySelector('#bar-chart'), {
     type: 'bar',
     data: {
-        labels: ['a', 'b', 'c', 'd', 'e'],
+        labels: ['일', '월', '화', '수', '목', '금', '토'],
         datasets: [
             {
-                label: "최고기온",
+                label: "감전사고인명피해현황(단위,명)",
                 backgroundColor: "#c45850",
-                data: [10.5, 11.5, 15.7, 8.5, 13.0]
-            },
-            {
-                label: "기온",
-                backgroundColor: "#3e95cd",
-                data: [3.1, 5.7, 1.2, 2.4, 3.5]
+                data: [55, 75, 74, 90, 98, 86, 68]
             }
+            // ,
+            // {
+            //     label: "기온",
+            //     backgroundColor: "#3e95cd",
+            //     data: [3.1, 5.7, 1.2, 2.4, 3.5]
+            // }
         ]
     },
     options: {
         legend: { display: true },
-        title: {
-            display: true,
-            text: 'Predicted world population (millions) in 2050'
-        },
         scales: {
             y: {
                 min: 0,
-                max: 20
+                max: 150
             }
         }
     }
