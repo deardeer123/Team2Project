@@ -1,70 +1,70 @@
-//Grouped bar chart
-new Chart(document.querySelector('#bar-chart-grouped'), {
-    type: 'bar',
-    data: {
-        labels: ["2022"],
-        datasets: [
-            {
-                label: "0-5",
-                backgroundColor: "#8e5ea2",
-                data: [300]
-            },
-            {
-                label: "6-10",
-                backgroundColor: "#8e5ea2",
-                data: [184]
-            }, {
-                label: "11-20",
-                backgroundColor: "#8e5ea2",
-                data: [35]
-            }, {
-                label: "21-30",
-                backgroundColor: "#8e5ea2",
-                data: [16]
-            }, {
-                label: "31-40",
-                backgroundColor: "#8e5ea2",
-                data: [3]
-            }, {
-                label: "41-50",
-                backgroundColor: "#8e5ea2",
-                data: [2]
-            }, {
-                label: "51-60",
-                backgroundColor: "#8e5ea2",
-                data: [2]
-            }, {
-                label: "60초과",
-                backgroundColor: "#8e5ea2",
-                data: [4]
-            }
-        ]
-    },
-    options: {
-        title: {
-            display: true,
-            text: 'Population growth (millions)'
-        },
-        // indexAxis: 'y',
-        // scales: {
+// //Grouped bar chart
+// new Chart(document.querySelector('#bar-chart-grouped'), {
+//     type: 'bar',
+//     data: {
+//         labels: ["2022"],
+//         datasets: [
+//             {
+//                 label: "0-5",
+//                 backgroundColor: "#8e5ea2",
+//                 data: [300]
+//             },
+//             {
+//                 label: "6-10",
+//                 backgroundColor: "#8e5ea2",
+//                 data: [184]
+//             }, {
+//                 label: "11-20",
+//                 backgroundColor: "#8e5ea2",
+//                 data: [35]
+//             }, {
+//                 label: "21-30",
+//                 backgroundColor: "#8e5ea2",
+//                 data: [16]
+//             }, {
+//                 label: "31-40",
+//                 backgroundColor: "#8e5ea2",
+//                 data: [3]
+//             }, {
+//                 label: "41-50",
+//                 backgroundColor: "#8e5ea2",
+//                 data: [2]
+//             }, {
+//                 label: "51-60",
+//                 backgroundColor: "#8e5ea2",
+//                 data: [2]
+//             }, {
+//                 label: "60초과",
+//                 backgroundColor: "#8e5ea2",
+//                 data: [4]
+//             }
+//         ]
+//     },
+//     options: {
+//         title: {
+//             display: true,
+//             text: 'Population growth (millions)'
+//         },
+//         // indexAxis: 'y',
+//         // scales: {
             
-        //     y: {
-        //         title: {
-        //             display: true,
-        //         },
-        //         min: 0,
-        //         max: 500,
-        //         // ticks: {
-        //         //     // forces step size to be 50 units
-        //         //     stepSize: 50
-        //         // },
-        //         type: 'logarithmic'
-        //     }
-        // }
+//         //     y: {
+//         //         title: {
+//         //             display: true,
+//         //         },
+//         //         min: 0,
+//         //         max: 500,
+//         //         // ticks: {
+//         //         //     // forces step size to be 50 units
+//         //         //     stepSize: 50
+//         //         // },
+//         //         type: 'logarithmic'
+//         //     }
+//         // }
 
-    }
+//     }
 
-});
+// });
 
 // , "2017", "2018", "2019","2020","2021","2022"
 
