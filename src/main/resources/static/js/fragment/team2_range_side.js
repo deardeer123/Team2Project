@@ -45,6 +45,7 @@ new Chart(document.querySelector('#bar-chart-grouped'), {
             display: true,
             text: 'Population growth (millions)'
         },
+        // indexAxis: 'y',
         // scales: {
             
         //     y: {
@@ -52,7 +53,7 @@ new Chart(document.querySelector('#bar-chart-grouped'), {
         //             display: true,
         //         },
         //         min: 0,
-        //         max: 400,
+        //         max: 500,
         //         // ticks: {
         //         //     // forces step size to be 50 units
         //         //     stepSize: 50

@@ -32,7 +32,8 @@ new Chart(document.querySelector('#bar-chart1'), {
                 min: 0,
                 max: 3000
             }
-        }
+        },
+        indexAxis: 'y'
     }
 });
 
