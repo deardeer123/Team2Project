@@ -1,5 +1,6 @@
 package com.green.Team2Project.range.rangeService;
 
+import com.green.Team2Project.range.vo.RangeVO;
 import jakarta.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ public class RangeServiceImpl implements RangeService{
     private SqlSessionTemplate sqlSession;
 
     @Override
-    public void selectAllRange() {
-        sqlSession.selectList("rangeMapper.selectAllRange");
+    public RangeVO selectAllRange() {
+        return sqlSession.selectOne("rangeMapper.selectAllRange");
     }
 }

@@ -1,13 +1,53 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
    >
+   <th:block layout:fragment="content_css">
+      <!-- html 파일이 열릴 때 같이 실행되는 css -->
+      <link rel="stylesheet" href="/css/fragment/team2_range_side.css">
+   </th:block>
+
 <th:block th:fragment="sideFragment5">
+   
    <!-- html 코드 작성 -->
-   <div class="col-4">
-      <div class="layer large-layer">
-         <canvas id="pie-chart" style="width: 100%; height: 100%;"></canvas>
+   <!-- 화상범위별 -->
+   <div class="row justify-content-center">
+      <div class="col" >
+         <div class="layer small-layer">
+            <table class="align-center">
+               <thead >
+                  <h3 style="text-align: right; padding: 5px;">화상범위별</h3>
+               </thead>
+               <tbody>
+                  <tr class="tb-h">
+                     <td>0 ~ 5</td>
+                     <td>6 ~ 10</td>
+                     <td>11 ~ 20</td>
+                     <td>21 ~ 30</td>
+                     <td>31 ~ 40</td>
+                     <td>41 ~ 50</td>
+                     <td>51 ~ 60</td>
+                     <td>60 초과</td>
+                  </tr>
+                  <tr class="tb-b">
+                     <td>300</td>
+                     <td>184</td>
+                     <td>35</td>
+                     <td>16</td>
+                     <td>3</td>
+                     <td>2</td>
+                     <td>2</td>
+                     <td>4</td>
+                  </tr>
+               </tbody>
+            </table>
+            
+         </div>
+         
       </div>
    </div>
+         
+      
+   
 </th:block>
 
 </html>

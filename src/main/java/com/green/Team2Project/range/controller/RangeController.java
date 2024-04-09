@@ -1,6 +1,7 @@
 package com.green.Team2Project.range.controller;
 
 import com.green.Team2Project.range.rangeService.RangeServiceImpl;
+import com.green.Team2Project.range.vo.RangeVO;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -16,10 +17,10 @@ public class RangeController {
     @Resource(name = "rangeService")
     private RangeServiceImpl rangeService;
 
-    @PostMapping("/selectAllrange")
+    @PostMapping("/selectAllRange")
     @ResponseBody
-    public void selectAllRange(){
-        rangeService.selectAllRange();
-
+    public RangeVO selectAllRange(){
+        RangeVO rangeVO =  rangeService.selectAllRange();
+        return rangeVO;
     }
 }

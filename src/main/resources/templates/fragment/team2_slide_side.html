@@ -7,31 +7,40 @@
 </head>
 
 <body>
-<th:block th:fragment="sideFragment6">
-   <div class="col">
-      <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-         <div class="carousel-inner" style="height: 200px; width: 400px;">
-            <div class="carousel-item active" data-bs-interval="100">
-                  <img src="/slide_test/브이햄쥐.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item" data-bs-interval="2000">
-                  <img src="/slide_test/따봉햄쥐.jpg" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                  <img src="/slide_test/놀란햄쥐.jpg" class="d-block w-100" alt="...">
+   <th:block th:fragment="sideFragment6">
+      <div class="row">
+         <div class="col">
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+               <div class="carousel-inner">
+                  <div class="carousel-item active" data-bs-interval="2000">
+                     <img src="/slide_test/slice1.jpg" width="477px" height="295px" class="d-block w-100 rounded"
+                        alt="...">
+                     <div class="text-center" style="background-color: white; position: absolute; margin-top: -100px; margin-left: 60px;">
+                        <div style="width:350px">‼️전기 인명피해 사고 최대 발생 요일‼️</div>
+                        <div style="width:350px">목요일(90명)</div>
+                     </div>
+                  </div>
+                  <div class="carousel-item" data-bs-interval="2000">
+                     <img src="/slide_test/slice2.jpg" width="477px" height="295px" class="d-block w-100 rounded"
+                        alt="...">
+                     <div class="text-center" style="background-color: white; position: absolute; margin-top: -100px; margin-left: 60px;">
+                        <div style="width:350px">‼️전기 인명피해 사고 최대 발생 시간대‼️</div>
+                        <div style="width:350px">14~16시(75건)</div>
+                     </div>
+                  </div>
+                  <div class="carousel-item" data-bs-interval="2000">
+                     <img src="/slide_test/slice3.jpg" width="477px" height="295px" class="d-block w-100 rounded"
+                        alt="...">
+                     <div class="text-center"  style="background-color: white; position: absolute; margin-top: -100px; margin-left: 60px;">
+                        <div style="width:350px">‼️2016년 총전기 사고 건수‼️ </div>
+                        <div style="width:350px">546건수</div>
+                     </div>
+                  </div>
+               </div>
             </div>
          </div>
-         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-         </button>
-         <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-         </button>                                   
       </div>
-   </div>
-</th:block>
+   </th:block>
 </body>
 
 </html>
