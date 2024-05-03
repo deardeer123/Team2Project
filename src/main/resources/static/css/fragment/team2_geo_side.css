@@ -1,6 +1,6 @@
 .infoTable{
     position: absolute;
-    border: 0 none;
+    border: none;
     border-radius: 10px 10px 10px 10px;
     background-color: #eeeeee;
     padding: 5px;
@@ -10,4 +10,5 @@
     margin-top: 590px;
     width: 225px;
     height: 293px;
+    display: none;
 }

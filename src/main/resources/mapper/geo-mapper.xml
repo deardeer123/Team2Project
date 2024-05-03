@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="geoMapper">
+
+    <resultMap id="geo" type="com.green.Team2Project.geo.vo.GeoVO">
+        <id column="OCCURRED_YEAR"      property="occurredYear"/>
+        <result column="SEOUL"          property="seoul"/>
+        <result column="BUSAN"          property="busan"/>
+        <result column="DAEGU"          property="daegu"/>
+        <result column="INCHEON"        property="incheon"/>
+        <result column="GWANGJU"        property="gwangju"/>
+        <result column="DAEJEON"        property="daejeon"/>
+        <result column="SEJONG"         property="sejong"/>
+        <result column="ULSAN"          property="ulsan"/>
+        <result column="GYEONGGI"       property="gyeonggi"/>
+        <result column="GANGWON"        property="gangwon"/>
+        <result column="CHUNGBUK"       property="chungbuk"/>
+        <result column="CHUNGNAM"       property="chungnam"/>
+        <result column="JEONBUK"        property="jeonbuk"/>
+        <result column="JEONNAM"        property="jeonnam"/>
+        <result column="GYEONGNUK"      property="gyeongnuk"/>
+        <result column="GYEONGNAM"      property="gyeongnam"/>
+        <result column="JEJU"           property="jeju"/>
+    </resultMap>
+
+    <select id="geoSelect" resultType="map">
+        SELECT OCCURRED_YEAR
+            , SEOUL
+            , BUSAN
+            , DAEGU
+            , INCHEON
+            , GWANGJU
+            , DAEJEON
+            , SEJONG
+            , ULSAN
+            , GYEONGGI
+            , GANGWON
+            , CHUNGBUK
+            , CHUNGNAM
+            , JEONBUK
+            , JEONNAM
+            , GYEONGNUK
+            , GYEONGNAM
+            , JEJU
+        FROM ELECTRIC_ACCIDENTS_FIRE_STATISTICS
+        WHERE 1 = 1
+        <if test='occurredYear != null and occurredYear != 0'>
+            AND OCCURRED_YEAR = #{occurredYear} AND STATE = #{state}
+        </if>
+    </select>
+
+</mapper>

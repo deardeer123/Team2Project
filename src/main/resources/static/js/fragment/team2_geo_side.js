@@ -51,34 +51,120 @@ function renderMap(topoData, renderData) {
     .append('g')
     .attr('transform', `translate(${renderData.margin},${renderData.margin})`);
 
-    const tooltip = d3.select(".infoTable")
-    .append("div")
-    .attr("class", "tooltip")
-    .style("opacity", 1);
+  const tooltip = d3.select('.infoTable');
+
+  // const onMouseHover = (event, d) => {
+  //   stage
+  //     .selectAll('.geopath')
+  //     .filter(function(td) {return td.properties.name === d.properties.name})
+  //     .attr('fill', '#eee8ce')
+  //     .on('mouseover', function () {tooltip.style("display", "block")});
+
+  //   tooltip
+  //     .style("opacity", 1)
+  //     .html(d.properties.name)
+  //     .style("left", (event.pageX + 10) + "px")
+  //     .style("top", (event.pageY - 10) + "px");
+  
+  // }
+
+  // const onMouseLeave = (event, d) => {
+  //   stage
+  //     .selectAll('.geopath')
+  //     .filter(function(td) {return td.properties.name === d.properties.name})
+  //     .attr('fill', '#eceae4')
+  //     .on('mouseout', function () {tooltip.style("display", "none")});
+
+  //   tooltip.style("opacity", 0);
+  // };
+
+const year = document.querySelector('#year').value;  
 
   const onMouseHover = (d) => {
-    stage
-      .selectAll('.geopath')
-      .filter(td => td.properties.name === d.properties.name)
-      .attr('fill', '#eee8ce')
-      .on('mouseover', function () {tooltip.style("display", "block")});
+    if (d && d.properties) {
+      stage
+        .selectAll('.geopath')
+        .filter(function(td) { return td.properties.name === d.properties.name; })
+        .attr('fill', '#eee8ce');
+        // .on('mouseover', function () {tooltip.style("display", "block")});
 
-    tooltip
-      .style("opacity", 1)
-      .html(d.properties.name)
-      .style("left", (pageX + 10) + "px")
-      .style("top", (pageY - 10) + "px");
-  
+      tooltip
+        .html(d.properties.name)
+        // .style("left", (d3.event.pageX + 10) + "px")
+        // .style("top", (d3.event.pageY - 10) + "px")
+        .style("display", "block")
+        .style("opacity", 1)
+        
+        fetch('/geo/geoSelect', {
+          method: 'POST',
+          cache: 'no-cache',
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+          },
+          body: JSON.stringify({
+            "occurredYear": year,
+            "state" : d.properties.name_eng
+          })
+        })
+        .then((response) => response.json())
+        .then((data) => {
+
+          console.log(data);
+
+          let sum = 0.0;
+          let avg = 0.0;
+          let cnt = 0;
+
+          data.forEach((e) => {
+            
+            const str = d.properties.name_eng;
+            const result = str.toUpperCase();
+
+            console.log(e[`${result}`]);
+            console.log(e['key']);
+                        
+            sum = sum + e[`${result}`];
+            cnt += 1;
+            // console.log(e[`${result}`]);
+            console.log('sum = '+ sum);
+            console.log(cnt);
+
+          })
+          avg = (sum * 100)/ cnt;
+          console.log(avg);
+          
+          // Math.round(number * 100) / 100;
+          
+          // 응답 데이터를 파싱하고 툴팁 업데이트
+          tooltip.html(`
+            <p>${d.properties.name}</p>
+            
+            <p>데이터: ${Math.round(avg) / 100}</p>
+          `);
+        })
+        .catch((err) => {
+          console.error('fetch error:', err);
+        });
+    
+        console.log(d.properties.name);
+    }
+
+        
   }
-
-  const onMouseLeave = d => {
-    stage
-      .selectAll('.geopath')
-      .filter(td => td.properties.name === d.properties.name)
-      .attr('fill', '#eceae4')
-      .on('mouseout', function () {tooltip.style("display", "none")});
-
-    tooltip.style("opacity", 0);
+  
+  const onMouseLeave = (d) => {
+    if (d && d.properties) {
+      stage
+        .selectAll('.geopath')
+        .filter(function(td) { return td.properties.name === d.properties.name; })
+        .attr('fill', '#eceae4');
+      //   .on('mouseout', function () {
+        
+      // });
+      tooltip
+        .style("display", "none")
+        .style("opacity", 0);
+    }
   };
 
   const tEnter = enter => {
@@ -110,3 +196,4 @@ async function main() {
 
 // 지도 렌더링
 main();
+// geoData();
