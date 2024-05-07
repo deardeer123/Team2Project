@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="causingMapper">
+    <resultMap id="causing" type="com.green.Team2Project.causing.vo.CausingVO">
+        <id column="OCCURRED_YEAR" property="occurredYear"/>
+        <result column="INSULATION_DETERIORATION_SHORT_CIRCUIT" property="insulationDeteriorationShortCircuit"/>
+        <result column="TRACKING_SHORT_CIRCUIT" property="trackingShortCircuit"/>
+        <result column="COMPRESSION_DAMAGE_SHORT_CIRCUIT" property="compressionDamageShortCircuit"/>
+        <result column="LAYER_SHORT_CIRCUIT" property="layerShortCircuit"/>
+        <result column="UNIDENTIFIED_SHORT_CIRCUIT" property="unidentifiedShortCircuit"/>
+        <result column="OVERLOAD_AND_OVERCURRENT" property="overloadAndOverCurrent"/>
+        <result column="ELECTRIC_LEAKAGE_GROUNDING" property="electricLeakageGrounding"/>
+        <result column="BAD_CONTACT" property="badContact"/>
+        <result column="HALF_CUT_LINE" property="halfCutLine"/>
+        <result column="ETC" property="etc"/>
+    </resultMap>
+
+    <select id="selectAllCausing" resultMap="causing">
+        SELECT
+        OCCURRED_YEAR
+        ,INSULATION_DETERIORATION_SHORT_CIRCUIT
+        ,TRACKING_SHORT_CIRCUIT
+        ,COMPRESSION_DAMAGE_SHORT_CIRCUIT
+        ,LAYER_SHORT_CIRCUIT
+        ,UNIDENTIFIED_SHORT_CIRCUIT
+        ,OVERLOAD_AND_OVERCURRENT
+        ,ELECTRIC_LEAKAGE_GROUNDING
+        ,BAD_CONTACT
+        ,HALF_CUT_LINE
+        ,ETC
+        FROM factors_causing_electric_accidents
+    </select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

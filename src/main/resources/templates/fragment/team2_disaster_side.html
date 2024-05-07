@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block layout:fragment="content_css">
+  <!-- html 파일이 열릴 때 같이 실행되는 css -->
+  <link rel="stylesheet" href="/css/fragment/team2_range_side.css">
+</th:block>
+
+<th:block th:fragment="sideFragment7">
+
+  <!-- html 코드 작성 -->
+  <!-- 화상범위별 -->
+  <div class="row justify-content-center">
+    <div class="col">
+      <div class="layer small-layer">
+        <table>
+          <thead>
+            <tr>
+              <th>연도</th>
+              <th>총화재건수</th>
+              <th>전기화재건수</th>
+              <th>인명피해(사망)</th>
+              <th>인명피해(부상)</th>
+              <th>재산피해(백만원)</th>
+            </tr>
+          </thead>
+          <tbody id="t-body">
+
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+</th:block>
+
+</html>

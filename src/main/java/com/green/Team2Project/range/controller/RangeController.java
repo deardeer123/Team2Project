@@ -5,11 +5,11 @@ import com.green.Team2Project.range.vo.RangeVO;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.naming.Name;
+import java.util.List;
 
 @Controller
 @RequestMapping("/range")
@@ -17,10 +17,23 @@ public class RangeController {
     @Resource(name = "rangeService")
     private RangeServiceImpl rangeService;
 
-    @PostMapping("/selectAllRange")
+
+    // 메인화면 화상범위 전체 데이터 목록
+    @PostMapping("/allRange")
     @ResponseBody
-    public RangeVO selectAllRange(){
-        RangeVO rangeVO =  rangeService.selectAllRange();
-        return rangeVO;
+    public List<RangeVO> allRange(){
+        return rangeService.selectAllRange();
     }
+
+    @GetMapping("/detailRange")
+    public String detailRange(){
+        return "content/detailContent/team2_range_detail.html";
+    }
+
+    @PostMapping("/detail")
+    @ResponseBody
+    public RangeVO detail(@RequestParam(name = "occurredYear") int occurredYear){
+        return rangeService.detail(occurredYear);
+    }
+
 }
