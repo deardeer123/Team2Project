@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="headerFragment">
+    <div class="row p-1" style="background-color: #313A46; color: aliceblue; height: 8vh;">
+        <div class="col-auto">
+            <button type="button" class="btn" style="border: 0; outline: 0; color: white; padding-top: 8px;"
+                onclick="check()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="5vw" height="5vh" fill="currentColor"
+                    class="bi bi-menu-button" viewBox="0 0 16 16">
+                    <path
+                        d="M0 1.5A1.5 1.5 0 0 1 1.5 0h8A1.5 1.5 0 0 1 11 1.5v2A1.5 1.5 0 0 1 9.5 5h-8A1.5 1.5 0 0 1 0 3.5zM1.5 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5z" />
+                    <path
+                        d="m7.823 2.823-.396-.396A.25.25 0 0 1 7.604 2h.792a.25.25 0 0 1 .177.427l-.396.396a.25.25 0 0 1-.354 0M0 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm1 3v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2zm14-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2zM2 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="col-auto">
+            <div class="fs-2 text-white mt-1">자바 기반 산업현장 안전 통합시스템 구축, 구현</div>
+        </div>
+
+        <div class="col-5"></div>
+
+        <div class="col-auto" style="margin-top: 8px;">
+            <button class="btn" style="border: 0; outline: 0; color: white; padding-top: 0px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="3vw" height="5vh" fill="currentColor" class="bi bi-house"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z" />
+                </svg>
+                <span class="fs-3 align-middle">HOME</span>
+            </button>
+        </div>
+    </div>
+    <script>
+        let chk = false
+        function check() {
+
+            console.log("asdf")
+            let menu_div = document.querySelector(".menu-div")
+            if (chk == false) {
+                // menu_div.style.display="block";
+                menu_div.style.width = '30vh'
+                menu_div.style.opacity = '80%'
+                chk = true
+            } else {
+                // menu_div.style.display="none";
+                menu_div.style.width = '0vh'
+                menu_div.style.opacity = '0%'
+                chk = false
+            }
+
+        }
+    </script>
+</th:block>
+
+</html>

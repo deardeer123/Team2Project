@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/test/test_layout}">
+
+<th:block layout:fragment="content_css">
+    <!-- html 파일이 열릴때 같이 실행되는 css -->
+    <link rel="stylesheet" href="/">
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+    <!-- html 코드 작성 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <div class="row">
+        <div class="col">
+
+            <div class="row">
+                <div class="col">
+                    <!-- 요일별 감전사고 피해현황 평균 -->
+                    <canvas id="day-bar-chart" style="width: 100%; height: 40vh;"></canvas>
+                    <script>
+                        // 바차트
+                        new Chart(document.querySelector('#day-bar-chart'), {
+                            type: 'bar',
+                            data: {
+                                labels: ['a', 'b', 'c', 'd', 'e'],
+                                datasets: [
+                                    {
+                                        label: "최고기온",
+                                        backgroundColor: "#c45850",
+                                        data: [10.5, 11.5, 15.7, 8.5, 13.0]
+                                    },
+                                    {
+                                        label: "기온",
+                                        backgroundColor: "#3e95cd",
+                                        data: [3.1, 5.7, 1.2, 2.4, 3.5]
+                                    }
+                                ]
+                            },
+                            options: {
+                                legend: { display: true },
+                                title: {
+                                    display: true,
+                                    text: 'Predicted world population (millions) in 2050'
+                                },
+                                scales: {
+                                    y: {
+                                        min: 0,
+                                        max: 20
+                                    }
+                                }
+                            }
+                        });
+                    </script>
+                    <div class="fs-2">평균적으로 월요일, 수요일, 목요일, 금요일에 상대적으로 많이 일어납니다.</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <!-- 시간별 감전사고 피해현황 평균-->
+                    <canvas id="time-bar-chart" style="width: 100%; height: 40vh;"></canvas>
+                    <script>
+                        // 바차트
+                        new Chart(document.querySelector('#time-bar-chart'), {
+                            type: 'bar',
+                            data: {
+                                labels: ['a', 'b', 'c', 'd', 'e'],
+                                datasets: [
+                                    {
+                                        label: "최고기온",
+                                        backgroundColor: "#c45850",
+                                        data: [10.5, 11.5, 15.7, 8.5, 13.0]
+                                    },
+                                    {
+                                        label: "기온",
+                                        backgroundColor: "#3e95cd",
+                                        data: [3.1, 5.7, 1.2, 2.4, 3.5]
+                                    }
+                                ]
+                            },
+                            options: {
+                                legend: { display: true },
+                                title: {
+                                    display: true,
+                                    text: 'Predicted world population (millions) in 2050'
+                                },
+                                scales: {
+                                    y: {
+                                        min: 0,
+                                        max: 20
+                                    }
+                                }
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+<th:block layout:fragment="content_js">
+    <!-- html 파일이 열릴때 같이 실행되는 js -->
+    <script src="/"></script>
+</th:block>
+
+</html>
