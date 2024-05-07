@@ -107,7 +107,7 @@ function renderMap(topoData) {
   const tooltip = d3.select('.infoTable');
   const mapContainer = d3.select('#map');
 
-const year = document.querySelector('#year').value;  
+// const year = document.querySelector('#year').value;  
 
   const onMouseHover = (d) => {
     if (d && d.properties) {

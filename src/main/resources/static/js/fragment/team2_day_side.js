@@ -46,7 +46,7 @@ new Chart(document.querySelector('#bar-chart'), {
         labels: ['일', '월', '화', '수', '목', '금', '토'],
         datasets: [
             {
-                label: "감전사고인명피해현황(단위,명)",
+                label: "요일별 감전사고인명피해현황(단위,명)",
                 backgroundColor: "#c45850",
                 data: [55, 75, 74, 90, 98, 86, 68]
             }
