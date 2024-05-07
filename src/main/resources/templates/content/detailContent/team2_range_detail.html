@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{content/detailContent/team2.detailLayout}">
+
+<th:block layout:fragment="content_css">
+  <!-- html 파일이 열릴 때 같이 실행되는 css -->
+  <!-- <link rel="stylesheet" href="/"> -->
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+
+  <style>
+    .click-box {
+      cursor: pointer;
+    }
+
+    body {
+      color: #666;
+      font: 14px/24px "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", Sans-Serif;
+    }
+
+    table {
+      border-collapse: separate;
+      border-spacing: 0;
+      width: 100%;
+    }
+
+    th,
+    td {
+      padding: 6px 12px;
+    }
+
+    th {
+      background: #42444e;
+      color: #fff;
+      text-align: left;
+    }
+
+    tr:first-child th:first-child {
+      border-top-left-radius: 6px;
+    }
+
+    tr:first-child th:last-child {
+      border-top-right-radius: 6px;
+    }
+
+    td {
+      border-right: 1px solid #c6c9cc;
+      border-bottom: 1px solid #c6c9cc;
+    }
+
+    td:first-child {
+      border-left: 1px solid #c6c9cc;
+    }
+
+    tr:nth-child(even) td {
+      background: #eaeaed;
+    }
+
+    tr:last-child td:first-child {
+      border-bottom-left-radius: 6px;
+    }
+
+    tr:last-child td:last-child {
+      border-bottom-right-radius: 6px;
+    }
+  </style>
+
+
+  <!-- html 코드 작성 -->
+  <div class="row justify-content-center" style="border: 1px solid black;">
+    <!-- 자료 -->
+    <div class="col-4">
+      <div>자료</div>
+    </div>
+    <div class="col-8" style="border: 1px solid black;">
+      <div class="row">
+        <!-- 체크 박스 -->
+        <div class="click-box col text-center">
+          <select class="form-select" name="occurredYear" id="occurredYear" onchange="changeData(alert(this.value))" style="width: 300px;">
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+            <option value="2020">2020</option>
+            <option value="2019">2019</option>
+            <option value="2018">2018</option>
+            <option value="2017">2017</option>
+            <option value="2016">2016</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <!-- 데이터 -->
+        <div class="col">
+          <div class="layer small-layer">
+            <table>
+              <thead>
+                <tr>
+                  <th>연도</th>
+                  <th>0-5</th>
+                  <th>6-10</th>
+                  <th>11-20</th>
+                  <th>21-30</th>
+                  <th>31-40</th>
+                  <th>41-50</th>
+                  <th>51-60</th>
+                  <th>60 초과</th>
+                </tr>
+              </thead>
+              <tbody id="t-body">
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <!-- 통계 -->
+        <div class="col">
+          <div>통계</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+
+    const changeData = (occurredYear) => {
+      const occurredYear = document.querySelector('#occurredYear').value
+      
+      alert(occurredYear)
+      // ------------------- 첫번째 방식 ---------------//
+      fetch('/range/detail', { //요청경로
+        method: 'POST',
+        cache: 'no-cache',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        },
+        //컨트롤러로 전달할 데이터
+        body: new URLSearchParams({
+          // 데이터명 : 데이터값
+          occurredYear : 2022
+        })
+      })
+        .then((response) => {
+          if (!response.ok) {
+            alert('fetch error!\n컨트롤러로 통신중에 오류가 발생했습니다.');
+            return;
+          }
+
+          // return response.text(); //컨트롤러에서 return하는 데이터가 없거나 int, String 일 때 사용
+          return response.json(); //나머지 경우에 사용
+        })
+        //fetch 통신 후 실행 영역
+        .then((data) => {//data -> controller에서 리턴되는 데이터!
+          console.log(data);
+
+          let tbody = document.querySelector('#t-body');
+          tbody.innerHTML = '';
+          let str = '';
+
+            str +=
+              `
+            <tr>
+                <td>${data.occurredYear}</td>
+                <td>${data.burnrange0_5}</td>
+                <td>${data.burnrange6_10}</td>
+                <td>${data.burnrange11_21}</td>
+                <td>${data.burnrange21_30}</td>
+                <td>${data.burnrange31_40}</td>
+                <td>${data.burnrange41_50}</td>
+                <td>${data.burnrange51_60}</td>
+                <td>${data.burnrange60_over}</td>
+                
+            </tr>
+            `
+
+          tbody.insertAdjacentHTML('afterbegin', str)
+
+        })
+        //fetch 통신 실패 시 실행 영역
+        .catch(err => {
+          alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
+          console.log(err);
+        });
+    }
+  </script>
+</th:block>
+
+<th:block layout:fragment="content_js">
+  <!-- html 파일이 열릴 때 같이 실행되는 js -->
+  <!-- <script src="/"></script> -->
+</th:block>
+
+</html>

@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="/css/common.css">
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <link rel="stylesheet" href="/css/fragment/team2_geo_side.css">
+<link rel="stylesheet" href="/css/fragment/team2_range_side.css">
 <script type="module" src="/js/fragment/team2_geo_side.js"></script>
 
 
@@ -28,14 +29,15 @@
                     <div class="infoTable" style="position: absolute; display: none;"></div>
                     <th:bolck th:replace="~{fragment/team2_geo_side::sideFragment0}"></th:bolck>
             </div>
+
             <div class="col-8">
-                <div class="row" style="height: 295px;">
+                <div class="row">
                     <!-- 1, 2 -->
                     <div class="col">
                         <th:bolck th:replace="~{fragment/team2_causing_side::sideFragment1}"></th:bolck>
                     </div>
                 </div>
-                <div class="row" style="height: 295px;">
+                <div class="row">
                     <!-- 3,4 -->
                     <div class="col-6">
                         <th:bolck th:replace="~{fragment/team2_day_side::sideFragment3}"></th:bolck>
@@ -44,21 +46,20 @@
                         <th:bolck th:replace="~{fragment/team2_hour_side::sideFragment4}"></th:bolck>
                     </div>
                 </div>
-                <div class="row" style="height: 295px;">
-                    <div class="col-6">
+                <div class="row">
+                    <div class="col-4">
                         <th:bolck th:replace="~{fragment/team2_range_side::sideFragment5}"></th:bolck>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
+                        <th:bolck th:replace="~{fragment/team2_disaster_side::sideFragment7}"></th:bolck>
+                    </div>
+                    <div class="col-4">
                         <th:bolck th:replace="~{fragment/team2_slide_side::sideFragment6}"></th:bolck>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <th:bolck th:replace="~{fragment/team2_footer::footerFragment}"></th:bolck>
-            </div>
-        </div>
+        
     </div>
     
     <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -78,6 +79,7 @@
     <script src="/js/fragment/team2_menu.js"></script>
     <script src="/js/fragment/team2_side.js"></script>
     <script src="/js/fragment/team2_slide_side.js"></script>
+    <script src="/js/fragment/team2_disaster_side.js"></script>
     
     <th:block layout:fragment="content_js"></th:block>
 </body>

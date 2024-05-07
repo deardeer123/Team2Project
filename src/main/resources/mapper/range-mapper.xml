@@ -30,6 +30,21 @@
         FROM ELECTRIC_ACCIDENTS_BURN_RANGE
     </select>
 
+    <select id="detail" resultMap="range">
+        SELECT
+            OCCURRED_YEAR
+            ,BURNRANGE0_5
+            ,BURNRANGE6_10
+            ,BURNRANGE11_21
+            ,BURNRANGE21_30
+            ,BURNRANGE31_40
+            ,BURNRANGE41_50
+            ,BURNRANGE51_60
+            ,BURNRANGE60_OVER
+        FROM ELECTRIC_ACCIDENTS_BURN_RANGE
+        where OCCURRED_YEAR = #{occurredYear}
+    </select>
+
 </mapper>
 
 
