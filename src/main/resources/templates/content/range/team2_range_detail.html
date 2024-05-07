@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{content/detailContent/team2.detailLayout}">
+  layout:decorate="~{fragment/detail/detail_layout}">
 
 <th:block layout:fragment="content_css">
   <!-- html 파일이 열릴 때 같이 실행되는 css -->
@@ -64,6 +64,12 @@
     tr:last-child td:last-child {
       border-bottom-right-radius: 6px;
     }
+
+    select {
+
+      text-align-last: center;
+
+    }
   </style>
 
 
@@ -76,8 +82,9 @@
     <div class="col-8" style="border: 1px solid black;">
       <div class="row">
         <!-- 체크 박스 -->
-        <div class="click-box col text-center">
-          <select class="form-select" name="occurredYear" id="occurredYear" onchange="changeData()" style="width: 300px;">
+        <div class="click-box col mt-3">
+          <select class="form-select" name="occurredYear" id="occurredYear" onchange="changeData()" style="width: 40%;">
+            <option value="none" hidden>연도를 선택하시면 그래프가 나옵니다.</option>
             <option value="2022">2022</option>
             <option value="2021">2021</option>
             <option value="2020">2020</option>
@@ -88,7 +95,7 @@
           </select>
         </div>
       </div>
-      <div class="row">
+      <div class="row mt-3">
         <!-- 데이터 -->
         <div class="col">
           <div class="layer small-layer">
@@ -107,28 +114,46 @@
                 </tr>
               </thead>
               <tbody id="t-body">
-
+                <tr>
+                  <td>[[${rangeVO.occurredYear}]]</td>
+                  <td>[[${rangeVO.burnrange0_5}]]</td>
+                  <td>[[${rangeVO.burnrange6_10}]]</td>
+                  <td>[[${rangeVO.burnrange11_21}]]</td>
+                  <td>[[${rangeVO.burnrange21_30}]]</td>
+                  <td>[[${rangeVO.burnrange31_40}]]</td>
+                  <td>[[${rangeVO.burnrange41_50}]]</td>
+                  <td>[[${rangeVO.burnrange51_60}]]</td>
+                  <td>[[${rangeVO.burnrange60_over}]]</td>
+                </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row mt-3">
         <!-- 통계 -->
         <div class="col">
-          <div>통계</div>
+          <div><canvas id="line-chart" height="100"></canvas></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          text
         </div>
       </div>
     </div>
   </div>
 
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
   <script>
 
-    const changeData = (occurredYear) => {
+    const changeData = () => {
       const occurredYear = document.querySelector('#occurredYear').value
-      
-      alert(occurredYear)
+      let chartStatus = Chart.getChart('line-chart');
+      if (chartStatus !== undefined) {
+        chartStatus.destroy();
+      }
       // ------------------- 첫번째 방식 ---------------//
       fetch('/range/detailRange', { //요청경로
         method: 'POST',
@@ -139,7 +164,7 @@
         //컨트롤러로 전달할 데이터
         body: new URLSearchParams({
           // 데이터명 : 데이터값
-          occurredYear : occurredYear
+          occurredYear: occurredYear
         })
       })
         .then((response) => {
@@ -159,8 +184,8 @@
           tbody.innerHTML = '';
           let str = '';
 
-            str +=
-              `
+          str +=
+            `
             <tr>
                 <td>${data.occurredYear}</td>
                 <td>${data.burnrange0_5}</td>
@@ -177,6 +202,27 @@
 
           tbody.insertAdjacentHTML('afterbegin', str)
 
+          // 라인차트
+          new Chart(document.getElementById("line-chart"), {
+            type: 'line',
+            data: {
+              labels: ["0~5", "6~10", "11~20", "21~30", "41~50", "51~50", "60over"],
+              datasets: [{
+                data: [data.burnrange0_5, data.burnrange6_10, data.burnrange11_21, data.burnrange21_30, data.burnrange31_40, data.burnrange41_50, data.burnrange51_60, data.burnrange60_over],
+                label: data.occurredYear,
+                borderColor: "#3e95cd",
+                fill: false,
+              }
+              ]
+            },
+            options: {
+              title: {
+                display: true,
+                text: 'World population per region (in millions)'
+              }
+            }
+          });
+
         })
         //fetch 통신 실패 시 실행 영역
         .catch(err => {
@@ -184,6 +230,10 @@
           console.log(err);
         });
     }
+
+
+
+
   </script>
 </th:block>
 

@@ -45,6 +45,9 @@
         where OCCURRED_YEAR = #{occurredYear}
     </select>
 
+    <select id="">
+
+    </select>
 </mapper>
 
 
