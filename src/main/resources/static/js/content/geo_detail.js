@@ -1,25 +1,117 @@
-const tag = document.querySelector('#drawing');
-const left = document.querySelector('#right');
+// const tag = document.querySelector('#drawing');
+// const left = document.querySelector('#right');
+
+const left = document.querySelector('#left');
+const right = document.querySelector('#right');
+let str1 = '';
+let str2 = '';
 
 const selectData = () => {
-  
+
     fetch('/geo/geoDetailSelect', { //요청경로
-      method: 'POST',
-      cache: 'no-cache',
-      headers: {
-          'Content-Type': 'application/json; charset=UTF-8'
-      },
-      //컨트롤러로 전달할 데이터
-      body: JSON.stringify({
+        method: 'POST',
+        cache: 'no-cache',
+        headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+        },
+        //컨트롤러로 전달할 데이터
+        body: JSON.stringify({
         // 데이터명 : 데이터값
-      })
-  })
-  .then((response) => {
+        })
+    })
+    .then((response) => {
       return response.json(); //나머지 경우에 사용
-  })
+    })
   //fetch 통신 후 실행 영역
-  .then((data) => {//data -> controller에서 리턴되는 데이터!
-      console.log(data);
+    .then((data) => {//data -> controller에서 리턴되는 데이터!
+    console.log(data);
+    
+    const seoul = Math.round(data.SEOUL * 100) / 100;
+    const gyeonggi = Math.round(data.GYEONGGI * 100) / 100;
+    const incheon = Math.round(data.INCHEON * 100) / 100;
+    const gangwon = Math.round(data.GANGWON * 100) / 100;
+    const sejong = Math.round(data.SEJONG * 100) / 100;
+    const daejeon = Math.round(data.DAEJEON * 100) / 100;
+    const chungbuk = Math.round(data.CHUNGBUK * 100) / 100;
+    const chungnam = Math.round(data.CHUNGNAM * 100) / 100;
+    const jeonbuk = Math.round(data.JEONBUK * 100) / 100;
+    const jeonnam = Math.round(data.JEONNAM * 100) / 100;
+    const gwangju = Math.round(data.GWANGJU * 100) / 100;
+    const jeju = Math.round(data.JEJU * 100) / 100;
+    const gyeongnuk = Math.round(data.GYEONGNUK * 100) / 100;
+    const gyeongnam = Math.round(data.GYEONGNAM * 100) / 100;
+    const daegu = Math.round(data.DAEGU * 100) / 100;
+    const ulsan = Math.round(data.ULSAN * 100) / 100;
+    const busan = Math.round(data.BUSAN * 100) / 100;
+
+    str1 += `
+    <div class="row">
+        <div class="col offset-2">
+            <img width="10%" style="margin-right: 10px;" src="/upload/서울최종.png">
+            <img width="18%" style="margin-right: 5px;" src="/upload/인천최종.png">
+            <img width="18%" style="margin-right: 5px;" src="/upload/경기최종.png">
+            <img width="15%" src="/upload/강원최종.png">
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col" id="upper" style="margin-left: 100px; font-size: x-large;">
+            <pre>     ${seoul}       ${incheon}          ${gyeonggi}         ${gangwon}</pre>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col offset-2">
+            <img width="15%" style="margin-right: 5px;" src="/upload/세종최종.png">
+            <img width="15%" style="margin-right: 5px;" src="/upload/대전최종.png">
+            <img width="9%" style="margin-right: 5px;" src="/upload/충북최종.png">
+            <img width="15%" src="/upload/충남최종.png">
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col" id="middle" style="font-size: x-large;">
+            <pre>                     ${sejong}        ${daejeon}      ${chungbuk}     ${chungnam}</pre>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col offset-2">
+            <img width="13%" style="margin-right: 5px;" src="/upload/광주최종.png">
+            <img width="15%" style="margin-right: 5px;" src="/upload/전북최종.png">
+            <img width="10%" style="margin-right: 5px;" src="/upload/전남최종.png">
+            <img width="20%" src="/upload/제주최종.png">
+        </div>
+    </div>
+    <hr>
+    <div class="row state">
+        <div class="col" id="lower1" style="font-size: x-large;">
+            <pre>                    ${gwangju}         ${jeonbuk}       ${jeonnam}         ${jeju}</pre>
+        </div>
+    </div>
+
+    <div class="row state">
+        <div class="col offset-1">
+            <img width="11%" style="margin-right: 5px;" src="/upload/대구최종.png">
+            <img width="15%" style="margin-right: 5px;" src="/upload/울산최종.png">
+            <img width="15%" style="margin-right: 5px;" src="/upload/부산최종.png">
+            <img width="18%" style="margin-right: 5px;" src="/upload/경북최종.png">
+            <img width="12%" src="/upload/경남최종.png">
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col" id="lower2" style="font-size: x-large;">
+            <pre>          ${daegu}        ${ulsan}         ${busan}            ${gyeongnuk}        ${gyeongnam}</pre>
+        </div>
+    </div>
+    `;
+
+    left.innerHTML = '';
+
+    left.insertAdjacentHTML('afterbegin', str1);
+
+      
       
   })
   //fetch 통신 실패 시 실행 영역
@@ -29,7 +121,7 @@ const selectData = () => {
   });
 }
 
-// 전체화면에서 
+// 전체탭 데이터
 selectData();
 
 // const all = () => {
