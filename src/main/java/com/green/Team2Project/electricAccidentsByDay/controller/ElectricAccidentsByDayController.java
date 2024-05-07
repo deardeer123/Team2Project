@@ -6,6 +6,7 @@ import com.green.Team2Project.home.vo.SearchVO;
 import jakarta.annotation.Resource;
 import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,12 @@ public class ElectricAccidentsByDayController {
         ElectricAccidentsByDayVO electricAccidentsByDayVO = electricAccidentsByDayService.selectAccidentDay();
 
         return electricAccidentsByDayVO;
+    }
+    @GetMapping("/test")
+    public String test1(Model model){
+        System.out.println("test");
+        model.addAttribute("selectedMenu", 1);
+        return "content/test/test";
     }
 
 }

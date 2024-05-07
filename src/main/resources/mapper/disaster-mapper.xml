@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="disasterMapper">
+    <resultMap id="disaster" type="com.green.Team2Project.disaster.vo.DisasterVO">
+        <id column="OCCURRED_YEAR" property="occurredYear"/>
+        <result column="TOTAL_FIRE" property="totalFire"/>
+        <result column="E_FIRE" property="eFire"/>
+        <result column="DEAD" property="dead"/>
+        <result column="OUCH" property="ouch"/>
+        <result column="MONEY_DAMAGE" property="moneyDamage"/>
+    </resultMap>
+
+
+    <select id="selectAllDisaster" resultMap="disaster">
+        SELECT * FROM E_DISASTER
+    </select>
+
+    <select id="selectOneDisaster" resultMap="disaster">
+        SELECT * FROM E_DISASTER
+        WHERE OCCURRED_YEAR = #{occurredYear}
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
