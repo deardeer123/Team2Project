@@ -68,7 +68,7 @@ const selectData = () => {
             <img width="15%" src="/upload/충남최종.png">
         </div>
     </div>
-    <hr>
+    <hr style="width: 75%; margin-left: 5%;">
     <div class="row">
         <div class="col" id="middle" style="font-size: x-large;">
             <pre>                 ${sejong}     ${daejeon}   ${chungbuk}   ${chungnam}</pre>
@@ -77,13 +77,13 @@ const selectData = () => {
 
     <div class="row">
         <div class="col offset-2">
-            <img width="11%" style="margin-right: 5px;" src="/upload/광주최종.png">
-            <img width="15%" style="margin-right: 5px;" src="/upload/전북최종.png">
-            <img width="10%" style="margin-right: 5px;" src="/upload/전남최종.png">
-            <img width="20%" src="/upload/제주최종.png">
+            <img width="9%" style="margin-right: 5px;" src="/upload/광주최종.png">
+            <img width="13%" style="margin-right: 5px;" src="/upload/전북최종.png">
+            <img width="13%" style="margin-right: 5px;" src="/upload/전남최종.png">
+            <img width="18%" src="/upload/제주최종.png">
         </div>
     </div>
-    <hr>
+    <hr style="width: 75%; margin-left: 5%;">
     <div class="row state">
         <div class="col" id="lower1" style="font-size: x-large;">
             <pre>                ${gwangju}     ${jeonbuk}    ${jeonnam}       ${jeju}</pre>
@@ -92,14 +92,14 @@ const selectData = () => {
 
     <div class="row state">
         <div class="col offset-1">
-            <img width="10%" style="margin-right: 5px;" src="/upload/대구최종.png">
+            <img width="9%" style="margin-right: 5px;" src="/upload/대구최종.png">
             <img width="15%" style="margin-right: 5px;" src="/upload/울산최종.png">
             <img width="15%" style="margin-right: 5px;" src="/upload/부산최종.png">
             <img width="18%" style="margin-right: 5px;" src="/upload/경북최종.png">
             <img width="10%" src="/upload/경남최종.png">
         </div>
     </div>
-    <hr>
+    <hr style="width: 75%; margin-left: 5%;">
     <div class="row">
         <div class="col" id="lower2" style="font-size: x-large;">
             <pre>       ${daegu}     ${ulsan}      ${busan}       ${gyeongnuk}     ${gyeongnam}</pre>
@@ -108,8 +108,31 @@ const selectData = () => {
     `;
 
     str2 += `
-        
-    `
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <!-- 전국 1등 -->
+                    <b style="font-family: LeferiPoint-BlackA; font-weight: 300;">최다 전기화재 발생 지역구</b>
+                </div>
+                <div class="col">
+                    <!-- 인구수대비 -->
+                    <b style="font-family: LeferiPoint-BlackA; font-weight: 300;">인구수대비 최다 전기화재 발생 지역구</b>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <!-- 2022년 기준 전년도에비해 많이 떨어진 지역 -->
+                    <b style="font-family: LeferiPoint-BlackA; font-weight: 300;">22년 기준 전기화재 발생 하락폭이 가장 큰 지역구 </b>
+                </div>
+                <div class="col">
+                    <!-- 2022년 기준 전년도에비해 많이 상승한 지역 -->
+                    <b style="font-family: LeferiPoint-BlackA; font-weight: 300;">22년 기준 전기화재 발생 상승폭이 가장 큰 지역구</b>
+                </div>
+            </div>
+        </div>
+    </div>
+    `;
 
 
     right.innerHTML = '';
