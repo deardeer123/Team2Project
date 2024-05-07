@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/geo_test.team2_layout}" >
+
+<th:block layout:fragment="content_css">
+    <!-- html 파일이 열릴때 같이 실행되는 css -->
+    <link rel="stylesheet" href="/">
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+    <!-- <div class="row">
+
+        <div class="col-6" style="display: grid; align-items: center;">
+            <div class="row">
+            <div class="col" style="text-align: center;">
+                <img width="75%" src="/upload/서울최종.png">
+                <img width="75%" src="/upload/경기최종.png">
+                <img width="75%" src="/upload/인천최종.png">
+                <img width="75%" src="/upload/강원최종.png">
+            </div>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col" style="text-align: center;">
+                <img width="75%" src="/upload/세종최종.png">
+                <img width="75%" src="/upload/대전최종.png">
+                <img width="75%" src="/upload/충북최종.png">
+                <img width="75%" src="/upload/충남최종.png">
+            </div>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col" style="text-align: center;">
+                <img width="75%" src="/upload/대구최종.png">
+                <img width="75%" src="/upload/부산최종.png">
+                <img width="75%" src="/upload/울산최종.png">
+                <img width="75%" src="/upload/경북최종.png">
+                <img width="75%" src="/upload/경남최종.png">
+            </div>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col" style="text-align: center;">
+                <img width="75%" src="/upload/광주최종.png">
+                <img width="75%" src="/upload/전북최종.png">
+                <img width="75%" src="/upload/전남최종.png">
+                <img width="75%" src="/upload/제주최종.png">
+            </div>
+            <hr>
+        </div>
+        </div>
+
+        <div class="col-6">
+
+        </div>
+    </div> -->
+
+    <div class="row">
+
+        <!-- 탭 -->
+        <ul class="nav nav-tabs" style="margin-bottom: 50px;">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page">전체</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" onclick="selectUpper()">수도권</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" onclick="selectMiddle()">중부권</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" onclick="selectLower()">남부권</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" onclick="selectTwo()">시도별 비교</a>
+            </li>
+        </ul>
+
+    <!-- 시도별 숫자 데이터 -->
+    <div class="col-5" style="display: grid; align-items: center;" id="left">
+
+        <div class="row">
+            <div class="col offset-2">
+                <img width="10%" style="margin-right: 1px;" src="/upload/서울최종.png">
+                <img width="18%" src="/upload/경기최종.png">
+                <img width="18%" src="/upload/인천최종.png">
+                <img width="15%" src="/upload/강원최종.png">
+            </div>
+        </div>
+        <hr>
+        <div class="row state">
+            <div class="col" id="upper">
+                
+            </div>
+        </div>
+
+        <div class="row state">
+            <div class="col offset-2">
+                <img width="15%" src="/upload/세종최종.png">
+                <img width="15%" src="/upload/대전최종.png">
+                <img width="9%" src="/upload/충북최종.png">
+                <img width="15%" src="/upload/충남최종.png">
+            </div>
+        </div>
+        <hr>
+        <div class="row state">
+            <div class="col" id="middle">
+                
+            </div>
+        </div>
+
+        <div class="row state">
+            <div class="col offset-2">
+                <img width="15%" src="/upload/전북최종.png">
+                <img width="15%" src="/upload/전남최종.png">
+                <img width="10%" src="/upload/광주최종.png">
+                <img width="20%" src="/upload/제주최종.png">
+            </div>
+        </div>
+        <hr>
+        <div class="row state">
+            <div class="col" id="lower1">
+                
+            </div>
+        </div>
+
+        <div class="row state">
+            <div class="col offset-1">
+                <img width="15%" src="/upload/경북최종.png">
+                <img width="10%" src="/upload/대구최종.png">
+                <img width="13%" src="/upload/경남최종.png">
+                <img width="18%" src="/upload/울산최종.png">
+                <img width="20%" src="/upload/부산최종.png">
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col" id="lower2">
+                
+            </div>
+        </div>
+        
+    </div>
+
+      <div class="col-7">
+          <!-- 체크박스 -->
+          <!-- <div class="row">
+              <div class="col">
+                  <input class="form-check" type="checkbox" name="occurredYear" value="0">전체
+              </div>
+              <div class="col">
+                  <input class="form-check"  type="checkbox" name="occurredYear" value="2016">2016
+              </div>
+              <div class="col">
+                  <input class="form-check"  type="checkbox" name="occurredYear" value="2017">2017
+              </div>
+              <div class="col">
+                  <input class="form-check"  type="checkbox" name="occurredYear" value="2018">2018
+              </div>
+              <div class="col">
+                  <input class="form-check"  type="checkbox" name="occurredYear" value="2019">2019
+              </div>
+              <div class="col">
+                  <input class="form-check"  type="checkbox" name="occurredYear" value="2020">2020
+              </div>
+              <div class="col">
+                  <input class="form-check"  type="checkbox" name="occurredYear" value="2021">2021
+              </div>
+              <div class="col">
+                  <input class="form-check"  type="checkbox" name="occurredYear" value="2022">2022
+              </div>
+          </div> -->
+          
+          <!-- 표 데이터 -->
+          <!-- <div class="row">
+              <div class="col">
+
+              </div>
+          </div> -->
+
+          <!-- 비교 데이터 -->
+          <div class="row">
+              <div class="col">
+                <!-- 전국 1등 -->
+                <!-- 인구수대비 -->
+                <!-- 2022년 기준 전년도에비해 많이 떨어진 지역 -->
+                <!-- 2022년 기준 전년도에비해 많이 상승한 지역 -->
+              </div>
+          </div>
+
+      </div>
+  </div>
+</th:block>
+
+<th:block layout:fragment="content_js">
+    <!-- html 파일이 열릴때 같이 실행되는 js -->
+    <script src="/js/content/geo_detail.js"></script>
+</th:block>
+</html>

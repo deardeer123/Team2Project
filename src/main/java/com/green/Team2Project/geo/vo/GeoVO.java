@@ -23,5 +23,4 @@ public class GeoVO {
     private int gyeongnuk;
     private int gyeongnam;
     private int jeju;
-    private String state;
 }
