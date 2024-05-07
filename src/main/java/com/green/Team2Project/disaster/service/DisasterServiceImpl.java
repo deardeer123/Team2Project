@@ -5,6 +5,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("disasterService")
 public class DisasterServiceImpl implements DisasterService{
     @Autowired
@@ -12,7 +14,12 @@ public class DisasterServiceImpl implements DisasterService{
 
 
     @Override
-    public DisasterVO selectAllDisaster() {
-        return sqlSession.selectOne("disasterMapper.selectAllDisaster");
+    public List<DisasterVO> selectAllDisaster() {
+        return sqlSession.selectList("disasterMapper.selectAllDisaster");
+    }
+
+    @Override
+    public DisasterVO selectOneDisaster(int occurredYear) {
+        return sqlSession.selectOne("disasterMapper.selectOneDisaster",occurredYear);
     }
 }

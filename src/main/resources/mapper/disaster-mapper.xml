@@ -13,8 +13,13 @@
     </resultMap>
 
 
-    <select id="selectAllDisaster">
+    <select id="selectAllDisaster" resultMap="disaster">
         SELECT * FROM E_DISASTER
+    </select>
+
+    <select id="selectOneDisaster" resultMap="disaster">
+        SELECT * FROM E_DISASTER
+        WHERE OCCURRED_YEAR = #{occurredYear}
     </select>
 </mapper>
 
