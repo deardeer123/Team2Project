@@ -22,7 +22,7 @@ const selectData = () => {
     .then((response) => {
       return response.json(); //나머지 경우에 사용
     })
-  //fetch 통신 후 실행 영역
+    //fetch 통신 후 실행 영역
     .then((data) => {//data -> controller에서 리턴되는 데이터!
     console.log(data);
     
@@ -44,9 +44,12 @@ const selectData = () => {
     const ulsan = Math.round(data.ULSAN * 100) / 100;
     const busan = Math.round(data.BUSAN * 100) / 100;
 
+    str1 = '';
+    str2 = '';
+
     str1 += `
     <div class="row">
-        <div class="col offset-2">
+        <div class="col offset-2" id="upper-image">
             <img width="10%" style="margin-right: 10px;" src="/upload/서울최종.png">
             <img width="15%" style="margin-right: 5px;" src="/upload/인천최종.png">
             <img width="15%" style="margin-right: 5px;" src="/upload/경기최종.png">
@@ -61,7 +64,7 @@ const selectData = () => {
     </div>
 
     <div class="row">
-        <div class="col offset-2">
+        <div class="col offset-2" id="middle-image">
             <img width="15%" style="margin-right: 5px;" src="/upload/세종최종.png">
             <img width="15%" style="margin-right: 5px;" src="/upload/대전최종.png">
             <img width="9%" style="margin-right: 5px;" src="/upload/충북최종.png">
@@ -76,7 +79,7 @@ const selectData = () => {
     </div>
 
     <div class="row">
-        <div class="col offset-2">
+        <div class="col offset-2" id="lower1-image">
             <img width="9%" style="margin-right: 5px;" src="/upload/광주최종.png">
             <img width="13%" style="margin-right: 5px;" src="/upload/전북최종.png">
             <img width="13%" style="margin-right: 5px;" src="/upload/전남최종.png">
@@ -86,12 +89,12 @@ const selectData = () => {
     <hr style="width: 75%; margin-left: 5%;">
     <div class="row state">
         <div class="col" id="lower1" style="font-size: x-large;">
-            <pre>                ${gwangju}     ${jeonbuk}    ${jeonnam}       ${jeju}</pre>
+            <pre>               ${gwangju}     ${jeonbuk}    ${jeonnam}       ${jeju}</pre>
         </div>
     </div>
 
     <div class="row state">
-        <div class="col offset-1">
+        <div class="col offset-1" id="lower2-image">
             <img width="9%" style="margin-right: 5px;" src="/upload/대구최종.png">
             <img width="15%" style="margin-right: 5px;" src="/upload/울산최종.png">
             <img width="15%" style="margin-right: 5px;" src="/upload/부산최종.png">
@@ -111,23 +114,27 @@ const selectData = () => {
     <div class="row">
         <div class="col">
             <div class="row">
-                <div class="col">
+                <div class="col" style="font-family: LeferiPoint-BlackA; font-weight: 300;">
                     <!-- 전국 1등 -->
-                    <b style="font-family: LeferiPoint-BlackA; font-weight: 300;">최다 전기화재 발생 지역구</b>
+                    <b>최다 전기화재 발생 지역구()</b>
+                    <img width="30%" src="/upload/경기최종.png">
                 </div>
                 <div class="col">
                     <!-- 인구수대비 -->
-                    <b style="font-family: LeferiPoint-BlackA; font-weight: 300;">인구수대비 최다 전기화재 발생 지역구</b>
+                    <b style="font-family: LeferiPoint-BlackA; font-weight: 300;">인구수대비 최다 전기화재 발생 지역구(인구수 100,000명당 25.1건)</b>
+                    <img width="30%" src="/upload/충남최종.png">
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <!-- 2022년 기준 전년도에비해 많이 떨어진 지역 -->
-                    <b style="font-family: LeferiPoint-BlackA; font-weight: 300;">22년 기준 전기화재 발생 하락폭이 가장 큰 지역구 </b>
+                    <b style="font-family: LeferiPoint-BlackA; font-weight: 300;">22년 기준 전기화재 발생 하락폭이 가장 큰 지역구(+182건)</b>
+                    <img width="30%" src="/upload/울산최종.png">
                 </div>
                 <div class="col">
                     <!-- 2022년 기준 전년도에비해 많이 상승한 지역 -->
-                    <b style="font-family: LeferiPoint-BlackA; font-weight: 300;">22년 기준 전기화재 발생 상승폭이 가장 큰 지역구</b>
+                    <b style="font-family: LeferiPoint-BlackA; font-weight: 300;">22년 기준 전기화재 발생 상승폭이 가장 큰 지역구(-87건)</b>
+                    <img width="30%" src="/upload/경기최종.png">
                 </div>
             </div>
         </div>
@@ -149,8 +156,217 @@ const selectData = () => {
     });
 }
 
-// 전체탭 데이터
 selectData();
+
+const selectUpper = () => {
+
+    right.innerHTML = '';
+    left.innerHTML = '';
+    console.log(left)
+    str1 = ``;
+    str1 += `
+    <canvas id="line-chart"></canvas>
+    `;
+
+    left.insertAdjacentHTML("afterbegin", str1);
+
+    new Chart(document.querySelector('#line-chart'), {
+        type: "line",
+        data: {
+            labels: ['2016', '2017', '2018', '2019', '2020', '2021', '2022'],
+            datasets: [
+                {
+                    data: [1138, 1180, 1412, 1199, 1175, 1250, 1357],
+                    label: "서울시",
+                    borderColor: 'yellow',
+                    fill: false
+                },
+                {
+                    data: [417, 397, 481, 353, 361, 392, 374],
+                    label: "인천시",
+                    borderColor: 'lightblue',
+                    fill: false
+                },
+                {
+                    data: [2007, 2067, 2403, 2082, 2173, 2198, 2380],
+                    label: "경기도",
+                    borderColor: 'lightgreen',
+                    fill: false
+                },
+                {
+                    data: [326, 347, 396, 333, 370, 393, 447],
+                    label: "강원도",
+                    borderColor: 'lightpink',
+                    fill: false
+                }
+            ]
+        }
+        
+    })
+
+    // 션생님 잘부탁합니데이ㅠㅠ
+    str2 += `
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col" style="font-family: LeferiPoint-BlackA; font-weight: 300;">
+                    <!-- 전국 1등 -->
+                    <b>최다 전기화재 발생 지역구()</b>
+                    <img width="30%" src="/upload/경기최종.png">
+                </div>
+                <div class="col">
+                    <!-- 인구수대비 -->
+                    <b style="font-family: LeferiPoint-BlackA; font-weight: 300;">인구수대비 최다 전기화재 발생 지역구(인구수 100,000명당 25.1건)</b>
+                    <img width="30%" src="/upload/충남최종.png">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <!-- 2022년 기준 전년도에비해 많이 떨어진 지역 -->
+                    <b style="font-family: LeferiPoint-BlackA; font-weight: 300;">22년 기준 전기화재 발생 하락폭이 가장 큰 지역구(+182건)</b>
+                    <img width="30%" src="/upload/울산최종.png">
+                </div>
+                <div class="col">
+                    <!-- 2022년 기준 전년도에비해 많이 상승한 지역 -->
+                    <b style="font-family: LeferiPoint-BlackA; font-weight: 300;">22년 기준 전기화재 발생 상승폭이 가장 큰 지역구(-87건)</b>
+                    <img width="30%" src="/upload/경기최종.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    `;
+
+    right.
+}
+
+const selectMiddle = () => {
+
+    right.innerHTML = '';
+    left.innerHTML = '';
+    console.log(left)
+    str1 = ``;
+    str1 += `
+    <canvas id="line-chart"></canvas>
+    `;
+
+    left.insertAdjacentHTML("afterbegin", str1);
+
+    new Chart(document.querySelector('#line-chart'), {
+        type: "line",
+        data: {
+            labels: ['2016', '2017', '2018', '2019', '2020', '2021', '2022'],
+            datasets: [
+                {
+                    data: [55, 50, 53, 43, 45, 57, 172],
+                    label: "세종시",
+                    borderColor: 'yellow',
+                    fill: false
+                },
+                {
+                    data: [206, 221, 272, 238, 207, 201, 197],
+                    label: "대전시",
+                    borderColor: 'lightblue',
+                    fill: false
+                },
+                {
+                    data: [210, 250, 254, 283, 298, 281, 351],
+                    label: "충청북도",
+                    borderColor: 'lightgreen',
+                    fill: false
+                },
+                {
+                    data: [384, 422, 491, 453, 461, 495, 502],
+                    label: "충청남도",
+                    borderColor: 'lightpink',
+                    fill: false
+                }
+            ]
+        }
+        
+    })
+}
+
+const selectLower = () => {
+    right.innerHTML = '';
+    left.innerHTML = '';
+    console.log(left)
+    str1 = ``;
+    str1 += `
+    <canvas id="line-chart"></canvas>
+    `;
+
+    left.insertAdjacentHTML("afterbegin", str1);
+
+    new Chart(document.querySelector('#line-chart'), {
+        type: "line",
+        data: {
+            labels: ['2016', '2017', '2018', '2019', '2020', '2021', '2022'],
+            datasets: [
+                {
+                    data: [186, 144, 185, 167, 166, 181, 147],
+                    label: "광주시",
+                    borderColor: 'yellow',
+                    fill: false
+                },
+                {
+                    data: [267, 346, 418, 357, 335, 353, 352],
+                    label: "전라북도",
+                    borderColor: 'lightblue',
+                    fill: false
+                },
+                {
+                    data: [376, 456, 478, 442, 453, 472, 497],
+                    label: "전라남도",
+                    borderColor: 'lightgreen',
+                    fill: false
+                },
+                {
+                    data: [121, 132, 168, 146, 137, 152, 166],
+                    label: "제주도",
+                    borderColor: 'lightpink',
+                    fill: false
+                },
+                {
+                    data: [273, 287, 319, 260, 276, 247, 250],
+                    label: "대구시",
+                    borderColor: 'red',
+                    fill: false
+                },
+                {
+                    data: [129, 152, 163, 163, 159, 144, 57],
+                    label: "울산시",
+                    borderColor: 'blue',
+                    fill: false
+                },
+                {
+                    data: [409, 457, 563, 590, 518, 408, 417],
+                    label: "부산시",
+                    borderColor: 'lightpurple',
+                    fill: false
+                },
+                {
+                    data: [430, 468, 526, 404, 455, 441, 500],
+                    label: "경상북도",
+                    borderColor: 'gray',
+                    fill: false
+                },
+                {
+                    data: [629, 635, 658, 642, 581, 576, 636],
+                    label: "경상남도",
+                    borderColor: 'orange',
+                    fill: false
+                }
+            ]
+        }
+        
+    })
+}
+
+// 전체탭 데이터
+// selectData();
+// left.innerHTML = '';
+// right.innerHTML = '';
+
 
 // const all = () => {
 //     tag.innerHTML = '';
