@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="electricAccidentsByTimeMapper">
+
+
+
+        <resultMap id="ElectricAccidentsByTime" type="com.green.Team2Project.electricAccidentsByTime.vo.ElectricAccidentsByTimeVO">
+                <id column="OCCURRED_YEAR" property="occurredYear" />
+                <result column="SUNDAY" property="sunday" />
+                <result column="MONDAY" property="monday" />
+                <result column="TUESDAY" property="tuesday" />
+                <result column="WEDNESDAY" property="wednesday" />
+                <result column="THURSDAY" property="thursday" />
+                <result column="FRIDAY" property="friday" />
+                <result column="SATURDAY" property="saturday" />
+        </resultMap>
+
+
+        <select id="selectAccidentDay" resultMap="ElectricAccidentsByDayVO">
+                SELECT
+                        sum(SUNDAY) as sunday ,
+                sum(MONDAY) as MONDAY ,
+                sum(TUESDAY) as TUESDAY,
+                sum(WEDNESDAY) as WEDNESDAY ,
+                sum(THURSDAY) as THURSDAY ,
+                sum(FRIDAY) as FRIDAY,
+                sum(SATURDAY) as SATURDAY
+                FROM
+                        ELECTRIC_ACCIDENTS_BY_DAY
+<!--                <if test='searchValue != null and !searchValue.equals("")'>-->
+<!--                        WHERE OCCURRED_YEAR = #{searchValue}-->
+<!--                        GROUP BY OCCURRED_YEAR-->
+<!--                </if>-->
+        </select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
