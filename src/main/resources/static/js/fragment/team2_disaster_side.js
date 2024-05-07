@@ -56,5 +56,5 @@ function disasterData() {
 disasterData();
 
 const goDisaster = () => {
-    location.href="/disasterDetail"
+    location.href="/disaster/disasterDetail"
 }

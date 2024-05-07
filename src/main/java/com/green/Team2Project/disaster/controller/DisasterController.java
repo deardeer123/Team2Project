@@ -30,8 +30,8 @@ public class DisasterController {
         return disaster;
     }
 
-//    @GetMapping("/disasterDetail")
-//    public String disasterDetail(){
-////        return "detailContent/team2_disaster_detail";
-//    }
+    @GetMapping("/disasterDetail")
+    public String disasterDetail(){
+        return "content/detailContent/team2_disaster_detail";
+    }
 }

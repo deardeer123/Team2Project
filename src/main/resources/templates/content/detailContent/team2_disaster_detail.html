@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{fragment/layout파일명기입}" >
+  layout:decorate="~{content/detailContent/team2.detailLayout}" >
 
 <th:block layout:fragment="content_css">
   <!-- html 파일이 열릴 때 같이 실행되는 css -->
@@ -10,7 +10,20 @@
 
 <th:block layout:fragment="contentFragment">
   <!-- html 코드 작성 -->
-  ㅎㅇ
+  <div class="row">
+    <!-- 좌측 라인 -->
+    <div class="col-6">
+      이미지
+    </div>
+    <!-- 우측 라인 -->
+    <div class="col-6">
+      <div class="row">
+        <div class="col">
+          
+        </div>
+      </div>
+    </div>
+  </div>
 </th:block>
 
 <th:block layout:fragment="content_js">
