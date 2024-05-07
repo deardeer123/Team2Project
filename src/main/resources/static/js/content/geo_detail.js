@@ -48,15 +48,15 @@ const selectData = () => {
     <div class="row">
         <div class="col offset-2">
             <img width="10%" style="margin-right: 10px;" src="/upload/서울최종.png">
-            <img width="18%" style="margin-right: 5px;" src="/upload/인천최종.png">
-            <img width="18%" style="margin-right: 5px;" src="/upload/경기최종.png">
+            <img width="15%" style="margin-right: 5px;" src="/upload/인천최종.png">
+            <img width="15%" style="margin-right: 5px;" src="/upload/경기최종.png">
             <img width="15%" src="/upload/강원최종.png">
         </div>
     </div>
-    <hr>
+    <hr style="width: 75%; margin-left: 5%;">
     <div class="row">
         <div class="col" id="upper" style="margin-left: 100px; font-size: x-large;">
-            <pre>     ${seoul}       ${incheon}          ${gyeonggi}         ${gangwon}</pre>
+            <pre>     ${seoul}   ${incheon}     ${gyeonggi}    ${gangwon}</pre>
         </div>
     </div>
 
@@ -71,13 +71,13 @@ const selectData = () => {
     <hr>
     <div class="row">
         <div class="col" id="middle" style="font-size: x-large;">
-            <pre>                     ${sejong}        ${daejeon}      ${chungbuk}     ${chungnam}</pre>
+            <pre>                 ${sejong}     ${daejeon}   ${chungbuk}   ${chungnam}</pre>
         </div>
     </div>
 
     <div class="row">
         <div class="col offset-2">
-            <img width="13%" style="margin-right: 5px;" src="/upload/광주최종.png">
+            <img width="11%" style="margin-right: 5px;" src="/upload/광주최종.png">
             <img width="15%" style="margin-right: 5px;" src="/upload/전북최종.png">
             <img width="10%" style="margin-right: 5px;" src="/upload/전남최종.png">
             <img width="20%" src="/upload/제주최종.png">
@@ -86,39 +86,44 @@ const selectData = () => {
     <hr>
     <div class="row state">
         <div class="col" id="lower1" style="font-size: x-large;">
-            <pre>                    ${gwangju}         ${jeonbuk}       ${jeonnam}         ${jeju}</pre>
+            <pre>                ${gwangju}     ${jeonbuk}    ${jeonnam}       ${jeju}</pre>
         </div>
     </div>
 
     <div class="row state">
         <div class="col offset-1">
-            <img width="11%" style="margin-right: 5px;" src="/upload/대구최종.png">
+            <img width="10%" style="margin-right: 5px;" src="/upload/대구최종.png">
             <img width="15%" style="margin-right: 5px;" src="/upload/울산최종.png">
             <img width="15%" style="margin-right: 5px;" src="/upload/부산최종.png">
             <img width="18%" style="margin-right: 5px;" src="/upload/경북최종.png">
-            <img width="12%" src="/upload/경남최종.png">
+            <img width="10%" src="/upload/경남최종.png">
         </div>
     </div>
     <hr>
     <div class="row">
         <div class="col" id="lower2" style="font-size: x-large;">
-            <pre>          ${daegu}        ${ulsan}         ${busan}            ${gyeongnuk}        ${gyeongnam}</pre>
+            <pre>       ${daegu}     ${ulsan}      ${busan}       ${gyeongnuk}     ${gyeongnam}</pre>
         </div>
     </div>
     `;
 
-    left.innerHTML = '';
+    str2 += `
+        
+    `
 
+
+    right.innerHTML = '';
+    left.innerHTML = '';
+    right.insertAdjacentHTML('afterbegin', str2);
     left.insertAdjacentHTML('afterbegin', str1);
 
-      
-      
-  })
+
+    })
   //fetch 통신 실패 시 실행 영역
-  .catch(err=>{
-      alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
-      console.log(err);
-  });
+    .catch(err=>{
+        alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
+        console.log(err);
+    });
 }
 
 // 전체탭 데이터
