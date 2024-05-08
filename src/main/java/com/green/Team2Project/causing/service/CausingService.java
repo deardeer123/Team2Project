@@ -8,4 +8,6 @@ public interface CausingService {
 
     //화재 발생 요인 목록
     List<CausingVO> selectAllCausing();
+
+    CausingVO selectOneCausing(int occurredYear);
 }

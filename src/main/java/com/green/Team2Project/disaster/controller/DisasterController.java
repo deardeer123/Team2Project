@@ -19,7 +19,6 @@ public class DisasterController {
     @ResponseBody
     public List<DisasterVO> selectAllDisaster(){
         List<DisasterVO> disasterList = disasterService.selectAllDisaster();
-        System.out.println(disasterList);
         return disasterList;
     }
 
@@ -32,6 +31,6 @@ public class DisasterController {
 
     @GetMapping("/disasterDetail")
     public String disasterDetail(){
-        return "content/detailContent/team2_disaster_detail";
+        return "content/disaster/team2_disaster_detail";
     }
 }

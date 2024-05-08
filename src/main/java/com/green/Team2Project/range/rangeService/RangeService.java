@@ -10,4 +10,8 @@ public interface RangeService {
     List<RangeVO> selectAllRange();
 
     RangeVO detail(int occurredYear);
+
+    RangeVO totalRange(int occurredYear);
+
+    RangeVO maxBurnRange05();
 }

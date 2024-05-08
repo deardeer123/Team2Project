@@ -26,7 +26,8 @@ public class RangeController {
     }
 
     @GetMapping("/detailRange")
-    public String detailRange(Model model,RangeVO rangeVO){
+    public String detailRange(Model model){
+        model.addAttribute("rangeList", rangeService.selectAllRange());
         model.addAttribute("rangeVO",rangeService.detail(2022));
         model.addAttribute("selectedMenu",2);
         return "content/range/team2_range_detail.html";
@@ -37,5 +38,6 @@ public class RangeController {
     public RangeVO detail(@RequestParam(name = "occurredYear") int occurredYear){
         return rangeService.detail(occurredYear);
     }
+
 
 }

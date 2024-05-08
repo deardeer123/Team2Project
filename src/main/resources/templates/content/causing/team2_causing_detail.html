@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{fragment/detail/detail_layout}">
+
+<th:block layout:fragment="content_css">
+  <!-- html 파일이 열릴 때 같이 실행되는 css -->
+  <link rel="stylesheet" href="/css/content/team2_causing_detail.css">
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+  <style>
+    #bar-chart1,
+    #mixed-chart1 {
+      background-color: #ffffff;
+    }
+
+    p {
+      color: #ffffff;
+    }
+
+    .img-div {
+      border: 1px solid #42444e;
+      border-radius: 10px;
+      box-shadow: 5px 5px #42444e;
+      background-color: #ffffff;
+      width: 80%;
+      margin-left: 10%;
+      padding: 10px;
+    }
+
+    .bar-div,
+    .mixed-div {
+      border: 1px solid #42444e;
+      border-radius: 10px;
+      box-shadow: 5px 5px #42444e;
+      background-color: #ffffff;
+      margin-right: 10px;
+    }
+  </style>
+
+
+
+  <!-- html 코드 작성 -->
+  <div class="row mt-5">
+    <!-- 자료 -->
+    <div class=" col-4 mt-3 text-center">
+      <div class="img-div">
+        <img src="/upload/전기안전관련용어.jpg">
+      </div>
+    </div>
+    <!-- 데이터 -->
+    <div class="col-8">
+
+      <!-- 그래프 -->
+      <div class="row">
+        <div class="bar-div col text-center">
+          <canvas id="bar-chart1" style="width: 51%; height: 100%;"></canvas>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col text-center">
+          <p>라벨을 클릭하여 비교할 수 있습니다.</p>
+
+        </div>
+      </div>
+      <!-- 바 차트 -->
+      <div class="row">
+        <div class="mixed-div col text-center">
+
+          <canvas id="mixed-chart1" style="width: 100%; height: 150%;"></canvas>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</th:block>
+
+<th:block layout:fragment="content_js">
+  <!-- html 파일이 열릴 때 같이 실행되는 js -->
+  <script src="/js/content/team2_causing_detail.js"></script>
+
+</th:block>
+
+</html>

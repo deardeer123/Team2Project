@@ -14,7 +14,7 @@
       cursor: pointer;
     }
 
-    body {
+    .body-div{
       color: #666;
       font: 14px/24px "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", Sans-Serif;
     }
@@ -65,84 +65,134 @@
       border-bottom-right-radius: 6px;
     }
 
+    table>tbody {
+      background-color: #ffffff;
+
+    }
+
+    .canvas {
+      background-color: #ffffff;
+    }
+
     select {
-
       text-align-last: center;
+    }
 
+    .img-div {
+      border: 1px solid #42444e;
+      border-radius: 10px;
+      padding: 10px;
+      margin-left: 10%;
+      background-color: #42444e;
+    }
+
+    p {
+      font-size: 18px;
+      color: #ffffff;
+      margin-bottom: 5px;
     }
   </style>
 
 
   <!-- html 코드 작성 -->
-  <div class="row justify-content-center" style="border: 1px solid black;">
-    <!-- 자료 -->
-    <div class="col-4">
-      <div>자료</div>
-    </div>
-    <div class="col-8" style="border: 1px solid black;">
+  <div class="body-div row justify-content-center" style=" height: 80%;">
+    <div class="col">
       <div class="row">
-        <!-- 체크 박스 -->
-        <div class="click-box col mt-3">
-          <select class="form-select" name="occurredYear" id="occurredYear" onchange="changeData()" style="width: 40%;">
-            <option value="none" hidden>연도를 선택하시면 그래프가 나옵니다.</option>
-            <option value="2022">2022</option>
-            <option value="2021">2021</option>
-            <option value="2020">2020</option>
-            <option value="2019">2019</option>
-            <option value="2018">2018</option>
-            <option value="2017">2017</option>
-            <option value="2016">2016</option>
-          </select>
+        <div class="col align-middle" style="font-size: 18px; color: #ffffff;">
+          전기화재
         </div>
       </div>
-      <div class="row mt-3">
-        <!-- 데이터 -->
-        <div class="col">
-          <div class="layer small-layer">
-            <table>
-              <thead>
-                <tr>
-                  <th>연도</th>
-                  <th>0-5</th>
-                  <th>6-10</th>
-                  <th>11-20</th>
-                  <th>21-30</th>
-                  <th>31-40</th>
-                  <th>41-50</th>
-                  <th>51-60</th>
-                  <th>60 초과</th>
-                </tr>
-              </thead>
-              <tbody id="t-body">
-                <tr>
-                  <td>[[${rangeVO.occurredYear}]]</td>
-                  <td>[[${rangeVO.burnrange0_5}]]</td>
-                  <td>[[${rangeVO.burnrange6_10}]]</td>
-                  <td>[[${rangeVO.burnrange11_21}]]</td>
-                  <td>[[${rangeVO.burnrange21_30}]]</td>
-                  <td>[[${rangeVO.burnrange31_40}]]</td>
-                  <td>[[${rangeVO.burnrange41_50}]]</td>
-                  <td>[[${rangeVO.burnrange51_60}]]</td>
-                  <td>[[${rangeVO.burnrange60_over}]]</td>
-                </tr>
-              </tbody>
-            </table>
+      <div class="row mt-3" style="height: 80%;">
+        <div class="col-4 text-center">
+          <div class="img-div">
+            <img src="/upload/전기화재.jpg" width="100%" style="height: 80vh;">
+          </div>
+        </div>
+        <div class="col-8">
+          <div class="row">
+            <!-- 체크 박스 -->
+            <div class="click-box col ">
+              <select class="form-select" name="occurredYear" id="occurredYear" onchange="changeData()"
+                style="width: 40%;">
+                <option value="none" hidden>연도를 선택하시면 그래프가 나옵니다.</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
+                <option value="2016">2016</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <!-- 데이터 -->
+            <div class="col">
+              <p class="text-center">표 통계</p>
+              <div class="layer small-layer">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>연도</th>
+                      <th>0-5</th>
+                      <th>6-10</th>
+                      <th>11-20</th>
+                      <th>21-30</th>
+                      <th>31-40</th>
+                      <th>41-50</th>
+                      <th>51-60</th>
+                      <th>60 초과</th>
+                    </tr>
+                  </thead>
+                  <tbody id="t-body">
+                    <tr style="font-weight: bold;" th:each="rangeVO : ${rangeList}">
+                      <td>[[${rangeVO.occurredYear}]]</td>
+                      <td style="color: red; font-weight: bold;">[[${rangeVO.burnrange0_5}]]</td>
+                      <td>[[${rangeVO.burnrange6_10}]]</td>
+                      <td>[[${rangeVO.burnrange11_21}]]</td>
+                      <td>[[${rangeVO.burnrange21_30}]]</td>
+                      <td>[[${rangeVO.burnrange31_40}]]</td>
+                      <td>[[${rangeVO.burnrange41_50}]]</td>
+                      <td>[[${rangeVO.burnrange51_60}]]</td>
+                      <td>[[${rangeVO.burnrange60_over}]]</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-5">
+            <!-- 통계 -->
+            <div class="col">
+              <p class="text-center">그래프 통계</p>
+              <div class="canvas"><canvas id="line-chart" height="100"></canvas></div>
+            </div>
+          </div>
+          <!-- taxt -->
+          <div class="row mb-3">
+            <div class="col">
+
+            </div>
           </div>
         </div>
       </div>
-      <div class="row mt-3">
-        <!-- 통계 -->
-        <div class="col">
-          <div><canvas id="line-chart" height="100"></canvas></div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          text
-        </div>
-      </div>
     </div>
+
   </div>
+  <!-- 자료 -->
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
@@ -186,9 +236,9 @@
 
           str +=
             `
-            <tr>
+            <tr style="font-weight: bold;">
                 <td>${data.occurredYear}</td>
-                <td>${data.burnrange0_5}</td>
+                <td style="color: red;">${data.burnrange0_5}</td>
                 <td>${data.burnrange6_10}</td>
                 <td>${data.burnrange11_21}</td>
                 <td>${data.burnrange21_30}</td>
@@ -212,6 +262,7 @@
                 label: data.occurredYear,
                 borderColor: "#3e95cd",
                 fill: false,
+                
               }
               ]
             },
@@ -222,7 +273,6 @@
               }
             }
           });
-
         })
         //fetch 통신 실패 시 실행 영역
         .catch(err => {

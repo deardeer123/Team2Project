@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{fragment/detail/detail_layout}" >
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{fragment/detail/detail_layout}">
 
 <th:block layout:fragment="content_css">
   <!-- html 파일이 열릴 때 같이 실행되는 css -->
@@ -9,12 +8,132 @@
 </th:block>
 
 <th:block layout:fragment="contentFragment">
+  <style>
+    .layer {
+      border: 1px solid #dddddd;
+      border-radius: 10px;
+      background-color: white;
+      padding: 10px;
+      height: 40vh;
+      width: 100%;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    }
+
+
+    .body-div {
+      color: #666;
+      font: 14px/24px "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", Sans-Serif;
+    }
+
+    table {
+      border-collapse: separate;
+      border-spacing: 0;
+      width: 100%;
+      background-color: #ffffff;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+
+    }
+
+    th,
+    td {
+      padding: 6px 12px;
+    }
+
+    th {
+      background: #42444e;
+      color: #fff;
+      text-align: left;
+    }
+
+    tr:first-child th:first-child {
+      border-top-left-radius: 6px;
+    }
+
+    tr:first-child th:last-child {
+      border-top-right-radius: 6px;
+    }
+
+    td {
+      border-right: 1px solid #c6c9cc;
+      border-bottom: 1px solid #c6c9cc;
+    }
+
+    td:first-child {
+      border-left: 1px solid #c6c9cc;
+    }
+
+    tr:nth-child(even) td {
+      background: #eaeaed;
+    }
+
+    tr:last-child td:first-child {
+      border-bottom-left-radius: 6px;
+    }
+
+    tr:last-child td:last-child {
+      border-bottom-right-radius: 6px;
+    }
+    
+  </style>
+
+
+
   <!-- html 코드 작성 -->
-  ㅎㅇ
+  <div class="body-div row mt-3">
+    <div class="col">
+      <div class="row">
+        <!-- 자료 -->
+        <div class="col-6">
+          자료
+        </div>
+        <!-- 데이터 -->
+        <div class="col-6">
+          <!-- 표 -->
+          <div class="row">
+            <div class="col table-div">
+              <table>
+                <thead>
+                  <tr>
+                    <th>연도</th>
+                    <th>총화재건수</th>
+                    <th>전기화재건수</th>
+                    <th>인명피해(사망)</th>
+                    <th>인명피해(부상)</th>
+                    <th>재산피해(백만원)</th>
+                  </tr>
+                </thead>
+                <tbody id="t-body2">
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- 차트 -->
+          <div class="row mt-3">
+            <div class="col-6">
+              <div class="layer small-layer">
+                <canvas id="radar-chart1" style="height: 55%;margin: 0 auto;"></canvas>
+              </div>
+            </div>
+          <!-- 데이터 -->
+            <div class="col-6">
+              <div class="layer small-layer">
+                ㅇㅇㅇㅇㅇ
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </th:block>
 
 <th:block layout:fragment="content_js">
   <!-- html 파일이 열릴 때 같이 실행되는 js -->
-  <!-- <script src="/"></script> -->
+  <script src="/js/content/team2_disaster_detail.js"></script>
 </th:block>
+
 </html>
