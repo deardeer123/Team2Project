@@ -34,6 +34,30 @@
 <!--                        GROUP BY OCCURRED_YEAR-->
 <!--                </if>-->
         </select>
+
+        <select id="avgDay" resultType="map">
+                SELECT
+                round(SUM(sunday)/COUNT(occurred_year),1)AS SUNDAY ,
+                round(SUM(monday)/COUNT(occurred_year),1)AS MONDAY ,
+                round(SUM(tuesday)/COUNT(occurred_year),1)AS TUESDAY ,
+                round(SUM(wednesday)/COUNT(occurred_year),1)AS WEDNESDAY ,
+                round(SUM(thursday)/COUNT(occurred_year),1)AS THURSDAY ,
+                round(SUM(friday)/COUNT(occurred_year),1)AS FRIDAY ,
+                round(SUM(saturday)/COUNT(occurred_year),1)AS SATURDAY
+                FROM
+                electric_accidents_by_day;
+        </select>
+
+        <select id="allDay" resultMap="ElectricAccidentsByDayVO">
+                select *
+                from electric_accidents_by_day
+        </select>
+
+        <select id="selectDay" resultType="map">
+                select *
+                from electric_accidents_by_day
+                where occurred_year = #{occurredYear}
+        </select>
 </mapper>
 
 

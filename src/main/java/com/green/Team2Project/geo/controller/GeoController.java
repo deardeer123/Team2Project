@@ -35,7 +35,7 @@ public class GeoController {
     @RequestMapping("/geoDetail")
     public String goGeoDetail(){
 
-        return "content/geo_detail";
+        return "content/team2_geo_detail";
     }
 
     // 전체 항목의 평균값 보여주는 메소드

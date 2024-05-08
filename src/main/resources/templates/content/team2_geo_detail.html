@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{fragment/detail/detail_layout}" >
+
+<th:block layout:fragment="content_css">
+    <!-- html 파일이 열릴때 같이 실행되는 css -->
+    <link rel="stylesheet" href="/">
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+    <div class="row">
+
+        <!-- 탭 -->
+        <ul class="nav nav-tabs" style="margin-bottom: 50px;">
+            <li class="nav-item">
+                <button class="nav-link active" aria-current="page" onclick="selectData()">전체</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" onclick="selectUpper()">수도권</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" onclick="selectMiddle()">중부권</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" onclick="selectLower()">남부권</button>
+            </li>
+        </ul>
+
+        <!-- 시도별 숫자 데이터 -->
+        <div class="col-6 responsive-text" style="display: grid; align-items: center; height: 90%;" id="left">
+            
+        </div>
+
+        <!-- 비교 데이터 -->
+        <div class="col-6" id="right">
+
+        </div>
+
+    </div>    
+</th:block>
+
+<th:block layout:fragment="content_js">
+    <!-- html 파일이 열릴때 같이 실행되는 js -->
+    <script src="/js/content/geo_detail.js"></script>
+</th:block>
+</html>
