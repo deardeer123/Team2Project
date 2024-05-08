@@ -9,39 +9,48 @@
 
 <th:block layout:fragment="contentFragment">
     <!-- html 코드 작성 -->
-    <div class="row">
+    <div class="row" style="background-color: white;">
         <div class="col">
             <div class="row">
                 <div class="col-1"></div>
-                <div class="col-4 text-center ms-4">
+                <div class="col-4 text-center ms-4 mt-1">
                     <!-- 요일별 데이터 -->
                     <div>
-                        <canvas id="mix-bar-chart" style="width: 30vh; height: 30vh;"></canvas>
+                        <canvas id="day-chart" style="width: 20vh; height: 20vh;"></canvas>
                     </div>
                 </div>
 
-                <div class="col-5 mt-5 me-5 ms-3">
-                    <div class="text-center fs-4">한국전기안전공사 연도별 감전사고 인명피해현황 요일별 데이터</div>
-                    <table class="table table-hover table-bordered mt-4s">
+                <div class="col-5 mt-3 me-5 ms-3">
+                    <div class="text-center fs-5" style="font-weight: bold;">한국전기안전공사 연도별 감전사고 인명피해현황 요일별 데이터 (단위,명)
+                    </div>
+                    <table class="table table-hover text-center table-bordered table-sm">
                         <thead>
                             <tr>
-                                <td class="text-center" style="background-color: #313A46; color: whitesmoke;"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                                <td class="text-center" style="background-color: #313A46; color: whitesmoke;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
                                         class="bi bi-calendar" viewBox="0 0 16 16">
                                         <path
                                             d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
-                                    </svg></td>
-                                <td class="fs-3" style="background-color: #3e95cd;">일</td>
-                                <td class="fs-3" style="background-color: #8e5ea2;">월</td>
-                                <td class="fs-3" style="background-color: #3cba9f;">화</td>
-                                <td class="fs-3" style="background-color: #e8c3b9;">수</td>
-                                <td class="fs-3" style="background-color: #c45850;">목</td>
-                                <td class="fs-3" style="background-color: #8FA9CC;">금</td>
-                                <td class="fs-3" style="background-color: #CC3AC5;">토</td>
+                                    </svg>
+                                </td>
+                                <td class="fs-3 text-center" style="background-color: #313A46; color: whitesmoke;">일
+                                </td>
+                                <td class="fs-3 text-center" style="background-color: #313A46; color: whitesmoke;">월
+                                </td>
+                                <td class="fs-3 text-center" style="background-color: #313A46; color: whitesmoke;">화
+                                </td>
+                                <td class="fs-3 text-center" style="background-color: #313A46; color: whitesmoke;">수
+                                </td>
+                                <td class="fs-3 text-center" style="background-color: #313A46; color: whitesmoke;">목
+                                </td>
+                                <td class="fs-3 text-center" style="background-color: #313A46; color: whitesmoke;">금
+                                </td>
+                                <td class="fs-3 text-center" style="background-color: #313A46; color: whitesmoke;">토
+                                </td>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr onclick="changeChart('avg')">
+                            <tr onclick="changeChart('avg', this)" class="trDiv table-active">
                                 <td>평균</td>
                                 <td>[[${avgData.SUNDAY}]]</td>
                                 <td>[[${avgData.MONDAY}]]</td>
@@ -51,8 +60,9 @@
                                 <td>[[${avgData.FRIDAY}]]</td>
                                 <td>[[${avgData.SATURDAY}]]</td>
                             </tr>
+
                             <th:block th:each="e:${allData}">
-                                <tr th:onclick="changeChart([[${e.occurredYear}]])">
+                                <tr th:onclick="changeChart([[${e.occurredYear}]], this)" class="trDiv">
                                     <td>[[${e.occurredYear}]]</td>
                                     <td>[[${e.sunday}]]</td>
                                     <td>[[${e.monday}]]</td>
@@ -66,7 +76,7 @@
                         </tbody>
 
                     </table>
-                    <div class="fs-2" id="data-div"></div>
+                    <div class="fs-5" id="data-div"></div>
                 </div>
             </div>
 
@@ -76,9 +86,88 @@
                     <div class="row">
                         <div class="col-1"></div>
                         <div class="col-4 text-center ms-4">
-                            <div class="layer large-layer">
-                                <canvas id="bar-chart" style="width: 30vh; height: 30vh;"></canvas>
+                            <div>
+                                <canvas id="time-chart" style="width: 20vh; height: 20vh;"></canvas>
                             </div>
+                        </div>
+                        <style>
+                            .time-btn {
+                                padding: 0;
+                                padding-left: 3px;
+                                padding-right: 3px;
+                            }
+                        </style>
+                        <div class="col-5 mt-1 me-5 ms-3">
+                            <div class="">
+                                <span class="btn time-btn" onclick="changeTimeChart('day')">
+                                    <div id="iconDay">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            fill="currentColor" class="bi bi-brightness-high" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708" />
+                                        </svg>
+                                    </div>
+                                    주간
+                                </span>
+                                <span class="btn time-btn" onclick="changeTimeChart('night')">
+                                    <div id="iconNight">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            fill="currentColor" class="bi bi-brightness-alt-high" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 3a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 3m8 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5m-13.5.5a.5.5 0 0 0 0-1h-2a.5.5 0 0 0 0 1zm11.157-6.157a.5.5 0 0 1 0 .707l-1.414 1.414a.5.5 0 1 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m-9.9 2.121a.5.5 0 0 0 .707-.707L3.05 5.343a.5.5 0 1 0-.707.707zM8 7a4 4 0 0 0-4 4 .5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5 4 4 0 0 0-4-4m0 1a3 3 0 0 1 2.959 2.5H5.04A3 3 0 0 1 8 8" />
+                                        </svg>
+                                    </div>
+                                    야간
+                                </span>
+                                <span class="btn time-btn" onclick="changeTimeChart('lateNight')">
+                                    <div id="iconLateNight">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            fill="currentColor" class="bi bi-moon" viewBox="0 0 16 16">
+                                            <path
+                                                d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286" />
+                                        </svg>
+                                    </div>
+                                    심야
+                                </span>
+
+                                <span class="btn time-btn" onclick="changeAvgTimeChart()" style="padding: 0;">
+                                    <div id="iconAll">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
+                                            <path
+                                                d="M4 11H2v3h2zm5-4H7v7h2zm5-5v12h-2V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z" />
+                                        </svg>
+                                    </div>
+                                    전체/평균
+                                </span>
+                                <span class="align-bottom" style="font-size: 1.04em; font-weight: bold;">
+                                    한국전기안전공사 연도별 감전사고 인명피해현황 시간별 데이터 (단위,명)
+                                </span>
+                            </div>
+                            <table class="table table-bordered table-sm" id="timeTable">
+                                <th:block th:if="${time == 'day'}">
+                                    <thead>
+                                        <tr>
+                                            <td style="background-color: #313A46; color: whitesmoke;">연도</td>
+                                            <td style="background-color: #313A46; color: whitesmoke;">06~08</td>
+                                            <td style="background-color: #313A46; color: whitesmoke;">08~10</td>
+                                            <td style="background-color: #313A46; color: whitesmoke;">10~12</td>
+                                            <td style="background-color: #313A46; color: whitesmoke;">12~14</td>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr th:each="e:${dayTimeData}">
+                                            <td>[[${e.occurredYear}]]</td>
+                                            <td>[[${e.hour06_08}]]</td>
+                                            <td>[[${e.hour08_10}]]</td>
+                                            <td>[[${e.hour10_12}]]</td>
+                                            <td>[[${e.hour12_14}]]</td>
+                                        </tr>
+                                    </tbody>
+                                </th:block>
+                            </table>
+                            <div id="avgTimeDataDiv"></div>
                         </div>
                     </div>
                 </div>
@@ -90,39 +179,86 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Chart.defaults.global.defaultFontColor = 'white';
-        new Chart(document.querySelector('#bar-chart'), {
-            type: 'bar',
+        // 라인차트
+        let timeChart = new Chart(document.querySelector('#time-chart'), {
+            type: 'line',
             data: {
-                labels: ['a', 'b', 'c', 'd', 'e'],
+                labels: ['06~08시', '08~10시', '10~12시', '12~14시'],
                 datasets: [
                     {
-                        label: "최고기온",
-                        backgroundColor: "#c45850",
-                        data: [10.5, 11.5, 15.7, 8.5, 13.0]
+                        data: [11, 39, 90, 58],
+                        label: "2016",
+                        borderColor: "#c45850",
+                        fill: false
                     },
                     {
-                        label: "기온",
-                        backgroundColor: "#3e95cd",
-                        data: [3.1, 5.7, 1.2, 2.4, 3.5]
+                        data: [18, 58, 95, 61],
+                        label: "2017",
+                        borderColor: "#3e95cd",
+                        fill: false
+                    },
+                    {
+                        data: [17, 57, 104, 64],
+                        label: "2018",
+                        borderColor: "#E887D8",
+                        fill: false
+                    },
+                    {
+                        data: [5, 38, 106, 77],
+                        label: "2019",
+                        borderColor: "#E7E85A",
+                        fill: false
                     }
+                    ,
+                    {
+                        data: [24, 85, 72, 64],
+                        label: "2020",
+                        borderColor: "#37E828",
+                        fill: false
+                    }
+                    ,
+                    {
+                        data: [21, 89, 57, 89],
+                        label: "2021",
+                        borderColor: "#ABCBE8",
+                        fill: false
+                    }
+                    ,
+                    {
+                        data: [27, 71, 71, 74],
+                        label: "2022",
+                        borderColor: "#E8C7C8",
+                        fill: false
+                    }
+                    ,
+                    {
+                        data: [27, 71, 71, 74],
+                        label: "평균",
+                        borderColor: "#FF0004",
+                        fill: false
+                    }
+
+
                 ]
             },
             options: {
-                legend: { display: true },
                 title: {
                     display: true,
-                    text: 'Predicted world population (millions) in 2050'
+                    text: 'World population per region (in millions)'
                 },
                 scales: {
                     y: {
                         min: 0,
-                        max: 20
+                        max: 120
                     }
                 }
             }
         });
+
+
+
         // 혼합 바차트
-        let chart1 = new Chart(document.querySelector('#mix-bar-chart'), {
+        let chart1 = new Chart(document.querySelector('#day-chart'), {
             type: 'bar',
             data: {
                 datasets: [{
@@ -139,34 +275,34 @@
                 }],
                 labels: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일']
             },
-            options: {}
+            options: {
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            fontColor: ['rgba(12, 13, 13, 1)', 'rgba(12, 13, 13, 1)', 'rgba(12, 13, 13, 1)', 'rgba(12, 13, 13, 1)', 'rgba(12, 13, 13, 1)', 'rgba(12, 13, 13, 1)', 'rgba(12, 13, 13, 1)'],
+                            fontSize: 14
+                        },
+                        gridLines: {
+                            color: "rgba(87, 152, 23, 1)",
+                            lineWidth: 3
+                        }
+                    }]
+                }
+            }
         });
+        //시작할떄 실행
+        changeChart('avg', 0);
+        changeAvgTimeChart()
 
-
-        // //Doughnut chart
-        // let chart1 = new Chart(document.querySelector('#doughnut-chart'), {
-        //     type: 'doughnut',
-        //     data: {
-        //         labels: ["일", "월", "화", "수", "목", "금", "토"],
-        //         datasets: [
-        //             {
-        //                 label: "피해인원 (명)",
-        //                 backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#8FA9CC", "#CC3AC5"],
-        //                 data: [0, 1, 2, 3, 4, 5, 6]
-        //             }
-        //         ]
-        //     },
-        //     options: {
-        //         title: {
-        //             display: false,
-        //             text: 'Predicted world population (millions) in 2050'
-        //         }
-        //     }
-        // });
-        changeChart('avg');
-
-        function changeChart(avg) {
-            console.log(avg)
+        function changeChart(avg, tag) {
+            if (tag != 0) {
+                let trDivs = document.querySelectorAll(".trDiv");
+                for (let e of trDivs) {
+                    e.className = 'trDiv'
+                }
+                tag.className = 'trDiv table-active'
+            }
+            // Chart.defaults.global.defaultFontColor = 'white';
 
             // ------------------- 첫번째 방식 ---------------//
             fetch(`/day/changeChart/${avg}`, { //요청경로
@@ -200,8 +336,8 @@
                     dataList.push(data.THURSDAY)
                     dataList.push(data.FRIDAY)
                     dataList.push(data.SATURDAY)
-
-                    console.log(dataList)
+                    // console.log(dataList)
+                    // 없애버리기
                     chart1.destroy();
 
                     //선 그래프로 평균치를 표현하고 싶음
@@ -221,10 +357,12 @@
                     }
 
                     //혼합형 chart
-                    chart1 = new Chart(document.querySelector('#mix-bar-chart'), {
+                    chart1 = new Chart(document.querySelector('#day-chart'), {
                         type: 'bar',
                         data: {
                             datasets: [{
+                                // backgroundColor : 'white',
+                                // borderColor : 'white',
                                 label: '인명피해현황(단위,명)',
                                 data: dataList,
                                 // 이 데이터집합은 아래에 그려집니다
@@ -247,42 +385,43 @@
                                     'rgb(201, 203, 207)'
                                 ],
                                 borderWidth: 1,
-                                order: 1
+                                order: 1,
+
                             }, {
+                                // backgroundColor : 'white',
+                                // borderColor : 'white',
                                 label: '평균',
                                 data: avgDataList,
                                 borderColor: 'rgb(75, 192, 192)',
-                                tension: 0.1,
-                                fill: false,
+                                // tension: 0.1,
+                                // fill: false,
                                 type: 'line',
                                 // 이 데이터집합은 위에 그려집니다
                                 order: 2
                             }],
                             labels: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일']
+
                         },
                         options: {
                             legend: {
                                 labels: {
-                                    fontColor: 'white'
+                                    fontColor: "black"
                                 }
                             },
                             scales: {
-                                xAxes:[{
-                                    ticks:{
-                                        fontColor : 'white'
-                                    },
-                                    gridLines:{
-                                        color:"whire"
+                                x: {
+                                    ticks: {
+                                        color: 'black',
+                                        fontSize: 20
                                     }
-                                }],
-                                yAxes: [{
-                                    ticks:{
-                                        fontColor:'white'
+                                },
+                                y: {
+                                    ticks: {
+                                        color: 'black',
+                                        fontSize: 20
                                     }
-
-                                }]
+                                }
                             }
-
                         }
                     });
 
@@ -339,7 +478,7 @@
                         }
                     }
 
-                    console.log(dayList);
+                    // console.log(dayList);
                     //avg문자열이 온경우는 평균적으로 으로 표현하고 싶음
                     if (avg == 'avg') {
                         str += `평균적으로 `
@@ -357,15 +496,856 @@
 
                     let korDayList = Object.keys(dayList)
                     korDayList.forEach((e, idx) => {
-                        console.log(korDayList.length)
-                        console.log(idx + 1)
+                        // console.log(korDayList.length)
+                        // console.log(idx + 1)
                         if (dayList[e] != '') {
                             str += `${dayList[e]} ,`
                         }
                     })
                     str = str.slice(0, str.length - 2);
-                    str += `에 사고가 많이 발생했습니다.`
+                    str += `에 사고가 많이 발생했어요.`
                     dataDiv.insertAdjacentHTML("afterbegin", str);
+
+                })
+                //fetch 통신 실패 시 실행 영역
+                .catch(err => {
+                    alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
+                    console.log(err);
+                });
+        }
+
+        function changeTimeChart(time) {
+            let timeTable = document.querySelector("#timeTable");
+            timeTable.innerHTML = '';
+            timeTable.className = `table table-bordered table-sm`;
+
+            // ------------------- 첫번째 방식 ---------------//
+            fetch(`/day/timeData/${time}`)
+                .then((response) => {
+                    if (!response.ok) {
+                        alert('fetch error!\n컨트롤러로 통신중에 오류가 발생했습니다.');
+                        return;
+                    }
+
+                    //return response.text(); //컨트롤러에서 return하는 데이터가 없거나 int, String 일 때 사용
+                    return response.json(); //나머지 경우에 사용
+                })
+                //fetch 통신 후 실행 영역
+                .then((data) => {//data -> controller에서 리턴되는 데이터!
+                    console.log(data)
+                    let str = ``;
+                    console.log(time)
+
+
+
+                    if (time == 'day') {
+                        //평균 데이터도 있으면 좋을거 같음
+                        let avgObject = { 'hour06_08': 0.0, 'hour08_10': 0.0, 'hour10_12': 0.0, 'hour12_14': 0.0 }
+                        let keyList = Object.keys(avgObject);
+                        //다 더하고
+                        for (let i of data) {
+                            for (let e of keyList) {
+                                avgObject[e] += i[e]
+                            }
+                        }
+                        //평균값 내기
+
+                        for (let i of keyList) {
+                            avgObject[i] = Math.ceil(avgObject[i] / data.length * 10) / 10;
+                        }
+                        console.log(avgObject)
+                        //평균값내서 어떤 시간대에 사고가 많이 났는지 표현할것
+                        // 주간에는 10~12시 12~14시에 많이 났어요 이런식으로 
+                        let sum = 0
+                        let avgOverDataList = []
+                        for (let i of keyList) {
+                            sum += avgObject[i]
+                        }
+                        let avg = Math.ceil(sum / data.length * 10) / 10;
+                        console.log(avg)
+                        let avgTimeDataDiv = document.querySelector("#avgTimeDataDiv");
+                        avgTimeDataDiv.innerHTML = ''
+                        for (let i of keyList) {
+                            if (avgObject[i] > avg) {
+                                avgOverDataList.push(i)
+                            }
+                        }
+                        console.log(avgOverDataList)
+                        let str2 = `주간시간대에는 `
+                        for (let i of avgOverDataList) {
+                            switch (i) {
+                                case "hour06_08":
+                                    str2 += "06~08시, "
+                                    break;
+                                case "hour08_10":
+                                    str2 += "08~10시, "
+                                    break;
+                                case "hour10_12":
+                                    str2 += "10~12시, "
+                                    break;
+                                case "hour12_14":
+                                    str2 += "12~14시, "
+                            }
+                        }
+                        str2 = str2.slice(0, str2.length - 2)
+                        str2 += `에 사고가 많이 발생했어요`
+                        avgTimeDataDiv.style.fontSize = '1.2em'
+                        avgTimeDataDiv.insertAdjacentHTML('afterbegin', str2);
+
+                        //주간
+                        str += `
+                        <thead>
+                            <tr>
+                                <td style="background-color: #313A46; color: whitesmoke;">연도</td>
+                                <td style="background-color: #313A46; color: whitesmoke;">06~08</td>
+                                <td style="background-color: #313A46; color: whitesmoke;">08~10</td>
+                                <td style="background-color: #313A46; color: whitesmoke;">10~12</td>
+                                <td style="background-color: #313A46; color: whitesmoke;">12~14</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        `
+                        dataList = []
+                        data.forEach((e, idx) => {
+                            let dataList2 = [e.hour06_08, e.hour08_10, e.hour10_12, e.hour12_14];
+                            dataList.push(dataList2)
+                            str +=
+                                `
+                            <tr>
+                                <td>${e.occurredYear}</td>
+                                <td>${e.hour06_08}</td>
+                                <td>${e.hour08_10}</td>
+                                <td>${e.hour10_12}</td>
+                                <td>${e.hour12_14}</td>
+                            </tr>
+                            `
+                        })
+                        str += `
+                            <tr>
+                                <td>평균</td>
+                                <td>${avgObject.hour06_08}</td>
+                                <td>${avgObject.hour08_10}</td>
+                                <td>${avgObject.hour10_12}</td>
+                                <td>${avgObject.hour12_14}</td>
+                            </tr>
+                        </tbody>
+
+                        
+                    `
+                        console.log(dataList)
+                        // 없애버리기
+                        timeChart.destroy();
+                        // 라인차트
+                        timeChart = new Chart(document.querySelector('#time-chart'), {
+                            type: 'line',
+                            data: {
+                                labels: ['06~08시', '08~10시', '10~12시', '12~14시'],
+                                datasets: [
+                                    {
+                                        data: dataList[0],
+                                        label: "2016",
+                                        borderColor: "#c45850",
+                                        fill: false
+                                    },
+                                    {
+                                        data: dataList[1],
+                                        label: "2017",
+                                        borderColor: "#3e95cd",
+                                        fill: false
+                                    },
+                                    {
+                                        data: dataList[2],
+                                        label: "2018",
+                                        borderColor: "#E887D8",
+                                        fill: false
+                                    },
+                                    {
+                                        data: dataList[3],
+                                        label: "2019",
+                                        borderColor: "#E7E85A",
+                                        fill: false
+                                    }
+                                    ,
+                                    {
+                                        data: dataList[4],
+                                        label: "2020",
+                                        borderColor: "#37E828",
+                                        fill: false
+                                    }
+                                    ,
+                                    {
+                                        data: dataList[5],
+                                        label: "2021",
+                                        borderColor: "#ABCBE8",
+                                        fill: false
+                                    }
+                                    ,
+                                    {
+                                        data: dataList[6],
+                                        label: "2022",
+                                        borderColor: "#E8C7C8",
+                                        fill: false
+                                    }
+                                    ,
+                                    {
+                                        data: [avg, avg, avg, avg],
+                                        label: "주간평균",
+                                        borderColor: "#FF0004",
+                                        fill: false
+                                    }
+                                ]
+                            },
+                            options: {
+                                title: {
+                                    display: true,
+                                    text: 'World population per region (in millions)'
+                                },
+                                scales: {
+                                    y: {
+                                        min: 0,
+                                        max: 120
+                                    }
+                                }
+                            }
+                        });
+
+                    } else if (time == 'night') {
+                        //야간
+
+                        //평균 데이터도 있으면 좋을거 같음
+                        let avgObject = { 'hour14_16': 0.0, 'hour16_18': 0.0, 'hour18_20': 0.0, 'hour20_22': 0.0 }
+                        let keyList = Object.keys(avgObject);
+                        //다 더하고
+                        for (let i of data) {
+                            for (let e of keyList) {
+                                avgObject[e] += i[e]
+                            }
+                        }
+                        //평균값 내기
+
+                        for (let i of keyList) {
+                            avgObject[i] = Math.ceil(avgObject[i] / data.length * 10) / 10;
+                        }
+                        console.log(avgObject)
+                        //평균값내서 어떤 시간대에 사고가 많이 났는지 표현할것
+                        // 주간에는 10~12시 12~14시에 많이 났어요 이런식으로 
+                        let sum = 0
+                        let avgOverDataList = []
+                        for (let i of keyList) {
+                            sum += avgObject[i]
+                        }
+                        let avg = Math.ceil(sum / data.length * 10) / 10;
+                        console.log(avg)
+                        let avgTimeDataDiv = document.querySelector("#avgTimeDataDiv");
+                        avgTimeDataDiv.style.fontSize = '1.2em'
+                        avgTimeDataDiv.innerHTML = ''
+                        for (let i of keyList) {
+                            if (avgObject[i] > avg) {
+                                avgOverDataList.push(i)
+                            }
+                        }
+                        console.log(avgOverDataList)
+                        let str2 = `야간시간대에는 `
+                        for (let i of avgOverDataList) {
+                            switch (i) {
+                                case "hour14_16":
+                                    str2 += "14~16시, "
+                                    break;
+                                case "hour16_18":
+                                    str2 += "16~18시, "
+                                    break;
+                                case "hour18_20":
+                                    str2 += "18~20시, "
+                                    break
+                                case "hour20_22":
+                                    str2 += "20~22시, "
+                            }
+                        }
+                        str2 = str2.slice(0, str2.length - 2)
+                        str2 += `에 사고가 많이 발생했어요`
+                        avgTimeDataDiv.style.fontSize = '1.2em'
+                        avgTimeDataDiv.insertAdjacentHTML('afterbegin', str2);
+                        str += `
+                        <thead>
+                            <tr>
+                                <td style="background-color: #313A46; color: whitesmoke;">연도</td>
+                                <td style="background-color: #313A46; color: whitesmoke;">14~16</td>
+                                <td style="background-color: #313A46; color: whitesmoke;">16~18</td>
+                                <td style="background-color: #313A46; color: whitesmoke;">18~20</td>
+                                <td style="background-color: #313A46; color: whitesmoke;">20~22</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            `
+                        let dataList = []
+                        data.forEach((e, idx) => {
+                            let dataList2 = [e.hour14_16, e.hour16_18, e.hour18_20, e.hour20_22]
+                            dataList.push(dataList2);
+                            str +=
+                                `
+                            <tr>
+                                <td>${e.occurredYear}</td>
+                                <td>${e.hour14_16}</td>
+                                <td>${e.hour16_18}</td>
+                                <td>${e.hour18_20}</td>
+                                <td>${e.hour20_22}</td>
+                            </tr>
+                            `
+                        })
+                        str += `
+                            <tr>
+                                <td>평균</td>
+                                <td>${avgObject.hour14_16}</td>
+                                <td>${avgObject.hour16_18}</td>
+                                <td>${avgObject.hour18_20}</td>
+                                <td>${avgObject.hour20_22}</td>
+                            </tr>
+                        </tbody>
+                    `
+
+                        console.log(dataList)
+                        // 없애버리기
+                        timeChart.destroy();
+                        // 라인차트
+                        timeChart = new Chart(document.querySelector('#time-chart'), {
+                            type: 'line',
+                            data: {
+                                labels: ['14~16시', '16~18시', '18~20시', '22~24시'],
+                                datasets: [
+                                    {
+                                        data: dataList[0],
+                                        label: "2016",
+                                        borderColor: "#c45850",
+                                        fill: false
+                                    },
+                                    {
+                                        data: dataList[1],
+                                        label: "2017",
+                                        borderColor: "#3e95cd",
+                                        fill: false
+                                    },
+                                    {
+                                        data: dataList[2],
+                                        label: "2018",
+                                        borderColor: "#E887D8",
+                                        fill: false
+                                    },
+                                    {
+                                        data: dataList[3],
+                                        label: "2019",
+                                        borderColor: "#E7E85A",
+                                        fill: false
+                                    }
+                                    ,
+                                    {
+                                        data: dataList[4],
+                                        label: "2020",
+                                        borderColor: "#37E828",
+                                        fill: false
+                                    }
+                                    ,
+                                    {
+                                        data: dataList[5],
+                                        label: "2021",
+                                        borderColor: "#ABCBE8",
+                                        fill: false
+                                    }
+                                    ,
+                                    {
+                                        data: dataList[6],
+                                        label: "2022",
+                                        borderColor: "#E8C7C8",
+                                        fill: false
+                                    }
+                                    ,
+                                    {
+                                        data: [avg, avg, avg, avg],
+                                        label: "야간평균",
+                                        borderColor: "#FF0004",
+                                        fill: false
+                                    }
+                                ]
+                            },
+                            options: {
+                                title: {
+                                    display: true,
+                                    text: 'World population per region (in millions)'
+                                },
+                                scales: {
+                                    y: {
+                                        min: 0,
+                                        max: 120
+                                    }
+                                }
+                            }
+                        });
+
+                    } else if (time == 'lateNight') {
+                        // 심야
+                        //평균 데이터도 있으면 좋을거 같음
+                        let avgObject = { 'hour22_24': 0.0, 'hour00_02': 0.0, 'hour02_04': 0.0, 'hour04_06': 0.0 }
+                        let keyList = Object.keys(avgObject);
+                        //다 더하고
+                        for (let i of data) {
+                            for (let e of keyList) {
+                                avgObject[e] += i[e]
+                            }
+                        }
+                        //평균값 내기
+                        for (let i of keyList) {
+                            avgObject[i] = Math.ceil(avgObject[i] / data.length * 10) / 10;
+                        }
+                        console.log(avgObject)
+                        //평균값내서 어떤 시간대에 사고가 많이 났는지 표현할것
+                        // 주간에는 10~12시 12~14시에 많이 났어요 이런식으로 
+                        let sum = 0
+                        let avgOverDataList = []
+                        for (let i of keyList) {
+                            sum += avgObject[i]
+                        }
+                        let avg = Math.ceil(sum / data.length * 10) / 10;
+                        console.log(avg)
+                        let avgTimeDataDiv = document.querySelector("#avgTimeDataDiv");
+                        avgTimeDataDiv.style.fontSize = '1.2em'
+                        avgTimeDataDiv.innerHTML = ''
+                        for (let i of keyList) {
+                            if (avgObject[i] > avg) {
+                                avgOverDataList.push(i)
+                            }
+                        }
+                        console.log(avgOverDataList)
+                        let str2 = `심야시간대에는 `
+                        for (let i of avgOverDataList) {
+                            switch (i) {
+                                case "hour22_24":
+                                    str2 += "22~24시, "
+                                    break;
+                                case "hour00_02":
+                                    str2 += "00~02시, "
+                                    break;
+                                case "hour02_04":
+                                    str2 += "02~04시, "
+                                    break;
+                                case "hour04_06":
+                                    str2 += "04~06시, "
+                                    break;
+                            }
+                        }
+                        str2 = str2.slice(0, str2.length - 2)
+                        str2 += `에 사고가 많이 발생했어요`
+                        avgTimeDataDiv.style.fontSize = '1.2em'
+                        avgTimeDataDiv.insertAdjacentHTML('afterbegin', str2);
+
+                        str += `
+                        <thead>
+                            <tr>
+                                <td style="background-color: #313A46; color: whitesmoke;">연도</td>
+                                <td style="background-color: #313A46; color: whitesmoke;">22~24</td>
+                                <td style="background-color: #313A46; color: whitesmoke;">00~02</td>
+                                <td style="background-color: #313A46; color: whitesmoke;">02~04</td>
+                                <td style="background-color: #313A46; color: whitesmoke;">04~06</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            `
+                        let dataList = []
+                        data.forEach((e, idx) => {
+                            let dataList2 = [e.hour22_24, e.hour00_02, e.hour02_04, e.hour04_06]
+                            dataList.push(dataList2)
+                            str +=
+                                `
+                            <tr>
+                                <td>${e.occurredYear}</td>
+                                <td>${e.hour22_24}</td>
+                                <td>${e.hour00_02}</td>
+                                <td>${e.hour02_04}</td>
+                                <td>${e.hour04_06}</td>
+                            </tr>
+                            `
+                        })
+                        str += `
+                            <tr>
+                                <td>평균</td>
+                                <td>${avgObject.hour22_24}</td>
+                                <td>${avgObject.hour00_02}</td>
+                                <td>${avgObject.hour02_04}</td>
+                                <td>${avgObject.hour04_06}</td>
+                            </tr>
+                        </tbody>
+                    `
+                        timeChart.destroy();
+                        // 라인차트
+                        timeChart = new Chart(document.querySelector('#time-chart'), {
+                            type: 'line',
+                            data: {
+                                labels: ['22~24시', '00~02시', '02~04시', '04~06시'],
+                                datasets: [
+                                    {
+                                        data: dataList[0],
+                                        label: "2016",
+                                        borderColor: "#c45850",
+                                        fill: false
+                                    },
+                                    {
+                                        data: dataList[1],
+                                        label: "2017",
+                                        borderColor: "#3e95cd",
+                                        fill: false
+                                    },
+                                    {
+                                        data: dataList[2],
+                                        label: "2018",
+                                        borderColor: "#E887D8",
+                                        fill: false
+                                    },
+                                    {
+                                        data: dataList[3],
+                                        label: "2019",
+                                        borderColor: "#E7E85A",
+                                        fill: false
+                                    }
+                                    ,
+                                    {
+                                        data: dataList[4],
+                                        label: "2020",
+                                        borderColor: "#37E828",
+                                        fill: false
+                                    }
+                                    ,
+                                    {
+                                        data: dataList[5],
+                                        label: "2021",
+                                        borderColor: "#ABCBE8",
+                                        fill: false
+                                    }
+                                    ,
+                                    {
+                                        data: dataList[6],
+                                        label: "2022",
+                                        borderColor: "#E8C7C8",
+                                        fill: false
+                                    }
+                                    ,
+                                    {
+                                        data: [avg, avg, avg, avg],
+                                        label: "심야평균",
+                                        borderColor: "#FF0004",
+                                        fill: false
+                                    }
+                                ]
+                            },
+                            options: {
+                                title: {
+                                    display: true,
+                                    text: 'World population per region (in millions)'
+                                },
+                                scales: {
+                                    y: {
+                                        min: 0,
+                                        max: 30
+                                    }
+                                }
+                            }
+                        });
+                    }
+
+                    timeTable.insertAdjacentHTML("afterbegin", str);
+
+                })
+                //fetch 통신 실패 시 실행 영역
+                .catch(err => {
+                    alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
+                    console.log(err);
+                });
+        }
+        function changeAvgTimeChart() {
+           
+            // ------------------- 첫번째 방식 ---------------//
+            fetch('/day/timeData/avg')
+                .then((response) => {
+                    if (!response.ok) {
+                        alert('fetch error!\n컨트롤러로 통신중에 오류가 발생했습니다.');
+                        return;
+                    }
+
+                    //return response.text(); //컨트롤러에서 return하는 데이터가 없거나 int, String 일 때 사용
+                    return response.json(); //나머지 경우에 사용
+                })
+                //fetch 통신 후 실행 영역
+                .then((data) => {//data -> controller에서 리턴되는 데이터!
+                    console.log(data)
+
+                    //전체 데이터
+                    let allData = data.all
+                    //평균 데이터
+                    let avgData = data.avg
+                    //테이블 태그
+                    let timeTable = document.querySelector("#timeTable")
+                    timeTable.innerHTML = ''
+                    timeTable.className = `table table-borderless`;
+                    let str = ``
+                    str += `
+                    <tr>
+                            <td>
+                                <div class="text-center" style="background-color: #313A46; color: whitesmoke;">주간 전체</div>
+                                <table class=table>
+                                    <thead>
+                                        <tr>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">06~08</td>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">08~10</td>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">10~12</td>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">12~14</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>${allData.HOUR06_08}</td>
+                                            <td>${allData.HOUR08_10}</td>
+                                            <td>${allData.HOUR10_12}</td>
+                                            <td>${allData.HOUR12_14}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td>
+                                <div class="text-center" style="background-color: #313A46; color: whitesmoke;">야간 전체</div>
+                                <table class=table>
+                                    <thead>
+                                        <tr>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">14~16</td>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">16~18</td>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">18~20</td>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">20~22</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>${allData.HOUR14_16}</td>
+                                            <td>${allData.HOUR16_18}</td>
+                                            <td>${allData.HOUR18_20}</td>
+                                            <td>${allData.HOUR20_22}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td>
+                                <div class="text-center" style="background-color: #313A46; color: whitesmoke;">심야 전체</div>
+                                <table class=table>
+                                    <thead>
+                                        <tr>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">22~24</td>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">0~2</td>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">2~4</td>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">4~6</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>${allData.HOUR22_24}</td>
+                                            <td>${allData.HOUR00_02}</td>
+                                            <td>${allData.HOUR02_04}</td>
+                                            <td>${allData.HOUR04_06}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="text-center" style="background-color: #313A46; color: whitesmoke;">주간 평균</div>
+                                <table class=table>
+                                    <thead>
+                                        <tr>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">06~08</td>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">08~10</td>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">10~12</td>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">12~14</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>${avgData.HOUR06_08}</td>
+                                            <td>${avgData.HOUR08_10}</td>
+                                            <td>${avgData.HOUR10_12}</td>
+                                            <td>${avgData.HOUR12_14}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td>
+                                <div class="text-center" style="background-color: #313A46; color: whitesmoke;">야간 평균</div>
+                                <table class=table>
+                                    <thead>
+                                        <tr>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">14~16</td>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">16~18</td>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">18~20</td>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">20~22</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>${avgData.HOUR14_16}</td>
+                                            <td>${avgData.HOUR16_18}</td>
+                                            <td>${avgData.HOUR18_20}</td>
+                                            <td>${avgData.HOUR20_22}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td>
+                                <div class="text-center" style="background-color: #313A46; color: whitesmoke;">심야 평균</div>
+                                <table class=table>
+                                    <thead>
+                                        <tr>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">22~24</td>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">0~2</td>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">2~4</td>
+                                            <td style="background-color: #313A46; color: whitesmoke; font-size:0.8em">4~6</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>${avgData.HOUR22_24}</td>
+                                            <td>${avgData.HOUR00_02}</td>
+                                            <td>${avgData.HOUR02_04}</td>
+                                            <td>${avgData.HOUR04_06}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    `
+                    //평균 데이터 리스트
+                    //전체 총 데이터를 통해서 평균을 내고 싶음
+                    let avgDataList = []
+                    avgDataList.push(avgData.HOUR06_08)
+                    avgDataList.push(avgData.HOUR08_10)
+                    avgDataList.push(avgData.HOUR10_12)
+                    avgDataList.push(avgData.HOUR12_14)
+                    avgDataList.push(avgData.HOUR14_16)
+                    avgDataList.push(avgData.HOUR16_18)
+                    avgDataList.push(avgData.HOUR18_20)
+                    avgDataList.push(avgData.HOUR20_22)
+                    avgDataList.push(avgData.HOUR22_24)
+                    avgDataList.push(avgData.HOUR00_02)
+                    avgDataList.push(avgData.HOUR02_04)
+                    avgDataList.push(avgData.HOUR04_06)
+
+                    let avgList = []
+                    let sum = 0;
+                    for (let i of avgDataList) {
+                        sum += i;
+                    }
+                    let avg = Math.ceil(sum / avgDataList.length * 10) / 10;
+                    for (let i of avgDataList) {
+                        avgList.push(avg)
+                    }
+
+                    //평균기준으로 사고가 많이난 시간대 표현
+                    let avgTimeDataDiv = document.querySelector("#avgTimeDataDiv");
+                    avgTimeDataDiv.innerHTML = ''
+                    avgTimeDataDiv.style.fontSize = '1.2em'
+                    let avgOverDataList = [];
+
+                    let keyList = Object.keys(avgData)
+                    // 키 이름이 순서대로 들어가지 않음..
+                    //sort()로 정렬
+                    keyList.sort()
+                    for (let i of keyList) {
+                        if (avgData[i] > avg) {
+                            avgOverDataList.push(i)
+                        }
+                    }
+                    console.log(keyList)
+                    console.log(avg)
+                    console.log(avgOverDataList)
+                    //한글로 표현
+                    let str2 = `전체 시간대에는 `
+                    for (let i of avgOverDataList) {
+                        switch (i) {
+                            case "HOUR00_02":
+                                str2 += "00~02시, "
+                                break;
+                            case "HOUR02_04":
+                                str2 += "02~04시, "
+                                break;
+                            case "hour04_06":
+                                str2 += "04~06시, "
+                                break;
+                            case "HOUR06_08":
+                                str2 += "06~08시, "
+                                break;
+                            case "HOUR08_10":
+                                str2 += "08~10시, "
+                                break;
+                            case "HOUR10_12":
+                                str2 += "10~12시, "
+                                break;
+                            case "HOUR12_14":
+                                str2 += "12~14시, "
+                                break;
+                            case "HOUR14_16":
+                                str2 += "14~16시, "
+                                break;
+                            case "HOUR16_18":
+                                str2 += "16~18시, "
+                                break;
+                            case "HOUR18_20":
+                                str2 += "18~20시, "
+                                break;
+                            case "HOUR20_22":
+                                str2 += "20~22시, "
+                                break;
+                            case "HOUR22_24":
+                                str2 += "22~24시, "
+                                break;
+                        }
+                    }
+                    str2 = str2.slice(0, str2.length - 2)
+                    str2 += `에 사고가 많이 발생했어요`
+                    // 조금 길어서 짤리는거 같아서 글자 폰트 크기를 줄임
+                    avgTimeDataDiv.style.fontSize = "1.1em"
+                    avgTimeDataDiv.insertAdjacentHTML('afterbegin', str2);
+
+                    timeChart.destroy();
+                    // 라인차트
+                    timeChart = new Chart(document.querySelector('#time-chart'), {
+                        type: 'line',
+                        data: {
+                            labels: ['06~08시', '08~10시', '10~12시', '12~14시', '14~16시', '16~18시', '18~20시', '20~22시', '22~24시', '00~02시', '02~04시', '04~06시'],
+                            datasets: [
+                                {
+                                    data: avgDataList,
+                                    label: "시간 평균",
+                                    borderColor: "#c45850",
+                                    fill: false
+                                }
+                                ,
+                                {
+                                    data: avgList,
+                                    label: "전체 평균",
+                                    borderColor: "#FF0004",
+                                    fill: false
+                                }
+                            ]
+                        },
+                        options: {
+                            title: {
+                                display: true,
+                                text: 'World population per region (in millions)'
+                            },
+                            scales: {
+                                y: {
+                                    min: 0,
+                                    max: 130
+                                }
+                            }
+                        }
+                    });
+                    timeTable.insertAdjacentHTML("afterbegin", str)
+
 
                 })
                 //fetch 통신 실패 시 실행 영역
@@ -375,8 +1355,6 @@
                 });
 
         }
-
-
     </script>
 </th:block>
 
