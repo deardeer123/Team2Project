@@ -14,7 +14,7 @@
       cursor: pointer;
     }
 
-    .body-div{
+    .body-div {
       color: #666;
       font: 14px/24px "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", Sans-Serif;
     }
@@ -23,6 +23,13 @@
       border-collapse: separate;
       border-spacing: 0;
       width: 100%;
+      background-color: #ffffff;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      border: 1px solid #42444e;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     }
 
     th,
@@ -70,39 +77,52 @@
 
     }
 
-    .canvas {
+    /* .canvas {
       background-color: #ffffff;
-    }
+    } */
 
     select {
       text-align-last: center;
     }
 
     .img-div {
-      border: 1px solid #42444e;
       border-radius: 10px;
       padding: 10px;
+      border: 1px solid #42444e;
       margin-left: 10%;
       background-color: #42444e;
+      box-shadow: 5px 5px #42444e;
+
     }
 
     p {
       font-size: 18px;
       color: #ffffff;
       margin-bottom: 5px;
+
     }
+    .title-head {
+      font-size: 30px;
+      display: inline-block;
+      font-weight: bolder;
+      margin-left: 3px;
+      margin-bottom: 0px;
+    }
+
+    .title-head>h2 {
+      margin: 0;
+    }
+    span{
+      color: #ffffff;
+    }
+    
   </style>
 
 
   <!-- html 코드 작성 -->
   <div class="body-div row justify-content-center" style=" height: 80%;">
     <div class="col">
-      <div class="row">
-        <div class="col align-middle" style="font-size: 18px; color: #ffffff;">
-          전기화재
-        </div>
-      </div>
-      <div class="row mt-3" style="height: 80%;">
+      <div class="row mt-5" style="height: 80%;">
         <div class="col-4 text-center">
           <div class="img-div">
             <img src="/upload/전기화재.jpg" width="100%" style="height: 80vh;">
@@ -110,11 +130,33 @@
         </div>
         <div class="col-8">
           <div class="row">
+            <div class="mb-2 text-center">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                  class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd"
+                    d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223" />
+                </svg>
+              </span>
+              <span class="title-head align-middle">
+                <h2>전기사고 화상범위</h2>
+              </span>
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                  class="bi bi-chevron-compact-right" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd"
+                    d="M6.776 1.553a.5.5 0 0 1 .671.223l3 6a.5.5 0 0 1 0 .448l-3 6a.5.5 0 1 1-.894-.448L9.44 8 6.553 2.224a.5.5 0 0 1 .223-.671" />
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div class="row">
             <!-- 체크 박스 -->
             <div class="click-box col ">
               <select class="form-select" name="occurredYear" id="occurredYear" onchange="changeData()"
                 style="width: 40%;">
                 <option value="none" hidden>연도를 선택하시면 그래프가 나옵니다.</option>
+                <option value="1">모든 통계 보기</option>
                 <option value="2022">2022</option>
                 <option value="2021">2021</option>
                 <option value="2020">2020</option>
@@ -147,7 +189,7 @@
                   <tbody id="t-body">
                     <tr style="font-weight: bold;" th:each="rangeVO : ${rangeList}">
                       <td>[[${rangeVO.occurredYear}]]</td>
-                      <td style="color: red; font-weight: bold;">[[${rangeVO.burnrange0_5}]]</td>
+                      <td style="color: crimson; font-weight: bold;">[[${rangeVO.burnrange0_5}]]</td>
                       <td>[[${rangeVO.burnrange6_10}]]</td>
                       <td>[[${rangeVO.burnrange11_21}]]</td>
                       <td>[[${rangeVO.burnrange21_30}]]</td>
@@ -161,17 +203,19 @@
               </div>
             </div>
           </div>
-          <div class="row mt-5">
+          <div class="row mt-4 justify-content-center">
             <!-- 통계 -->
             <div class="col">
-              <p class="text-center">그래프 통계</p>
+              <p class="text-center">
+                그래프 통계
+              </p>
               <div class="canvas"><canvas id="line-chart" height="100"></canvas></div>
             </div>
           </div>
           <!-- taxt -->
-          <div class="row mb-3">
-            <div class="col">
-
+          <div class="row justify-content-center mb-3 mt-4">
+            <div class="text-div col text-center">
+              <p class="text-p"></p>
             </div>
           </div>
         </div>
@@ -198,47 +242,81 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
   <script>
 
+
+
     const changeData = () => {
       const occurredYear = document.querySelector('#occurredYear').value
-      let chartStatus = Chart.getChart('line-chart');
-      if (chartStatus !== undefined) {
-        chartStatus.destroy();
-      }
-      // ------------------- 첫번째 방식 ---------------//
-      fetch('/range/detailRange', { //요청경로
-        method: 'POST',
-        cache: 'no-cache',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-        },
-        //컨트롤러로 전달할 데이터
-        body: new URLSearchParams({
-          // 데이터명 : 데이터값
-          occurredYear: occurredYear
+
+
+      if (occurredYear == 1) {
+        location.href = '/range/detailRange';
+      } else {
+
+
+        let chartStatus = Chart.getChart('line-chart');
+        if (chartStatus !== undefined) {
+          chartStatus.destroy();
+        }
+        // ------------------- 첫번째 방식 ---------------//
+        fetch('/range/detailRangeOne', { //요청경로
+          method: 'POST',
+          cache: 'no-cache',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+          },
+          //컨트롤러로 전달할 데이터
+          body: new URLSearchParams({
+            // 데이터명 : 데이터값
+            occurredYear: occurredYear
+          })
         })
-      })
-        .then((response) => {
-          if (!response.ok) {
-            alert('fetch error!\n컨트롤러로 통신중에 오류가 발생했습니다.');
-            return;
-          }
+          .then((response) => {
+            if (!response.ok) {
+              alert('fetch error!\n컨트롤러로 통신중에 오류가 발생했습니다.');
+              return;
+            }
 
-          // return response.text(); //컨트롤러에서 return하는 데이터가 없거나 int, String 일 때 사용
-          return response.json(); //나머지 경우에 사용
-        })
-        //fetch 통신 후 실행 영역
-        .then((data) => {//data -> controller에서 리턴되는 데이터!
-          console.log(data);
+            // return response.text(); //컨트롤러에서 return하는 데이터가 없거나 int, String 일 때 사용
+            return response.json(); //나머지 경우에 사용
+          })
+          //fetch 통신 후 실행 영역
+          .then((data) => {//data -> controller에서 리턴되는 데이터!
+            console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@", data);
 
-          let tbody = document.querySelector('#t-body');
-          tbody.innerHTML = '';
-          let str = '';
+            let bur = data.total;
+            let avg = data.total_avg;
 
-          str +=
-            `
+            const nPercent = (bur, avg) => Math.round((bur / avg) * 100) - 100 + '%';
+
+            // const burn05 = data.burnrange0_5;
+            // const burn05avg = data.avg05;
+
+
+            const tbody = document.querySelector('#t-body')
+            const p = document.querySelector('.text-p')
+
+            // canvas 그림
+            const canvas = document.querySelector('.canvas');
+      
+            canvas.style.backgroundColor="#ffffff"
+            canvas.style.border="1px solid #42444e"
+            canvas.style.borderRadius = "10px"
+            canvas.style.boxShadow = "0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)"
+            
+            // p태그 그림
+            
+
+
+
+            tbody.innerHTML = '';
+            p.innerHTML = '';
+            let str = '';
+            let str2 = '';
+            str +=
+              `
             <tr style="font-weight: bold;">
                 <td>${data.occurredYear}</td>
-                <td style="color: red;">${data.burnrange0_5}</td>
+                <td style="color: crimson;">${data.burnrange0_5}</td>
                 <td>${data.burnrange6_10}</td>
                 <td>${data.burnrange11_21}</td>
                 <td>${data.burnrange21_30}</td>
@@ -249,36 +327,71 @@
                 
             </tr>
             `
+            let percent = nPercent(bur, avg);
 
-          tbody.insertAdjacentHTML('afterbegin', str)
-
-          // 라인차트
-          new Chart(document.getElementById("line-chart"), {
-            type: 'line',
-            data: {
-              labels: ["0~5", "6~10", "11~20", "21~30", "41~50", "51~50", "60over"],
-              datasets: [{
-                data: [data.burnrange0_5, data.burnrange6_10, data.burnrange11_21, data.burnrange21_30, data.burnrange31_40, data.burnrange41_50, data.burnrange51_60, data.burnrange60_over],
-                label: data.occurredYear,
-                borderColor: "#3e95cd",
-                fill: false,
-                
-              }
-              ]
-            },
-            options: {
-              title: {
-                display: true,
-                text: 'World population per region (in millions)'
-              }
+            if (percent.slice(0, 1) != '-') {
+              str2 +=
+                `
+                <div class="text-div col text-center">
+          <p class="fs-3" style="color : white">전체 평균보다 총 화상범위 피해가 <span class="fs-2" style="border : bold; color : 	#FF135A;">${percent} 증가</span>했습니다.</p>
+          </div>
+          `
+            } else {
+              str2 +=
+                `
+          <p class="fs-3" style="color : white">전체 평균보다 총 화상범위 피해가 <span class="fs-2" style="border : bold; color : #1E90FF;">${percent} 감소</span>했습니다.</p>
+          `
             }
+
+
+
+            tbody.insertAdjacentHTML('afterbegin', str)
+            p.insertAdjacentHTML('afterbegin', str2)
+            // 라인차트
+            new Chart(document.getElementById("line-chart"), {
+              type: 'line',
+              data: {
+                labels: ["0~5", "6~10", "11~20", "21~30", "31~40", "41~50", "51~50", "60over"],
+                datasets: [{
+                  data: [data.burnrange0_5, data.burnrange6_10, data.burnrange11_21, data.burnrange21_30, data.burnrange31_40, data.burnrange41_50, data.burnrange51_60, data.burnrange60_over],
+                  label: data.occurredYear,
+                  borderColor: "#3e95cd",
+                  fill: false,
+                }, {
+                  label: "평균",
+                  type: "bar",
+                  backgroundColor: "rgba(0,0,0,0.2)",
+                  data: [
+                    parseInt(data.avg05),
+                    parseInt(data.avg610),
+                    parseInt(data.avg1120),
+                    parseInt(data.avg2130),
+                    parseInt(data.avg3140),
+                    parseInt(data.avg4150),
+                    parseInt(data.avg5160),
+                    parseInt(data.avg60over)
+                  ],
+                }
+                ]
+              },
+              options: {
+                title: {
+                  display: true,
+                  text: 'World population per region (in millions)'
+                }
+              }
+            });
+
+
+
+
+          })
+          //fetch 통신 실패 시 실행 영역
+          .catch(err => {
+            alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
+            console.log(err);
           });
-        })
-        //fetch 통신 실패 시 실행 영역
-        .catch(err => {
-          alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
-          console.log(err);
-        });
+      }
     }
 
 

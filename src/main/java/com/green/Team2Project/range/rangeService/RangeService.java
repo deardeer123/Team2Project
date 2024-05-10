@@ -11,7 +11,4 @@ public interface RangeService {
 
     RangeVO detail(int occurredYear);
 
-    RangeVO totalRange(int occurredYear);
-
-    RangeVO maxBurnRange05();
 }

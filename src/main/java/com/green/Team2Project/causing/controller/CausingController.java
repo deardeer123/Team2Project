@@ -26,6 +26,7 @@ public class CausingController {
         @GetMapping("/goCausingDetail")
         public String goCausingDetail(Model model){
             model.addAttribute("causingVO",causingService.selectOneCausing(2022));
+
             return "/content/causing/team2_causing_detail";
         }
 
@@ -36,4 +37,12 @@ public class CausingController {
             CausingVO causingVO = causingService.selectOneCausing(2022);
             return causingVO;
         }
+
+        @PostMapping("/total")
+        @ResponseBody
+        public CausingVO total(@RequestParam(name = "occurredYear",defaultValue = "0" ,required = false)int occurredYear){
+            System.out.println(causingService.total(2022));
+            return causingService.total(occurredYear);
+        }
+
 }

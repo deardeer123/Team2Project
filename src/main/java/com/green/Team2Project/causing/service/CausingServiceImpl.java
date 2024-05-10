@@ -22,4 +22,14 @@ public class CausingServiceImpl implements CausingService{
     public CausingVO selectOneCausing(int occurredYear) {
         return sqlSession.selectOne("causingMapper.selectOneCausing", occurredYear);
     }
+
+    @Override
+    public CausingVO selectAvgCausing() {
+        return sqlSession.selectOne("causingMapper.selectAvgCausing");
+    }
+
+    @Override
+    public CausingVO total(int occurredYear) {
+        return sqlSession.selectOne("causingMapper.total",occurredYear);
+    }
 }

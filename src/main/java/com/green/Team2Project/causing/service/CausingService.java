@@ -10,4 +10,8 @@ public interface CausingService {
     List<CausingVO> selectAllCausing();
 
     CausingVO selectOneCausing(int occurredYear);
+
+    CausingVO selectAvgCausing();
+
+    CausingVO total(int occurredYear);
 }
