@@ -4,18 +4,109 @@
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
 <mapper namespace="electricAccidentsByTimeMapper">
 
+    <resultMap id="time" type="com.green.Team2Project.electricAccidentsByTime.vo.ElectricAccidentsByTimeVO">
+        <id column="OCCURRED_YEAR" property="occurredYear"/>
+        <result column="HOUR00_02" property="hour00_02" />
+        <result column="HOUR02_04" property="hour02_04" />
+        <result column="HOUR04_06" property="hour04_06" />
+        <result column="HOUR06_08" property="hour06_08" />
+        <result column="HOUR08_10" property="hour08_10" />
+        <result column="HOUR10_12" property="hour10_12" />
+        <result column="HOUR12_14" property="hour12_14" />
+        <result column="HOUR14_16" property="hour14_16" />
+        <result column="HOUR16_18" property="hour16_18" />
+        <result column="HOUR18_20" property="hour18_20" />
+        <result column="HOUR20_22" property="hour20_22" />
+        <result column="HOUR22_24" property="hour22_24" />
+    </resultMap>
+
+<!--    주간 야간 심야 나눠서 검색할 것-->
+<!--    주간 06 ~ 14-->
+<!--    야간 14 ~ 22-->
+<!--    심야 22 ~ 06-->
+
+<!--    주간-->
+    <select id="selectDayTimeList" resultMap="time">
+        SELECT
+        OCCURRED_YEAR ,
+        HOUR06_08 ,
+        HOUR08_10 ,
+        HOUR10_12 ,
+        HOUR12_14
+        FROM
+        electric_accidents_by_time
+        <if test='occurredYear != null and !occurredYear.equals("") and occurredYear != 0'>
+            where OCCURRED_YEAR = ${occurredYear}
+        </if>
+    </select>
+<!--    야간-->
+    <select id="selectNightList" resultMap="time">
+        SELECT
+        OCCURRED_YEAR ,
+        HOUR14_16 ,
+        HOUR16_18 ,
+        HOUR18_20 ,
+        HOUR20_22
+        FROM
+        electric_accidents_by_time
+        <if test='occurredYear != null and !occurredYear.equals("") and occurredYear != 0'>
+            where OCCURRED_YEAR = ${occurredYear}
+        </if>
+    </select>
+<!--    심야-->
+    <select id="selectLateNightList" resultMap="time">
+        SELECT
+        OCCURRED_YEAR ,
+        HOUR22_24 ,
+        HOUR00_02 ,
+        HOUR02_04 ,
+        HOUR04_06
+        FROM
+        electric_accidents_by_time
+        <if test='occurredYear != null and !occurredYear.equals("") and occurredYear != 0'>
+            where OCCURRED_YEAR = ${occurredYear}
+        </if>
+    </select>
+
+    <select id="selectAvgTimeDataList" resultType="map">
+        SELECT
+        round(SUM(HOUR00_02)/COUNT(occurred_year),1) AS HOUR00_02,
+        round(SUM(HOUR02_04)/COUNT(occurred_year),1) AS HOUR02_04,
+        round(SUM(HOUR04_06)/COUNT(occurred_year),1) AS HOUR04_06,
+        round(SUM(HOUR06_08)/COUNT(occurred_year),1) AS HOUR06_08,
+        round(SUM(HOUR08_10)/COUNT(occurred_year),1) AS HOUR08_10,
+        round(SUM(HOUR10_12)/COUNT(occurred_year),1) AS HOUR10_12,
+        round(SUM(HOUR12_14)/COUNT(occurred_year),1) AS HOUR12_14,
+        round(SUM(HOUR14_16)/COUNT(occurred_year),1) AS HOUR14_16,
+        round(SUM(HOUR16_18)/COUNT(occurred_year),1) AS HOUR16_18,
+        round(SUM(HOUR18_20)/COUNT(occurred_year),1) AS HOUR18_20 ,
+        round(SUM(HOUR20_22)/COUNT(occurred_year),1) AS HOUR20_22 ,
+        round(SUM(HOUR22_24)/COUNT(occurred_year),1) AS HOUR22_24
+        FROM
+        electric_accidents_by_time;
+    </select>
+
+    <select id="selectAllTimeDataList" resultType="map">
+        SELECT
+        SUM(HOUR00_02) AS HOUR00_02,
+        SUM(HOUR02_04) AS HOUR02_04,
+        SUM(HOUR04_06) AS HOUR04_06,
+        SUM(HOUR06_08) AS HOUR06_08,
+        SUM(HOUR08_10) AS HOUR08_10,
+        SUM(HOUR10_12) AS HOUR10_12,
+        SUM(HOUR12_14) AS HOUR12_14,
+        SUM(HOUR14_16) AS HOUR14_16,
+        SUM(HOUR16_18) AS HOUR16_18,
+        SUM(HOUR18_20) AS HOUR18_20,
+        SUM(HOUR20_22) AS HOUR20_22,
+        SUM(HOUR22_24) AS HOUR22_24
+        FROM
+        electric_accidents_by_time;
+    </select>
 
 
-<!--        <resultMap id="ElectricAccidentsByTime" type="com.green.Team2Project.electricAccidentsByTime.vo.ElectricAccidentsByTimeVO">-->
-<!--                <id column="OCCURRED_YEAR" property="occurredYear" />-->
-<!--                <result column="SUNDAY" property="sunday" />-->
-<!--                <result column="MONDAY" property="monday" />-->
-<!--                <result column="TUESDAY" property="tuesday" />-->
-<!--                <result column="WEDNESDAY" property="wednesday" />-->
-<!--                <result column="THURSDAY" property="thursday" />-->
-<!--                <result column="FRIDAY" property="friday" />-->
-<!--                <result column="SATURDAY" property="saturday" />-->
-<!--        </resultMap>-->
+
+
 
 
 <!--        <select id="selectAccidentDay" resultMap="ElectricAccidentsByDayVO">-->

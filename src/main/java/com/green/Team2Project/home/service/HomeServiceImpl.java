@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
 @Service("homeService")
 public class HomeServiceImpl implements HomeService{
     @Autowired
-    SqlSessionTemplate sqlSession;
+    private SqlSessionTemplate sqlSession;
 }
