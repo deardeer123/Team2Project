@@ -14,7 +14,7 @@
       border-radius: 10px;
       background-color: white;
       padding: 10px;
-      height: 40vh;
+      /* height: 40vh; */
       width: 100%;
       box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     }
@@ -34,7 +34,8 @@
       border-top-right-radius: 6px;
       border-bottom-left-radius: 6px;
       border-bottom-right-radius: 6px;
-
+      border: 1px solid #42444e;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     }
 
     th,
@@ -67,6 +68,7 @@
 
     tr:nth-child(even) td {
       background: #eaeaed;
+
     }
 
     tr:last-child td:first-child {
@@ -76,24 +78,66 @@
     tr:last-child td:last-child {
       border-bottom-right-radius: 6px;
     }
-    
+
+    img {
+      margin-left: 10%;
+    }
+
+    span {
+      color: #ffffff;
+    }
+
+    .title-head {
+      font-size: 30px;
+      display: inline-block;
+      font-weight: bolder;
+      margin-left: 3px;
+      margin-bottom: 0px;
+    }
+
+    .title-head>h2 {
+      margin: 0;
+    }
+
+    tr:hover,tr:nth-child(even):hover {
+      background-color: #c6c9cc;
+    }
   </style>
 
 
 
   <!-- html 코드 작성 -->
-  <div class="body-div row mt-3">
+  <div class="body-div row mt-5">
     <div class="col">
       <div class="row">
         <!-- 자료 -->
-        <div class="col-6">
-          자료
+        <div class="col-4">
+          <img src="/upload/감전사고사고부상1.jpg" alt="">
         </div>
         <!-- 데이터 -->
-        <div class="col-6">
+        <div class="col-8">
           <!-- 표 -->
           <div class="row">
             <div class="col table-div">
+              <div class="mb-2 text-center">
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                    class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223" />
+                  </svg>
+                </span>
+                <span class="title-head align-middle">
+                  <h2>전기사고 피해현황</h2>
+                </span>
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                    class="bi bi-chevron-compact-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M6.776 1.553a.5.5 0 0 1 .671.223l3 6a.5.5 0 0 1 0 .448l-3 6a.5.5 0 1 1-.894-.448L9.44 8 6.553 2.224a.5.5 0 0 1 .223-.671" />
+                  </svg>
+                </span>
+              </div>
               <table>
                 <thead>
                   <tr>
@@ -112,16 +156,16 @@
             </div>
           </div>
           <!-- 차트 -->
-          <div class="row mt-3">
+          <div class="row mt-5">
             <div class="col-6">
-              <div class="layer small-layer">
-                <canvas id="radar-chart1" style="height: 55%;margin: 0 auto;"></canvas>
+              <div class="layer" style="word-break: break-all ">
+                <canvas id="bar-chart2-grouped" style="width: 100%; "></canvas>
               </div>
             </div>
-          <!-- 데이터 -->
+            <!-- 데이터 -->
             <div class="col-6">
-              <div class="layer small-layer">
-                ㅇㅇㅇㅇㅇ
+              <div class="layer" style="word-break: break-all ">
+                <canvas id="bar-chart1-grouped" style="width: 100%; "></canvas>
               </div>
             </div>
           </div>

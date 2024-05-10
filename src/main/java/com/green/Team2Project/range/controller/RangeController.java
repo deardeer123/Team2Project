@@ -33,11 +33,12 @@ public class RangeController {
         return "content/range/team2_range_detail.html";
     }
 
-    @PostMapping("/detailRange")
+    @PostMapping("/detailRangeOne")
     @ResponseBody
     public RangeVO detail(@RequestParam(name = "occurredYear") int occurredYear){
         return rangeService.detail(occurredYear);
     }
+
 
 
 }

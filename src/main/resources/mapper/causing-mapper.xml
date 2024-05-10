@@ -38,6 +38,7 @@
         WHERE OCCURRED_YEAR = #{occurredYear}
     </select>
 
+
 </mapper>
 
 

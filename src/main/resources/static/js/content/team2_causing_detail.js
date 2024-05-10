@@ -119,7 +119,38 @@ function mixed() {
     })
     //fetch 통신 후 실행 영역
     .then((data) => {//data -> controller에서 리턴되는 데이터!
-      console.log(data)
+      console.log("데이터 : ", data)
+
+      // 각 항목의 합 초기화
+      let sums = {
+        insulationDeteriorationShortCircuit: 0,
+        trackingShortCircuit: 0,
+        compressionDamageShortCircuit: 0,
+        layerShortCircuit: 0,
+        unidentifiedShortCircuit: 0,
+        overloadAndOverCurrent: 0,
+        electricLeakageGrounding: 0,
+        badContact: 0,
+        halfCutLine: 0,
+        etc: 0
+      };
+
+      // 데이터 배열 반복하며 각 항목의 속성 합산
+      for (const item of data) {
+        for (const key in sums) {
+          sums[key] += item[key] || 0; // 만약 속성이 존재하지 않으면 0으로 처리
+        }
+      }
+
+      // 각 항목의 평균 계산
+      let averages = {};
+      for (const key in sums) {
+        averages[key + 'Avg'] = sums[key] / data.length;
+      }
+
+      // 결과 출력
+      console.log("@@@@@@@@",averages);
+
 
 
       //////////////////////////////////////////////
@@ -257,7 +288,23 @@ function mixed() {
               data[6].etc
             ],
             fill: false
-          }
+          }, {
+            label: "평균",
+            type: "bar",
+            backgroundColor: "rgba(0,0,0,0.2)",
+            data: [
+              parseInt(averages.insulationDeteriorationShortCircuitAvg),
+              parseInt(averages.trackingShortCircuitAvg),
+              parseInt(averages.compressionDamageShortCircuitAvg),
+              parseInt(averages.layerShortCircuitAvg),
+              parseInt(averages.unidentifiedShortCircuitAvg),
+              parseInt(averages.overloadAndOverCurrentAvg),
+              parseInt(averages.electricLeakageGroundingAvg),
+              parseInt(averages.badContactAvg),
+              parseInt(averages.halfCutLineAvg),
+              parseInt(averages.etcAvg)
+            ],
+          },
 
           ]
         },
@@ -269,6 +316,9 @@ function mixed() {
           legend: { display: false }
         }
       });
+
+
+
 
 
     })

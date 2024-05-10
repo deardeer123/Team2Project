@@ -33,7 +33,7 @@ function disasterData() {
         console.log(i)
         str +=
           `
-          <tr onclick="goData([[${i.occurredYear}]])">
+          <tr onclick="goData([[${i.occurredYear}]])" style="cursor: pointer">
               <td>${i.occurredYear}</td>
               <td>${i.totalFire}</td>
               <td>${i.efire}</td>
@@ -55,10 +55,17 @@ function disasterData() {
 }
 disasterData();
 
-
+goData(2022);
 
 function goData(occurredYear) {
-
+  const lineChart = document.querySelector('#bar-chart1-grouped');
+  const lineChart2 = document.querySelector('#bar-chart2-grouped');
+  if (Chart.getChart(lineChart)) {
+    Chart.getChart(lineChart)?.destroy();
+    Chart.getChart(lineChart2)?.destroy();
+    // lineChart.style.height = 40 + 'vh'
+    // lineChart2.style.height = 40 + 'vh'
+  }
   // ------------------- 첫번째 방식 ---------------//
   fetch('/disaster/selectOneDisaster', { //요청경로
     method: 'POST',
@@ -69,7 +76,7 @@ function goData(occurredYear) {
     //컨트롤러로 전달할 데이터
     body: new URLSearchParams({
       // 데이터명 : 데이터값
-      occurredYear : occurredYear
+      occurredYear: occurredYear
     })
   })
     .then((response) => {
@@ -83,44 +90,72 @@ function goData(occurredYear) {
     })
     //fetch 통신 후 실행 영역
     .then((data) => {//data -> controller에서 리턴되는 데이터!
-      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@",data)
+      console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@", data)
 
-      //Radar chart
-      new Chart(document.querySelector('#radar-chart1'), {
-        type: 'radar',
+
+
+      // Radar chart
+      new Chart(document.querySelector('#bar-chart2-grouped'), {
+        type: 'bar',
         data: {
-          labels: ["총 화재건수", "전기화재건수", "인명피해(사망)", "인명피해(부상)", "재산피해(백만원)"],
+          labels: [data.occurredYear],
           datasets: [
             {
-              label: occurredYear,
-              fill: true,
-              backgroundColor: "rgba(255,99,132,0.2)",
-              borderColor: "rgba(255,99,132,1)",
-              pointBorderColor: "#fff",
-              pointBackgroundColor: "rgba(255,99,132,1)",
-              pointBorderColor: "#fff",
-              data: [data.totalFire, data.efire, data.dead, data.ouch , data.moneyDamage]
+              label: "총 화재건수",
+              backgroundColor: "#3e95cd",
+              data: [data.totalFire]
+            }, {
+              label: "전기화재건수",
+              backgroundColor: "#8e5ea2",
+              data: [data.efire] 
             }
-
+            , {
+              label: "재산피해(백만원)",
+              backgroundColor: "#8e5ea2",
+              data: [data.moneyDamage]
+            }
           ]
         },
         options: {
-          legend: {
-            position: 'bottom'
-          },
           title: {
             display: true,
-            text: 'Distribution in % of world population'
+            text: 'Population growth (millions)'
           }
         }
       });
+      new Chart(document.querySelector('#bar-chart1-grouped'), {
+        type: 'bar',
+        data: {
+          labels: [data.occurredYear],
+          datasets: [
+            {
+              label: "인명피해(사망)",
+              backgroundColor: "#8e5ea2",
+              data: [data.dead]
+            }, {
+              label: "인명피해(부상)",
+              backgroundColor: "#3e95cd",
+              data: [data.ouch]
+            }
+            
+          ]
+        },
+        options: {
+          title: {
+            display: true,
+            text: 'Population growth (millions)'
+          }
+        }
+      });
+
+
     })
+
     //fetch 통신 실패 시 실행 영역
     .catch(err => {
       alert('fetch error!\nthen 구문에서 오류가 발생했습니다.\n콘솔창을 확인하세요!');
       console.log(err);
     });
-
 
 
 

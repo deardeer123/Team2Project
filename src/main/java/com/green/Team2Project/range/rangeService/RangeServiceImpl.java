@@ -23,14 +23,6 @@ public class RangeServiceImpl implements RangeService{
         return sqlSession.selectOne("rangeMapper.detail", occurredYear);
     }
 
-    @Override
-    public RangeVO totalRange(int occurredYear) {
-        return sqlSession.selectOne("rangeMapper.totalRange",occurredYear);
-    }
 
-    @Override
-    public RangeVO maxBurnRange05() {
-        return sqlSession.selectOne("rangeMapper.maxBurnRange05");
-    }
 
 }
