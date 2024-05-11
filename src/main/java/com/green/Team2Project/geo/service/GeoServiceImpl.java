@@ -11,10 +11,56 @@ import java.util.Map;
 @Service("geoService")
 public class GeoServiceImpl implements GeoService{
     @Autowired
-    SqlSessionTemplate sqlSession;
+    private SqlSessionTemplate sqlSession;
 
     @Override
     public List<Map<String, Integer>> geoSelect(GeoVO geoVO) {
         return sqlSession.selectList("geoMapper.geoSelect", geoVO);
+    }
+
+    @Override
+    public Map<String,Object> totalAreaData() {
+        return sqlSession.selectOne("geoMapper.totalAreaData");
+    }
+
+    @Override
+    public List<Integer> selectYearList() {
+        return sqlSession.selectList("geoMapper.selectYearList");
+    }
+
+    @Override
+    public Map<String, Object> selectAreaDataOne(int occurredYear) {
+
+        return sqlSession.selectOne("geoMapper.selectAreaDataOne",occurredYear);
+    }
+
+    @Override
+    public Map<String, Object> selectCapitalAreaDataOne(int occurredYear) {
+        return sqlSession.selectOne("geoMapper.selectCapitalAreaDataOne",occurredYear);
+    }
+
+    @Override
+    public Map<String, Object> totalCapitalAreaData() {
+        return sqlSession.selectOne("geoMapper.totalCapitalAreaData");
+    }
+
+    @Override
+    public Map<String, Object> selectMiddleAreaDataOne(int occurredYear) {
+        return sqlSession.selectOne("geoMapper.selectMiddleAreaDataOne",occurredYear);
+    }
+
+    @Override
+    public Map<String, Object> totalMiddleAreaData() {
+        return sqlSession.selectOne("geoMapper.totalMiddleAreaData");
+    }
+
+    @Override
+    public Map<String, Object> selectSouthAreaDataOne(int occurredYear) {
+        return sqlSession.selectOne("geoMapper.selectSouthAreaDataOne",occurredYear);
+    }
+
+    @Override
+    public Map<String, Object> totalSouthAreaData() {
+        return sqlSession.selectOne("geoMapper.totalSouthAreaData");
     }
 }

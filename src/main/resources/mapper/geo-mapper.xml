@@ -26,7 +26,8 @@
     </resultMap>
 
     <select id="geoSelect" resultType="map">
-        SELECT OCCURRED_YEAR
+        SELECT
+            OCCURRED_YEAR
             , SEOUL
             , BUSAN
             , DAEGU
@@ -49,6 +50,140 @@
         <if test='occurredYear != null and occurredYear != 0'>
             AND OCCURRED_YEAR = #{occurredYear}
         </if>
+    </select>
+
+    <select id="selectAreaDataOne" resultType="map">
+        select
+        SEOUL AS '서울'
+        , BUSAN AS '부산'
+        , DAEGU AS '대구'
+        , INCHEON AS '인천'
+        , GWANGJU AS '광주'
+        , DAEJEON AS '대전'
+        , SEJONG AS '세종'
+        , ULSAN AS '울산'
+        , GYEONGGI  AS '경기도'
+        , GANGWON AS '강원도'
+        , CHUNGBUK AS '충북'
+        , CHUNGNAM AS '충남'
+        , JEONBUK AS '전북'
+        , JEONNAM AS '전남'
+        , GYEONGNUK AS '경북'
+        , GYEONGNAM AS '경남'
+        , JEJU AS '제주'
+        FROM ELECTRIC_ACCIDENTS_FIRE_STATISTICS
+        WHERE 1 = 1
+        <if test='occurredYear != null and occurredYear != 0'>
+            AND OCCURRED_YEAR = #{occurredYear}
+        </if>
+    </select>
+
+<!--    수도권 데이터 (서울, 인천, 경기도)-->
+    <select id="selectCapitalAreaDataOne" resultType="map">
+        select
+        SEOUL AS '서울'
+
+        , INCHEON AS '인천'
+        , GYEONGGI  AS '경기도'
+        FROM ELECTRIC_ACCIDENTS_FIRE_STATISTICS
+        WHERE 1 = 1
+        <if test='occurredYear != null and occurredYear != 0'>
+            AND OCCURRED_YEAR = #{occurredYear}
+        </if>
+    </select>
+<!--    수도권 데이터 총합-->
+    <select id="totalCapitalAreaData" resultType="map">
+        SELECT
+        sum(SEOUL) AS '서울'
+        , sum(INCHEON) AS '인천'
+        , sum(GYEONGGI) AS '경기도'
+        FROM electric_accidents_fire_statistics;
+    </select>
+
+<!--    중부권 데이터 (강원도, 충북, 충남, 세종, 대전)-->
+    <select id="selectMiddleAreaDataOne" resultType="map">
+        select
+        DAEJEON AS '대전'
+        , SEJONG AS '세종'
+        , GANGWON AS '강원도'
+        , CHUNGBUK AS '충북'
+        , CHUNGNAM AS '충남'
+        FROM ELECTRIC_ACCIDENTS_FIRE_STATISTICS
+        WHERE 1 = 1
+        <if test='occurredYear != null and occurredYear != 0'>
+            AND OCCURRED_YEAR = #{occurredYear}
+        </if>
+    </select>
+<!--    중부권 데이터 총합-->
+    <select id="totalMiddleAreaData" resultType="map">
+        SELECT
+        sum(DAEJEON) AS '대전'
+        , sum(SEJONG) AS '세종'
+        , sum(GANGWON) AS '강원도'
+        , sum(CHUNGBUK) AS '충북'
+        , sum(CHUNGNAM) AS '충남'
+        FROM electric_accidents_fire_statistics;
+    </select>
+
+<!--    남부권 데이터 (전북, 전남, 광주, 대구, 울산, 부산, 경북, 경남, 제주)-->
+    <select id="selectSouthAreaDataOne" resultType="map">
+        select
+        BUSAN AS '부산'
+        , DAEGU AS '대구'
+        , GWANGJU AS '광주'
+        , ULSAN AS '울산'
+        , JEONBUK AS '전북'
+        , JEONNAM AS '전남'
+        , GYEONGNUK AS '경북'
+        , GYEONGNAM AS '경남'
+        , JEJU AS '제주'
+        FROM ELECTRIC_ACCIDENTS_FIRE_STATISTICS
+        WHERE 1 = 1
+        <if test='occurredYear != null and occurredYear != 0'>
+            AND OCCURRED_YEAR = #{occurredYear}
+        </if>
+    </select>
+<!--    남부권 데이터 총합-->
+    <select id="totalSouthAreaData" resultType="map">
+        SELECT
+        sum(BUSAN) AS '부산'
+        , sum(DAEGU) AS '대구'
+        , sum(GWANGJU) AS '광주'
+        , sum(ULSAN) AS '울산'
+        , sum(JEONBUK) AS '전북'
+        , sum(JEONNAM) AS '전남'
+        , sum(GYEONGNUK) AS '경북'
+        , sum(GYEONGNAM) AS '경남'
+        , sum(JEJU) AS '제주'
+        FROM electric_accidents_fire_statistics;
+    </select>
+
+    <select id="totalAreaData" resultType="map">
+        SELECT
+        sum(SEOUL) AS '서울'
+        , sum(BUSAN) AS '부산'
+        , sum(DAEGU) AS '대구'
+        , sum(INCHEON) AS '인천'
+        , sum(GWANGJU) AS '광주'
+        , sum(DAEJEON) AS '대전'
+        , sum(SEJONG) AS '세종'
+        , sum(ULSAN) AS '울산'
+        , sum(GYEONGGI) AS '경기도'
+        , sum(GANGWON) AS '강원도'
+        , sum(CHUNGBUK) AS '충북'
+        , sum(CHUNGNAM) AS '충남'
+        , sum(JEONBUK) AS '전북'
+        , sum(JEONNAM) AS '전남'
+        , sum(GYEONGNUK) AS '경북'
+        , sum(GYEONGNAM) AS '경남'
+        , sum(JEJU) AS '제주'
+        FROM electric_accidents_fire_statistics;
+    </select>
+
+    <select id="selectYearList" resultType="int">
+        SELECT
+        occurred_year
+        FROM electric_accidents_fire_statistics;
     </select>
 
 </mapper>

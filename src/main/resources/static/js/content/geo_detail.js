@@ -236,7 +236,7 @@ const selectUpper = () => {
     </div>
     `;
 
-    right.
+    // right.
 }
 
 const selectMiddle = () => {
