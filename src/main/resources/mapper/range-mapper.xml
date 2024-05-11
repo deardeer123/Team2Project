@@ -13,37 +13,78 @@
         <result column="BURNRANGE41_50" property="burnrange41_50"/>
         <result column="BURNRANGE51_60" property="burnrange51_60"/>
         <result column="BURNRANGE60_OVER" property="burnrange60_over"/>
+        <result column="AVG05" property="AVG05"/>
+        <result column="AVG610" property="AVG610"/>
+        <result column="AVG1120" property="AVG1120"/>
+        <result column="AVG2130" property="AVG2130"/>
+        <result column="AVG3140" property="AVG3140"/>
+        <result column="AVG4150" property="AVG4150"/>
+        <result column="AVG5160" property="AVG5160"/>
+        <result column="AVG60OVER" property="AVG60OVER"/>
+        <result column="total" property="total"/>
+        <result column="total_avg" property="total_avg"/>
     </resultMap>
 
     <!--  전체 셀렉  -->
     <select id="selectAllRange" resultMap="range">
         SELECT
             OCCURRED_YEAR
-            ,BURNRANGE0_5
-            ,BURNRANGE6_10
-            ,BURNRANGE11_21
-            ,BURNRANGE21_30
-            ,BURNRANGE31_40
-            ,BURNRANGE41_50
-            ,BURNRANGE51_60
-            ,BURNRANGE60_OVER
+            ,BURNRANGE0_5  ,(SELECT avg(BURNRANGE0_5)FROM ELECTRIC_ACCIDENTS_BURN_RANGE) AS AVG05
+            ,BURNRANGE6_10 ,(SELECT avg(BURNRANGE6_10)FROM ELECTRIC_ACCIDENTS_BURN_RANGE) AS AVG610
+            ,BURNRANGE11_21 ,(SELECT avg(BURNRANGE11_21)FROM ELECTRIC_ACCIDENTS_BURN_RANGE) AS AVG1120
+            ,BURNRANGE21_30 ,(SELECT avg(BURNRANGE21_30)FROM ELECTRIC_ACCIDENTS_BURN_RANGE) AS AVG2130
+            ,BURNRANGE31_40 ,(SELECT avg(BURNRANGE31_40)FROM ELECTRIC_ACCIDENTS_BURN_RANGE) AS AVG3140
+            ,BURNRANGE41_50 ,(SELECT avg(BURNRANGE41_50)FROM ELECTRIC_ACCIDENTS_BURN_RANGE) AS AVG4150
+            ,BURNRANGE51_60 ,(SELECT avg(BURNRANGE51_60)FROM ELECTRIC_ACCIDENTS_BURN_RANGE) AS AVG5160
+            ,BURNRANGE60_OVER ,(SELECT avg(BURNRANGE60_OVER)FROM ELECTRIC_ACCIDENTS_BURN_RANGE) AS AVG60over
         FROM ELECTRIC_ACCIDENTS_BURN_RANGE
     </select>
 
     <select id="detail" resultMap="range">
         SELECT
-            OCCURRED_YEAR
-            ,BURNRANGE0_5
-            ,BURNRANGE6_10
-            ,BURNRANGE11_21
-            ,BURNRANGE21_30
-            ,BURNRANGE31_40
-            ,BURNRANGE41_50
-            ,BURNRANGE51_60
-            ,BURNRANGE60_OVER
-        FROM ELECTRIC_ACCIDENTS_BURN_RANGE
+        OCCURRED_YEAR
+        ,BURNRANGE0_5 , (SELECT avg(BURNRANGE0_5)FROM ELECTRIC_ACCIDENTS_BURN_RANGE) AS AVG05
+        ,BURNRANGE6_10 , (SELECT avg(BURNRANGE6_10)FROM ELECTRIC_ACCIDENTS_BURN_RANGE) AS AVG610
+        ,BURNRANGE11_21 , (SELECT avg(BURNRANGE11_21)FROM ELECTRIC_ACCIDENTS_BURN_RANGE) AS AVG1120
+        ,BURNRANGE21_30 , (SELECT avg(BURNRANGE21_30)FROM ELECTRIC_ACCIDENTS_BURN_RANGE) AS AVG2130
+        ,BURNRANGE31_40 , (SELECT avg(BURNRANGE31_40)FROM ELECTRIC_ACCIDENTS_BURN_RANGE) AS AVG3140
+        ,BURNRANGE41_50 , (SELECT avg(BURNRANGE41_50)FROM ELECTRIC_ACCIDENTS_BURN_RANGE) AS AVG4150
+        ,BURNRANGE51_60 , (SELECT avg(BURNRANGE51_60)FROM ELECTRIC_ACCIDENTS_BURN_RANGE) AS AVG5160
+        ,BURNRANGE60_OVER , (SELECT avg(BURNRANGE60_OVER)FROM ELECTRIC_ACCIDENTS_BURN_RANGE) AS AVG60over
+        ,(SELECT SUM(BURNRANGE0_5
+        +BURNRANGE6_10
+        +BURNRANGE11_21
+        +BURNRANGE21_30
+        +BURNRANGE31_40
+        +BURNRANGE41_50
+        +BURNRANGE51_60
+        +BURNRANGE60_OVER) FROM electric_accidents_burn_range WHERE OCCURRED_YEAR = #{occurredYear}) AS TOTAL
+        ,(SELECT AVG(BURNRANGE0_5
+        +BURNRANGE6_10
+        +BURNRANGE11_21
+        +BURNRANGE21_30
+        +BURNRANGE31_40
+        +BURNRANGE41_50
+        +BURNRANGE51_60
+        +BURNRANGE60_OVER) FROM electric_accidents_burn_range) AS TOTAL_AVG
+        FROM electric_accidents_burn_range
         where OCCURRED_YEAR = #{occurredYear}
     </select>
+
+    <select id="total" resultMap="range">
+        SELECT
+        (BURNRANGE0_5
+        +BURNRANGE6_10
+        +BURNRANGE11_21
+        +BURNRANGE21_30
+        +BURNRANGE31_40
+        +BURNRANGE41_50
+        +BURNRANGE51_60
+        +BURNRANGE60_over) AS total
+        FROM electric_accidents_burn_range
+        WHERE occurred_year = #{occurredYear}
+    </select>
+
 
 </mapper>
 

@@ -23,4 +23,6 @@ public class RangeServiceImpl implements RangeService{
         return sqlSession.selectOne("rangeMapper.detail", occurredYear);
     }
 
+
+
 }

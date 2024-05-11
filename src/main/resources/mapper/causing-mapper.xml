@@ -33,6 +33,12 @@
         FROM factors_causing_electric_accidents
     </select>
 
+    <select id="selectOneCausing" resultMap="causing">
+        SELECT * FROM factors_causing_electric_accidents
+        WHERE OCCURRED_YEAR = #{occurredYear}
+    </select>
+
+
 </mapper>
 
 

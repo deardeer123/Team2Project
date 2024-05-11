@@ -10,4 +10,5 @@ public interface RangeService {
     List<RangeVO> selectAllRange();
 
     RangeVO detail(int occurredYear);
+
 }

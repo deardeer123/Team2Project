@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{fragment/detail/detail_layout}">
+
+<th:block layout:fragment="content_css">
+  <!-- html 파일이 열릴 때 같이 실행되는 css -->
+  <link rel="stylesheet" href="/css/content/team2_causing_detail.css">
+</th:block>
+
+<th:block layout:fragment="contentFragment">
+  <style>
+    #bar-chart1,
+    #mixed-chart1 {
+      background-color: #ffffff;
+    }
+
+    p {
+      color: #ffffff;
+    }
+
+    /* .img-div {
+      border: 1px solid #42444e;
+      width: 70%;
+      border-radius: 10px;
+      box-shadow: 5px 5px #42444e;
+      background-color: #ffffff;
+      margin-left: 10%;
+      padding: 10px;
+    } */
+
+    .bar-div,
+    .mixed-div {
+      border: 1px solid #42444e;
+      border-radius: 10px;
+      box-shadow: 5px 5px #42444e;
+      background-color: #ffffff;
+      margin-right: 10px;
+
+    }
+
+    .title-head {
+      font-size: 30px;
+      display: inline-block;
+      font-weight: bolder;
+      margin-left: 3px;
+      margin-bottom: 0px;
+    }
+
+    .title-head>h2 {
+      margin: 0;
+    }
+
+    span {
+      color: #ffffff;
+    }
+    .up-div{
+      border: 1px solid #42444e;
+      border-radius: 10px;
+      /* box-shadow: 5px 5px gray; */
+      background-color: #42444e;
+      padding: 10px;
+      height: 100%;
+      width: 80%;
+      margin-left: 10%;
+    }
+    img{
+      height: 80vh;
+    }
+  </style>
+
+
+
+  <!-- html 코드 작성 -->
+  <div class="body-div row mt-5">
+    <div class="col">
+      <div class="row justify-content-center">
+        <!-- 자료 -->
+        <div class="col-4 text-center">
+          <div class="up-div">
+            <img src="/upload/전기안전관련용어.jpg" style="width: 100%;">
+          </div>
+        </div>
+        <!-- 데이터 -->
+        <div class="col-8">
+          <!-- 표 -->
+          <div class="row">
+            <div class="col table-div">
+              <div class="mb-2 text-center">
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                    class="bi bi-chevron-compact-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M9.224 1.553a.5.5 0 0 1 .223.67L6.56 8l2.888 5.776a.5.5 0 1 1-.894.448l-3-6a.5.5 0 0 1 0-.448l3-6a.5.5 0 0 1 .67-.223" />
+                  </svg>
+                </span>
+                <span class="title-head align-middle">
+                  <h2>전기사고 피해현황</h2>
+                </span>
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                    class="bi bi-chevron-compact-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M6.776 1.553a.5.5 0 0 1 .671.223l3 6a.5.5 0 0 1 0 .448l-3 6a.5.5 0 1 1-.894-.448L9.44 8 6.553 2.224a.5.5 0 0 1 .223-.671" />
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </div>
+          <!-- 그래프 -->
+          <div class="row">
+            <div class="bar-div col text-center">
+              <canvas id="bar-chart1" style="width: 51%; height: 100%;"></canvas>
+            </div>
+          </div>
+          <div class="row mt-5">
+            <div class="col text-center">
+              <p>라벨을 클릭하여 비교할 수 있습니다.</p>
+
+            </div>
+          </div>
+          <!-- 바 차트 -->
+          <div class="row">
+            <div class="mixed-div col text-center">
+
+              <canvas id="mixed-chart1" style="width: 100%; height: 150%;"></canvas>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</th:block>
+
+<th:block layout:fragment="content_js">
+  <!-- html 파일이 열릴 때 같이 실행되는 js -->
+  <script src="/js/content/team2_causing_detail.js"></script>
+
+</th:block>
+
+</html>

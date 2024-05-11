@@ -26,14 +26,19 @@ public class RangeController {
     }
 
     @GetMapping("/detailRange")
-    public String detailRange(){
-        return "content/detailContent/team2_range_detail.html";
+    public String detailRange(Model model){
+        model.addAttribute("rangeList", rangeService.selectAllRange());
+        model.addAttribute("rangeVO",rangeService.detail(2022));
+        model.addAttribute("selectedMenu",2);
+        return "content/range/team2_range_detail.html";
     }
 
-    @PostMapping("/detail")
+    @PostMapping("/detailRangeOne")
     @ResponseBody
     public RangeVO detail(@RequestParam(name = "occurredYear") int occurredYear){
         return rangeService.detail(occurredYear);
     }
+
+
 
 }
