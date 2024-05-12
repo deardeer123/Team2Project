@@ -13,6 +13,8 @@ public interface ElectricAccidentsByTimeService {
     List<ElectricAccidentsByTimeVO> selectLateNightList(int occurredYear);
     //평균
     Map<String, Object> selectAvgTimeDataList();
+    Map<String, Object> selectAvgTimeDataList2();
+
     //전체
     Map<String, Object> selectAllTimeDataList();
 

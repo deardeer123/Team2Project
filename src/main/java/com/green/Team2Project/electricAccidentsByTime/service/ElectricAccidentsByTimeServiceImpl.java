@@ -38,6 +38,11 @@ public class ElectricAccidentsByTimeServiceImpl implements ElectricAccidentsByTi
     }
 
     @Override
+    public Map<String, Object> selectAvgTimeDataList2() {
+        return sqlSession.selectOne("electricAccidentsByTimeMapper.selectAvgTimeDataList2");
+    }
+
+    @Override
     public Map<String, Object> selectAllTimeDataList() {
         return sqlSession.selectOne("electricAccidentsByTimeMapper.selectAllTimeDataList");
     }

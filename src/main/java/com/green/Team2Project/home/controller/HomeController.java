@@ -1,14 +1,22 @@
 package com.green.Team2Project.home.controller;
+import com.green.Team2Project.disaster.service.DisasterService;
+import com.green.Team2Project.disaster.vo.DisasterVO;
+import com.green.Team2Project.electricAccidentsByDay.service.ElectricAccidentsByDayService;
+import com.green.Team2Project.electricAccidentsByTime.service.ElectricAccidentsByTimeService;
+import com.green.Team2Project.electricAccidentsByTime.vo.ElectricAccidentsByTimeVO;
 import com.green.Team2Project.geo.service.GeoService;
 import com.green.Team2Project.geo.vo.GeoVO;
 import com.green.Team2Project.home.service.HomeService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.math.BigDecimal;
+import java.nio.channels.Pipe;
 import java.util.*;
 
 @Controller
@@ -20,10 +28,65 @@ public class HomeController {
     @Resource(name="geoService")
     private GeoService geoService;
 
-    @GetMapping("/home")
-    public String helloWorld(){
-        System.out.println("hello world!");
+    @Resource(name="electricAccidentsByDayService")
+    private ElectricAccidentsByDayService electricAccidentsByDayService;
 
+    @Resource(name ="electricAccidentsByTimeService")
+    private ElectricAccidentsByTimeService electricAccidentsByTimeService;
+
+    @Resource(name="disasterService")
+    private DisasterService disasterService;
+
+
+
+
+    @GetMapping("/home")
+    public String helloWorld(Model model){
+        System.out.println("hello world!");
+        //메인화면에 던져줄 데이터1(전기화재 현황)
+        DisasterVO disasterVO = disasterService.mainAvgDisaster();
+        System.out.println(disasterVO);
+        model.addAttribute("disaster" ,disasterVO);
+
+        //메인화면에 던져줄 데이터2 (사고 최다 발생요일)
+        Map<String, Object> mainDayData = electricAccidentsByDayService.avgDay2();
+
+        //mainDayData 있는 최대 요일 및 데이터 구하기
+        String maxDay = "";
+        float maxDayData = 0.0f;
+        for(String e : mainDayData.keySet()){
+            //계속 형변환 오류뜸
+            BigDecimal a = (BigDecimal) mainDayData.get(e);
+            float b = a.floatValue();
+            if(b > maxDayData){
+                maxDayData = b;
+                maxDay = e;
+            }
+        }
+        //반올림
+//        maxDayData = Math.round(maxDayData);
+        model.addAttribute("maxDay", maxDay);
+        model.addAttribute("maxDayData", maxDayData);
+
+        //메인화면에 던져줄 데이터3 (사고 최다 발생 시간대)
+        Map<String, Object> mainTimeData = electricAccidentsByTimeService.selectAvgTimeDataList2();
+
+        String maxTime ="";
+        float maxTimeData = 0.0f;
+        for(String e : mainTimeData.keySet()){
+            //계속 형변환 오류뜸
+            BigDecimal a = (BigDecimal) mainTimeData.get(e);
+            float b = a.floatValue();
+            if(b > maxDayData){
+                maxTimeData = b;
+                maxTime = e;
+            }
+        }
+        model.addAttribute("maxTime", maxTime);
+        model.addAttribute("maxTimeData", maxTimeData);
+
+        //2022년 총 사고
+        model.addAttribute("totalAccData", homeService.totalAccData(2022));
         return"content/home";
     }
     @ResponseBody
@@ -124,6 +187,12 @@ public class HomeController {
     public Map<String, Object> mainAvgData(){
         System.out.println("평균값");
         return geoService.mainAvgAreaData();
+    }
+    @ResponseBody
+    @GetMapping("/hourData/avg")
+    public Map<String,Object> mainAvgHourData(){
+        System.out.println("시간 평균");
+        return electricAccidentsByTimeService.selectAvgTimeDataList();
     }
 
 }

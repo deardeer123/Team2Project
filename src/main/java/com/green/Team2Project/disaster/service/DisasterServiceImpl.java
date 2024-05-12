@@ -22,4 +22,9 @@ public class DisasterServiceImpl implements DisasterService{
     public DisasterVO selectOneDisaster(int occurredYear) {
         return sqlSession.selectOne("disasterMapper.selectOneDisaster",occurredYear);
     }
+
+    @Override
+    public DisasterVO mainAvgDisaster() {
+        return sqlSession.selectOne("disasterMapper.mainAvgDisaster");
+    }
 }

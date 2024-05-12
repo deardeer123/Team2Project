@@ -8,27 +8,51 @@
 <th:block th:fragment="sideFragment7">
 
   <!-- html 코드 작성 -->
-  <!-- 화상범위별 -->
-  <div class="body-div row justify-content-center">
+  <div class="row">
     <div class="col">
-      <div class="layer small-layer">
-        <table>
-          <thead>
-            <tr>
-              <th>연도</th>
-              <th>총화재건수</th>
-              <th>전기화재건수</th>
-              <th>인명피해(사망)</th>
-              <th>인명피해(부상)</th>
-              <th>재산피해(백만원)</th>
-            </tr>
-          </thead>
-          <tbody id="t-body2">
 
-          </tbody>
-        </table>
+      <div class="row g-2">
+        <div class="col">
+          <div class="p-3">
+            <div class="row text-center">
+              <div class="col text-white fs-4" style="background-color: #313A46;">인명피해(사망)</div>
+            </div>
+            <div class="row text-center">
+              <div class="col fs-1 pt-2" style="color: #FFBA00; background-color: #505c6d; height: 10vh;">
+                [[${disaster.dead}]]
+                <div class="fs-5">단위,명</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="p-3">
+            <div class="row text-center">
+              <div class="col text-white fs-4" style="background-color: #313A46;">인명피해(부상)</div>
+            </div>
+            <div class="row text-center">
+              <div class="col fs-1 pt-2" style="color: #FFBA00; background-color: #505c6d; height: 10vh;">
+                [[${disaster.ouch}]]
+                <div class="fs-5">단위,명</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="p-3">
+            <div class="row text-center">
+              <div class="col text-white fs-3" style="background-color: #313A46;">재산피해</div>
+            </div>
+            <div class="row text-center">
+              <div class="col fs-1 pt-2" style="color: #FFBA00; background-color: #505c6d; height: 10vh;">
+                [[${#numbers.formatInteger(disaster.moneyDamage,3,'COMMA')}]]
+                <div class="fs-6">단위,백만원</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
     </div>
   </div>
 

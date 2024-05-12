@@ -48,6 +48,19 @@
                 electric_accidents_by_day;
         </select>
 
+        <select id="avgDay2" resultType="map">
+                SELECT
+                round(SUM(sunday)/COUNT(occurred_year),1)AS '일요일' ,
+                round(SUM(monday)/COUNT(occurred_year),1)AS '월요일' ,
+                round(SUM(tuesday)/COUNT(occurred_year),1)AS '화요일' ,
+                round(SUM(wednesday)/COUNT(occurred_year),1)AS '수요일' ,
+                round(SUM(thursday)/COUNT(occurred_year),1)AS '목요일' ,
+                round(SUM(friday)/COUNT(occurred_year),1)AS '금요일' ,
+                round(SUM(saturday)/COUNT(occurred_year),1)AS '토요일'
+                FROM
+                electric_accidents_by_day;
+        </select>
+
         <select id="allDay" resultMap="ElectricAccidentsByDayVO">
                 select *
                 from electric_accidents_by_day

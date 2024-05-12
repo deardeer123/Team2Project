@@ -22,6 +22,17 @@
         SELECT * FROM E_DISASTER
         WHERE OCCURRED_YEAR = #{occurredYear}
     </select>
+
+    <select id="mainAvgDisaster" resultMap="disaster">
+        SELECT
+        round(SUM(total_fire)/COUNT(occurred_year),0) AS TOTAL_FIRE,
+        round(SUM(e_fire)/COUNT(occurred_year),0) AS E_FIRE,
+        round(SUM(dead)/COUNT(occurred_year),0) AS DEAD,
+        round(SUM(ouch)/COUNT(occurred_year),0) AS OUCH,
+        round(SUM(money_damage)/COUNT(occurred_year),0) AS MONEY_DAMAGE
+        FROM
+        e_disaster;
+    </select>
 </mapper>
 
 

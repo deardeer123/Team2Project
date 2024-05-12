@@ -8,4 +8,9 @@ import org.springframework.stereotype.Service;
 public class HomeServiceImpl implements HomeService{
     @Autowired
     private SqlSessionTemplate sqlSession;
+
+    @Override
+    public int totalAccData(int occurredYear) {
+        return sqlSession.selectOne("homeMapper.totalAccData",occurredYear);
+    }
 }

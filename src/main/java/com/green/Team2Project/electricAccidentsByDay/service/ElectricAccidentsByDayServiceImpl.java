@@ -26,6 +26,11 @@ public class ElectricAccidentsByDayServiceImpl implements ElectricAccidentsByDay
     }
 
     @Override
+    public Map<String, Object> avgDay2() {
+        return sqlSession.selectOne("electricAccidentsByDayMapper.avgDay2");
+    }
+
+    @Override
     public List<ElectricAccidentsByDayVO> allDay() {
         return sqlSession.selectList("electricAccidentsByDayMapper.allDay");
     }

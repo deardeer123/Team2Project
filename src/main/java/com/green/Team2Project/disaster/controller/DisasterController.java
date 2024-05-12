@@ -4,6 +4,7 @@ import com.green.Team2Project.disaster.service.DisasterService;
 import com.green.Team2Project.disaster.vo.DisasterVO;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,7 +31,9 @@ public class DisasterController {
     }
 
     @GetMapping("/disasterDetail")
-    public String disasterDetail(){
+    public String disasterDetail(Model model){
+        model.addAttribute("selectedMenu", 5);//메뉴 5번
         return "content/disaster/team2_disaster_detail";
     }
+
 }

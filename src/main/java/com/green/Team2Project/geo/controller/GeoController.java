@@ -90,6 +90,7 @@ public class GeoController {
     @GetMapping("/detail")
     public String goDetailGeo(Model model){
         System.out.println("지역별 감전사고 데이터");
+        model.addAttribute("selectedMenu", 1);//메뉴 1번
         //처음에 상세페이지이 들어가면 전체 메뉴
         model.addAttribute("geoMenu", "all");
         GeoVO geoVO = new GeoVO();

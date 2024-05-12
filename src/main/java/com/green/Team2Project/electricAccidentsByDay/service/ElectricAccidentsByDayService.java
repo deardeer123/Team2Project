@@ -10,6 +10,8 @@ import java.util.Objects;
 public interface ElectricAccidentsByDayService {
     ElectricAccidentsByDayVO selectAccidentDay();
     Map<String , Object> avgDay();
+    Map<String , Object> avgDay2();
+
     List<ElectricAccidentsByDayVO> allDay();
     Map<String , Object> selectDay(int occurredYear);
 }

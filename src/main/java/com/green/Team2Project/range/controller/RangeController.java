@@ -29,7 +29,7 @@ public class RangeController {
     public String detailRange(Model model){
         model.addAttribute("rangeList", rangeService.selectAllRange());
         model.addAttribute("rangeVO",rangeService.detail(2022));
-        model.addAttribute("selectedMenu",2);
+        model.addAttribute("selectedMenu",4); //화상범위 메뉴4
         return "content/range/team2_range_detail.html";
     }
 

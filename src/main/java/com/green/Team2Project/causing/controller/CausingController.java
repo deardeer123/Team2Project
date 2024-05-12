@@ -26,6 +26,7 @@ public class CausingController {
         @GetMapping("/goCausingDetail")
         public String goCausingDetail(Model model){
             model.addAttribute("causingVO",causingService.selectOneCausing(2022));
+            model.addAttribute("selectedMenu", 2); //메뉴2번
 
             return "/content/causing/team2_causing_detail";
         }

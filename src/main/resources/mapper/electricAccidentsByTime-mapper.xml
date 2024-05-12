@@ -85,6 +85,23 @@
         FROM
         electric_accidents_by_time;
     </select>
+    <select id="selectAvgTimeDataList2" resultType="map">
+        SELECT
+        round(SUM(HOUR00_02)/COUNT(occurred_year),1) AS '00~02시',
+        round(SUM(HOUR02_04)/COUNT(occurred_year),1) AS '02~04시',
+        round(SUM(HOUR04_06)/COUNT(occurred_year),1) AS '04~06시',
+        round(SUM(HOUR06_08)/COUNT(occurred_year),1) AS '06~08시',
+        round(SUM(HOUR08_10)/COUNT(occurred_year),1) AS '08~10시',
+        round(SUM(HOUR10_12)/COUNT(occurred_year),1) AS '10~12시',
+        round(SUM(HOUR12_14)/COUNT(occurred_year),1) AS '12~14시',
+        round(SUM(HOUR14_16)/COUNT(occurred_year),1) AS '14~16시',
+        round(SUM(HOUR16_18)/COUNT(occurred_year),1) AS '16~18시',
+        round(SUM(HOUR18_20)/COUNT(occurred_year),1) AS '18~20시' ,
+        round(SUM(HOUR20_22)/COUNT(occurred_year),1) AS '20~22시' ,
+        round(SUM(HOUR22_24)/COUNT(occurred_year),1) AS '22~24시'
+        FROM
+        electric_accidents_by_time;
+    </select>
 
     <select id="selectAllTimeDataList" resultType="map">
         SELECT

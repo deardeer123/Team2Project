@@ -8,11 +8,46 @@
 
 <body>
    <th:block th:fragment="sideFragment3">
-      <div class="row">
+      <div class="row mt-4">
          <div class="col">
             <!-- 오철민 -->
             <!-- 한국전기안전공사_연도별_감전사고인명피해현황 -->
-            <canvas id="bar-chart" style="width: 51%; height: 100%;"></canvas>
+            <div class="row mt-5">
+               <div class="col">
+
+                  <div class="fs-4 text-white text-center">전기재해 현황 (2016 ~ 2022 평균)</div>
+
+                  <div class="row g-2 mt-1">
+                     <div class="col-6">
+                        <div class="p-3">
+                           <div class="row text-center">
+                              <div class="col text-white fs-3" style="background-color: #313A46;">총 화재건수</div>
+                           </div>
+                           <div class="row text-center">
+                              <div class="col fs-1 pt-2" style="color: #FFBA00; background-color: #505c6d; height: 10vh;" >
+                                 [[${disaster.totalFire}]]
+                              </div>
+             
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-6">
+                        <div class="p-3">
+                           <div class="row text-center">
+                              <div class="col text-white fs-3" style="background-color: #313A46;">전기 화재 건수</div>
+                           </div>
+                           <div class="row text-center">
+                              <div class="col fs-1 pt-2" style=" color: #FFBA00; background-color: #505c6d; height: 10vh;">
+                                 [[${disaster.eFire}]]
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+
+               </div>
+            </div>
          </div>
       </div>
    </th:block>

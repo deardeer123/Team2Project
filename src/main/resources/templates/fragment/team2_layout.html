@@ -16,6 +16,15 @@
 
 </head>
 <body style="background-color: #445061;">
+    <style>
+        /* 커서안생기게 하는 CSS */
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
     <!-- bootstrap 디자인을 잘 적용하기 위해선 -->
     <!-- 반드시 container 클래스안에 모든 내용 작성 -->
     <div class="container-fluid">
@@ -38,7 +47,7 @@
                     <div id="tooltip" style="background-color: #697e99; color: white;">
                         <div class="fs-2 text=white text-center" >지역별 전기화재 발생 데이터</div>
                     </div>
-                    <div style="width: 32vw; height: 35vh;">
+                    <div style="width: 32vw; height: 32vh;">
                         <canvas id="main-area-chart" ></canvas>
                     </div>
                     <th:bolck th:replace="~{fragment/team2_geo_side::sideFragment0}"></th:bolck>
@@ -54,6 +63,7 @@
                 <div class="row">
                     <!-- 3,4 -->
                     <div class="col-6">
+                        <!-- 피해 현황으로 변경 -->
                         <th:bolck th:replace="~{fragment/team2_day_side::sideFragment3}"></th:bolck>
                     </div>
                     <div class="col-6">
@@ -61,13 +71,14 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-4">
+                    <!-- <div class="col-4">
                         <th:bolck th:replace="~{fragment/team2_range_side::sideFragment5}"></th:bolck>
-                    </div>
-                    <div class="col-4">
+                    </div> -->
+                    <div class="col-6" style="height:25vh;">
                         <th:bolck th:replace="~{fragment/team2_disaster_side::sideFragment7}"></th:bolck>
                     </div>
-                    <div class="col-4">
+                    <div class="col-6" style="height:25vh;">
+                        <!-- https://www.kesco.or.kr/bbs/pr/selectBbs.do -->
                         <th:bolck th:replace="~{fragment/team2_slide_side::sideFragment6}"></th:bolck>
                     </div>
                 </div>
@@ -84,7 +95,7 @@
     <script src=" https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js "></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 
-    <script src="/js/fragment/team2_range_side.js"></script>
+    <!-- <script src="/js/fragment/team2_range_side.js"></script> -->
     <script src="/js/fragment/team2_day_side.js"></script>
     <script src="/js/fragment/team2_avg_side.js"></script>
     <script src="/js/fragment/team2_causing_side.js"></script> 
