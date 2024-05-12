@@ -10,7 +10,7 @@
 <th:block layout:fragment="contentFragment">
     <style>
         /* 커서안생기게 하는 CSS */
-        body{
+        body {
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -40,62 +40,64 @@
                         </span>
                         한국전기안전공사 연도별 감전사고 인명피해현황 요일별 데이터 (단위,명)
                     </div>
-                    <table class="table table-hover text-center table-bordered table-sm">
-                        <thead>
-                            <tr>
-                                <td class="text-center" style="background-color: #313A46; color: whitesmoke;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                                        class="bi bi-calendar" viewBox="0 0 16 16">
-                                        <path
-                                            d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
-                                    </svg>
-                                </td>
-                                <td class="fs-3 text-center" style="background-color: #313A46; color: whitesmoke;">일
-                                </td>
-                                <td class="fs-3 text-center" style="background-color: #313A46; color: whitesmoke;">월
-                                </td>
-                                <td class="fs-3 text-center" style="background-color: #313A46; color: whitesmoke;">화
-                                </td>
-                                <td class="fs-3 text-center" style="background-color: #313A46; color: whitesmoke;">수
-                                </td>
-                                <td class="fs-3 text-center" style="background-color: #313A46; color: whitesmoke;">목
-                                </td>
-                                <td class="fs-3 text-center" style="background-color: #313A46; color: whitesmoke;">금
-                                </td>
-                                <td class="fs-3 text-center" style="background-color: #313A46; color: whitesmoke;">토
-                                </td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr onclick="changeChart('avg', this)" class="trDiv table-active">
-                                <td>평균</td>
-                                <td>[[${avgData.SUNDAY}]]</td>
-                                <td>[[${avgData.MONDAY}]]</td>
-                                <td>[[${avgData.TUESDAY}]]</td>
-                                <td>[[${avgData.WEDNESDAY}]]</td>
-                                <td>[[${avgData.THURSDAY}]]</td>
-                                <td>[[${avgData.FRIDAY}]]</td>
-                                <td>[[${avgData.SATURDAY}]]</td>
-                            </tr>
-
-                            <th:block th:each="e:${allData}">
-                                <tr th:onclick="changeChart([[${e.occurredYear}]], this)" class="trDiv">
-                                    <td>[[${e.occurredYear}]]</td>
-                                    <td>[[${e.sunday}]]</td>
-                                    <td>[[${e.monday}]]</td>
-                                    <td>[[${e.tuesday}]]</td>
-                                    <td>[[${e.wednesday}]]</td>
-                                    <td>[[${e.thursday}]]</td>
-                                    <td>[[${e.friday}]]</td>
-                                    <td>[[${e.saturday}]]</td>
+                    <div class="">
+                        <table class="table table-hover text-center table-bordered table-sm">
+                            <thead>
+                                <tr>
+                                    <td class="text-center" style="background-color: #313A46; color: whitesmoke;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                            fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+                                            <path
+                                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
+                                        </svg>
+                                    </td>
+                                    <td class="fs-3 text-center" style="background-color: #313A46; color: whitesmoke;">일
+                                    </td>
+                                    <td class="fs-3 text-center" style="background-color: #313A46; color: whitesmoke;">월
+                                    </td>
+                                    <td class="fs-3 text-center" style="background-color: #313A46; color: whitesmoke;">화
+                                    </td>
+                                    <td class="fs-3 text-center" style="background-color: #313A46; color: whitesmoke;">수
+                                    </td>
+                                    <td class="fs-3 text-center" style="background-color: #313A46; color: whitesmoke;">목
+                                    </td>
+                                    <td class="fs-3 text-center" style="background-color: #313A46; color: whitesmoke;">금
+                                    </td>
+                                    <td class="fs-3 text-center" style="background-color: #313A46; color: whitesmoke;">토
+                                    </td>
                                 </tr>
-                            </th:block>
-                        </tbody>
+                            </thead>
+                            <tbody>
+                                <tr onclick="changeChart('avg', this)" class="trDiv table-active">
+                                    <td>평균</td>
+                                    <td>[[${avgData.SUNDAY}]]</td>
+                                    <td>[[${avgData.MONDAY}]]</td>
+                                    <td>[[${avgData.TUESDAY}]]</td>
+                                    <td>[[${avgData.WEDNESDAY}]]</td>
+                                    <td>[[${avgData.THURSDAY}]]</td>
+                                    <td>[[${avgData.FRIDAY}]]</td>
+                                    <td>[[${avgData.SATURDAY}]]</td>
+                                </tr>
 
-                    </table>
+                                <th:block th:each="e:${allData}">
+                                    <tr th:onclick="changeChart([[${e.occurredYear}]], this)" class="trDiv">
+                                        <td>[[${e.occurredYear}]]</td>
+                                        <td>[[${e.sunday}]]</td>
+                                        <td>[[${e.monday}]]</td>
+                                        <td>[[${e.tuesday}]]</td>
+                                        <td>[[${e.wednesday}]]</td>
+                                        <td>[[${e.thursday}]]</td>
+                                        <td>[[${e.friday}]]</td>
+                                        <td>[[${e.saturday}]]</td>
+                                    </tr>
+                                </th:block>
+                            </tbody>
+
+                        </table>
+                    </div>
                     <div class="fs-5 text-white" id="data-div"></div>
                 </div>
-                
+
             </div>
 
             <div class="row">
@@ -117,7 +119,8 @@
                         </style>
                         <div class="col-5 mt-1 me-5 ms-3 border border-3">
                             <div class="">
-                                <span class="btn time-btn" onclick="changeTimeChart('day')" style="color: rgb(246, 83, 83);">
+                                <span class="btn time-btn" onclick="changeTimeChart('day')"
+                                    style="color: rgb(246, 83, 83);">
                                     <div id="iconDay">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             fill="currentColor" class="bi bi-brightness-high" viewBox="0 0 16 16">
@@ -164,29 +167,31 @@
                                     한국전기안전공사 연도별 감전사고 인명피해현황 시간별 데이터 (단위,명)
                                 </span>
                             </div>
-                            <table class="table table-bordered table-sm" id="timeTable">
-                                <th:block th:if="${time == 'day'}">
-                                    <thead>
-                                        <tr>
-                                            <td style="background-color: #313A46; color: whitesmoke;">연도</td>
-                                            <td style="background-color: #313A46; color: whitesmoke;">06~08</td>
-                                            <td style="background-color: #313A46; color: whitesmoke;">08~10</td>
-                                            <td style="background-color: #313A46; color: whitesmoke;">10~12</td>
-                                            <td style="background-color: #313A46; color: whitesmoke;">12~14</td>
-                                        </tr>
-                                    </thead>
+                            <div class="shadow-sm">
+                                <table class="table table-bordered table-sm" id="timeTable">
+                                    <th:block th:if="${time == 'day'}">
+                                        <thead>
+                                            <tr>
+                                                <td style="background-color: #313A46; color: whitesmoke;">연도</td>
+                                                <td style="background-color: #313A46; color: whitesmoke;">06~08</td>
+                                                <td style="background-color: #313A46; color: whitesmoke;">08~10</td>
+                                                <td style="background-color: #313A46; color: whitesmoke;">10~12</td>
+                                                <td style="background-color: #313A46; color: whitesmoke;">12~14</td>
+                                            </tr>
+                                        </thead>
 
-                                    <tbody>
-                                        <tr th:each="e:${dayTimeData}">
-                                            <td>[[${e.occurredYear}]]</td>
-                                            <td>[[${e.hour06_08}]]</td>
-                                            <td>[[${e.hour08_10}]]</td>
-                                            <td>[[${e.hour10_12}]]</td>
-                                            <td>[[${e.hour12_14}]]</td>
-                                        </tr>
-                                    </tbody>
-                                </th:block>
-                            </table>
+                                        <tbody>
+                                            <tr th:each="e:${dayTimeData}">
+                                                <td>[[${e.occurredYear}]]</td>
+                                                <td>[[${e.hour06_08}]]</td>
+                                                <td>[[${e.hour08_10}]]</td>
+                                                <td>[[${e.hour10_12}]]</td>
+                                                <td>[[${e.hour12_14}]]</td>
+                                            </tr>
+                                        </tbody>
+                                    </th:block>
+                                </table>
+                            </div>
                             <div class="text-white" id="avgTimeDataDiv"></div>
                         </div>
                     </div>

@@ -77,7 +77,7 @@ new Chart(document.querySelector('#bar-chart1'), {
         datasets: [
             {
                 label: "전기화재발생요인",
-                backgroundColor: "#3e95cd",
+                backgroundColor: "#009FE3",
                 data: [1630, 1180, 357, 102, 2919, 617, 247, 914, 189, 647]
             }
         ]
@@ -91,7 +91,27 @@ new Chart(document.querySelector('#bar-chart1'), {
         scales: {
             y: {
                 min: 0,
-                max: 3000
+                max: 3000,
+                ticks: {
+                    color: 'white'
+                }
+            },
+            x:{
+                ticks: {
+                    color: 'white'
+                }
+            }
+        },
+        
+        plugins: {
+            legend: {
+                labels: {
+                    font: {
+                        size: 16,
+                        weight: 'bold'
+                    },
+                    color: '#FFBA00'
+                }
             }
         },
         indexAxis: 'y'

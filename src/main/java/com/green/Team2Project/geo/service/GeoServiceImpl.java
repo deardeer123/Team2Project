@@ -63,4 +63,14 @@ public class GeoServiceImpl implements GeoService{
     public Map<String, Object> totalSouthAreaData() {
         return sqlSession.selectOne("geoMapper.totalSouthAreaData");
     }
+
+    @Override
+    public List<Map<String,Integer>> mainGeoData(String area) {
+        return sqlSession.selectList("geoMapper.mainGeoData",area);
+    }
+
+    @Override
+    public Map<String, Object> mainAvgAreaData() {
+        return sqlSession.selectOne("geoMapper.mainAvgAreaData");
+    }
 }

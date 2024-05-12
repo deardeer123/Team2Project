@@ -27,4 +27,8 @@ public interface GeoService {
     Map<String, Object> selectSouthAreaDataOne(int occurredYear);
     //남부권 총계 데이터
     Map<String, Object> totalSouthAreaData();
+//    메인페이지 지도 정보
+    List<Map<String,Integer>> mainGeoData(String area);
+// 메인페이지 평균값 정보
+    Map<String, Object> mainAvgAreaData();
 }
